@@ -5,9 +5,16 @@ Imports System.IO
 Public Class JmrJson
 
     Public js As JavaScriptSerializer
+
     Dim conBd As Conexao = New Conexao()
-    Public CONEXAO_PATH As String = "conexaobd.json"
-    Public CLIENTE_PATH As String = "cliente.json"
+    Dim movDb As Movimentos = New Movimentos()
+    Dim utilitario As New Util
+
+    ' msgbox("config")
+
+    Public CONEXAO_PATH As String = utilitario.dataPathConfig + "\conexaobd.json"
+    Public CLIENTE_PATH As String = utilitario.dataPathConfig + "\cliente.json"
+    Public MOVIMENTO_PATH As String = utilitario.dataPathConfig + "\movimento.json"
 
     Dim cliDb As Cliente = New Cliente
 
@@ -47,6 +54,18 @@ Public Class JmrJson
         End If
 
         Return New Cliente()
+    End Function
+    Public Function getListaMovimento() As Movimentos
+        js = New JavaScriptSerializer()
+
+        If System.IO.File.Exists(MOVIMENTO_PATH) Then
+
+            Dim jsStr As String = File.ReadAllText(MOVIMENTO_PATH)
+            movDb = js.Deserialize(Of Movimentos)(jsStr)
+            Return Me.movDb
+        End If
+
+        Return New Movimentos()
     End Function
 
 

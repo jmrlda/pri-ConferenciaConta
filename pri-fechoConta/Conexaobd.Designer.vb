@@ -43,6 +43,11 @@ Partial Class Conexaobd
         Me.txtBasedados = New System.Windows.Forms.TextBox()
         Me.lblMsgErro = New System.Windows.Forms.Label()
         Me.btnGuardar = New System.Windows.Forms.Button()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.btnSelecionarCaminho = New System.Windows.Forms.Button()
+        Me.btnTestarCaminho = New System.Windows.Forms.Button()
+        Me.ofd = New System.Windows.Forms.OpenFileDialog()
+        Me.txtPath = New System.Windows.Forms.TextBox()
         CType(Me.LogoPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -86,7 +91,7 @@ Partial Class Conexaobd
         '
         'btnTerminar
         '
-        Me.btnTerminar.Location = New System.Drawing.Point(369, 232)
+        Me.btnTerminar.Location = New System.Drawing.Point(369, 250)
         Me.btnTerminar.Name = "btnTerminar"
         Me.btnTerminar.Size = New System.Drawing.Size(80, 23)
         Me.btnTerminar.TabIndex = 4
@@ -96,7 +101,7 @@ Partial Class Conexaobd
         '
         Me.btnTestar.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.btnTestar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnTestar.Location = New System.Drawing.Point(208, 232)
+        Me.btnTestar.Location = New System.Drawing.Point(208, 250)
         Me.btnTestar.Name = "btnTestar"
         Me.btnTestar.Size = New System.Drawing.Size(77, 23)
         Me.btnTestar.TabIndex = 5
@@ -161,12 +166,51 @@ Partial Class Conexaobd
         '
         'btnGuardar
         '
-        Me.btnGuardar.Location = New System.Drawing.Point(291, 232)
+        Me.btnGuardar.Location = New System.Drawing.Point(291, 250)
         Me.btnGuardar.Name = "btnGuardar"
         Me.btnGuardar.Size = New System.Drawing.Size(75, 23)
         Me.btnGuardar.TabIndex = 13
         Me.btnGuardar.Text = "&Guardar"
         Me.btnGuardar.UseVisualStyleBackColor = True
+        '
+        'Label3
+        '
+        Me.Label3.BackColor = System.Drawing.Color.Transparent
+        Me.Label3.Location = New System.Drawing.Point(206, 195)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(220, 23)
+        Me.Label3.TabIndex = 15
+        Me.Label3.Text = "Caminho Ficheiro Configuração"
+        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'btnSelecionarCaminho
+        '
+        Me.btnSelecionarCaminho.Location = New System.Drawing.Point(454, 221)
+        Me.btnSelecionarCaminho.Name = "btnSelecionarCaminho"
+        Me.btnSelecionarCaminho.Size = New System.Drawing.Size(66, 20)
+        Me.btnSelecionarCaminho.TabIndex = 16
+        Me.btnSelecionarCaminho.Text = "Selecionar"
+        Me.btnSelecionarCaminho.UseVisualStyleBackColor = True
+        '
+        'btnTestarCaminho
+        '
+        Me.btnTestarCaminho.Location = New System.Drawing.Point(526, 221)
+        Me.btnTestarCaminho.Name = "btnTestarCaminho"
+        Me.btnTestarCaminho.Size = New System.Drawing.Size(47, 20)
+        Me.btnTestarCaminho.TabIndex = 17
+        Me.btnTestarCaminho.Text = "Check"
+        Me.btnTestarCaminho.UseVisualStyleBackColor = True
+        '
+        'ofd
+        '
+        Me.ofd.FileName = "ofd"
+        '
+        'txtPath
+        '
+        Me.txtPath.Location = New System.Drawing.Point(208, 221)
+        Me.txtPath.Name = "txtPath"
+        Me.txtPath.Size = New System.Drawing.Size(241, 20)
+        Me.txtPath.TabIndex = 18
         '
         'Conexaobd
         '
@@ -175,7 +219,11 @@ Partial Class Conexaobd
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.CancelButton = Me.btnTestar
-        Me.ClientSize = New System.Drawing.Size(494, 267)
+        Me.ClientSize = New System.Drawing.Size(585, 295)
+        Me.Controls.Add(Me.txtPath)
+        Me.Controls.Add(Me.btnTestarCaminho)
+        Me.Controls.Add(Me.btnSelecionarCaminho)
+        Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.btnGuardar)
         Me.Controls.Add(Me.lblMsgErro)
         Me.Controls.Add(Me.txtBasedados)
@@ -209,4 +257,9 @@ Partial Class Conexaobd
     Friend WithEvents txtBasedados As TextBox
     Friend WithEvents lblMsgErro As Label
     Friend WithEvents btnGuardar As Button
+    Friend WithEvents Label3 As Label
+    Friend WithEvents btnSelecionarCaminho As Button
+    Friend WithEvents btnTestarCaminho As Button
+    Friend WithEvents ofd As OpenFileDialog
+    Friend WithEvents txtPath As TextBox
 End Class

@@ -57,6 +57,7 @@ Partial Class LicencaControlo
         Me.btnRemover = New System.Windows.Forms.Button()
         Me.txtClienteNuit = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
+        Me.btnRemoverLicenca = New System.Windows.Forms.Button()
         CType(Me.LogoPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgvUtilizadoresLicenca, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuStrip1.SuspendLayout()
@@ -85,7 +86,7 @@ Partial Class LicencaControlo
         'PasswordLabel
         '
         Me.PasswordLabel.BackColor = System.Drawing.Color.Transparent
-        Me.PasswordLabel.Location = New System.Drawing.Point(600, 31)
+        Me.PasswordLabel.Location = New System.Drawing.Point(374, 92)
         Me.PasswordLabel.Name = "PasswordLabel"
         Me.PasswordLabel.Size = New System.Drawing.Size(106, 23)
         Me.PasswordLabel.TabIndex = 2
@@ -95,7 +96,7 @@ Partial Class LicencaControlo
         'btnLicenciar
         '
         Me.btnLicenciar.Enabled = False
-        Me.btnLicenciar.Location = New System.Drawing.Point(523, 344)
+        Me.btnLicenciar.Location = New System.Drawing.Point(520, 395)
         Me.btnLicenciar.Name = "btnLicenciar"
         Me.btnLicenciar.Size = New System.Drawing.Size(94, 23)
         Me.btnLicenciar.TabIndex = 4
@@ -105,7 +106,7 @@ Partial Class LicencaControlo
         '
         Me.btnFechar.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.btnFechar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnFechar.Location = New System.Drawing.Point(623, 344)
+        Me.btnFechar.Location = New System.Drawing.Point(620, 395)
         Me.btnFechar.Name = "btnFechar"
         Me.btnFechar.Size = New System.Drawing.Size(94, 23)
         Me.btnFechar.TabIndex = 5
@@ -115,7 +116,7 @@ Partial Class LicencaControlo
         '
         Me.txtUtilizadoresNumero.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtUtilizadoresNumero.Enabled = False
-        Me.txtUtilizadoresNumero.Location = New System.Drawing.Point(603, 57)
+        Me.txtUtilizadoresNumero.Location = New System.Drawing.Point(377, 118)
         Me.txtUtilizadoresNumero.Name = "txtUtilizadoresNumero"
         Me.txtUtilizadoresNumero.Size = New System.Drawing.Size(114, 20)
         Me.txtUtilizadoresNumero.TabIndex = 6
@@ -123,7 +124,7 @@ Partial Class LicencaControlo
         'Label1
         '
         Me.Label1.BackColor = System.Drawing.Color.Transparent
-        Me.Label1.Location = New System.Drawing.Point(534, 89)
+        Me.Label1.Location = New System.Drawing.Point(566, 140)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(104, 23)
         Me.Label1.TabIndex = 9
@@ -133,7 +134,7 @@ Partial Class LicencaControlo
         'Label2
         '
         Me.Label2.BackColor = System.Drawing.Color.Transparent
-        Me.Label2.Location = New System.Drawing.Point(335, 89)
+        Me.Label2.Location = New System.Drawing.Point(332, 140)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(117, 23)
         Me.Label2.TabIndex = 7
@@ -144,7 +145,7 @@ Partial Class LicencaControlo
         '
         Me.btnAdicionar.Enabled = False
         Me.btnAdicionar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnAdicionar.Location = New System.Drawing.Point(572, 180)
+        Me.btnAdicionar.Location = New System.Drawing.Point(569, 231)
         Me.btnAdicionar.Name = "btnAdicionar"
         Me.btnAdicionar.Size = New System.Drawing.Size(66, 23)
         Me.btnAdicionar.TabIndex = 11
@@ -154,7 +155,7 @@ Partial Class LicencaControlo
         '
         Me.cboUtilizador.Enabled = False
         Me.cboUtilizador.FormattingEnabled = True
-        Me.cboUtilizador.Location = New System.Drawing.Point(171, 180)
+        Me.cboUtilizador.Location = New System.Drawing.Point(168, 231)
         Me.cboUtilizador.Name = "cboUtilizador"
         Me.cboUtilizador.Size = New System.Drawing.Size(206, 21)
         Me.cboUtilizador.TabIndex = 12
@@ -162,7 +163,7 @@ Partial Class LicencaControlo
         'Label3
         '
         Me.Label3.BackColor = System.Drawing.Color.Transparent
-        Me.Label3.Location = New System.Drawing.Point(171, 155)
+        Me.Label3.Location = New System.Drawing.Point(168, 206)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(74, 23)
         Me.Label3.TabIndex = 13
@@ -175,14 +176,14 @@ Partial Class LicencaControlo
         Me.cboLicencaSerie.FormattingEnabled = True
         Me.cboLicencaSerie.Location = New System.Drawing.Point(174, 55)
         Me.cboLicencaSerie.Name = "cboLicencaSerie"
-        Me.cboLicencaSerie.Size = New System.Drawing.Size(220, 21)
+        Me.cboLicencaSerie.Size = New System.Drawing.Size(359, 21)
         Me.cboLicencaSerie.TabIndex = 14
         '
         'dgvUtilizadoresLicenca
         '
         Me.dgvUtilizadoresLicenca.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvUtilizadoresLicenca.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Utilizadores, Me.Nivel})
-        Me.dgvUtilizadoresLicenca.Location = New System.Drawing.Point(171, 207)
+        Me.dgvUtilizadoresLicenca.Location = New System.Drawing.Point(168, 258)
         Me.dgvUtilizadoresLicenca.Name = "dgvUtilizadoresLicenca"
         Me.dgvUtilizadoresLicenca.Size = New System.Drawing.Size(395, 131)
         Me.dgvUtilizadoresLicenca.TabIndex = 15
@@ -202,8 +203,9 @@ Partial Class LicencaControlo
         '
         'btnLimpar
         '
+        Me.btnLimpar.Enabled = False
         Me.btnLimpar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnLimpar.Location = New System.Drawing.Point(646, 180)
+        Me.btnLimpar.Location = New System.Drawing.Point(643, 231)
         Me.btnLimpar.Name = "btnLimpar"
         Me.btnLimpar.Size = New System.Drawing.Size(67, 23)
         Me.btnLimpar.TabIndex = 16
@@ -212,17 +214,17 @@ Partial Class LicencaControlo
         'dtpDataInicio
         '
         Me.dtpDataInicio.Enabled = False
-        Me.dtpDataInicio.Location = New System.Drawing.Point(338, 115)
+        Me.dtpDataInicio.Location = New System.Drawing.Point(335, 166)
         Me.dtpDataInicio.Name = "dtpDataInicio"
-        Me.dtpDataInicio.Size = New System.Drawing.Size(180, 20)
+        Me.dtpDataInicio.Size = New System.Drawing.Size(228, 20)
         Me.dtpDataInicio.TabIndex = 19
         '
         'dtpDataFim
         '
         Me.dtpDataFim.Enabled = False
-        Me.dtpDataFim.Location = New System.Drawing.Point(537, 115)
+        Me.dtpDataFim.Location = New System.Drawing.Point(569, 166)
         Me.dtpDataFim.Name = "dtpDataFim"
-        Me.dtpDataFim.Size = New System.Drawing.Size(180, 20)
+        Me.dtpDataFim.Size = New System.Drawing.Size(230, 20)
         Me.dtpDataFim.TabIndex = 20
         '
         'MenuStrip1
@@ -231,7 +233,7 @@ Partial Class LicencaControlo
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LicencaToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(737, 26)
+        Me.MenuStrip1.Size = New System.Drawing.Size(803, 26)
         Me.MenuStrip1.TabIndex = 21
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -254,7 +256,7 @@ Partial Class LicencaControlo
         Me.cboNivelUtilizador.Enabled = False
         Me.cboNivelUtilizador.FormattingEnabled = True
         Me.cboNivelUtilizador.Items.AddRange(New Object() {"Selecionar nivel", "Administrador", "Tesoureiro"})
-        Me.cboNivelUtilizador.Location = New System.Drawing.Point(383, 180)
+        Me.cboNivelUtilizador.Location = New System.Drawing.Point(380, 231)
         Me.cboNivelUtilizador.Name = "cboNivelUtilizador"
         Me.cboNivelUtilizador.Size = New System.Drawing.Size(183, 21)
         Me.cboNivelUtilizador.TabIndex = 22
@@ -263,7 +265,7 @@ Partial Class LicencaControlo
         '
         Me.Label4.AutoSize = True
         Me.Label4.BackColor = System.Drawing.Color.Transparent
-        Me.Label4.Location = New System.Drawing.Point(380, 160)
+        Me.Label4.Location = New System.Drawing.Point(377, 211)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(57, 13)
         Me.Label4.TabIndex = 23
@@ -273,7 +275,7 @@ Partial Class LicencaControlo
         '
         Me.txtDuracao.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtDuracao.Enabled = False
-        Me.txtDuracao.Location = New System.Drawing.Point(175, 115)
+        Me.txtDuracao.Location = New System.Drawing.Point(172, 166)
         Me.txtDuracao.Name = "txtDuracao"
         Me.txtDuracao.Size = New System.Drawing.Size(142, 20)
         Me.txtDuracao.TabIndex = 24
@@ -281,7 +283,7 @@ Partial Class LicencaControlo
         'Label5
         '
         Me.Label5.BackColor = System.Drawing.Color.Transparent
-        Me.Label5.Location = New System.Drawing.Point(171, 89)
+        Me.Label5.Location = New System.Drawing.Point(168, 140)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(106, 23)
         Me.Label5.TabIndex = 25
@@ -292,7 +294,7 @@ Partial Class LicencaControlo
         '
         Me.btnRemover.Enabled = False
         Me.btnRemover.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnRemover.Location = New System.Drawing.Point(573, 210)
+        Me.btnRemover.Location = New System.Drawing.Point(570, 261)
         Me.btnRemover.Name = "btnRemover"
         Me.btnRemover.Size = New System.Drawing.Size(65, 23)
         Me.btnRemover.TabIndex = 26
@@ -302,7 +304,7 @@ Partial Class LicencaControlo
         'txtClienteNuit
         '
         Me.txtClienteNuit.Enabled = False
-        Me.txtClienteNuit.Location = New System.Drawing.Point(400, 56)
+        Me.txtClienteNuit.Location = New System.Drawing.Point(174, 117)
         Me.txtClienteNuit.Name = "txtClienteNuit"
         Me.txtClienteNuit.Size = New System.Drawing.Size(197, 20)
         Me.txtClienteNuit.TabIndex = 27
@@ -311,11 +313,21 @@ Partial Class LicencaControlo
         '
         Me.Label6.AutoSize = True
         Me.Label6.BackColor = System.Drawing.Color.Transparent
-        Me.Label6.Location = New System.Drawing.Point(398, 30)
+        Me.Label6.Location = New System.Drawing.Point(172, 91)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(26, 13)
         Me.Label6.TabIndex = 28
         Me.Label6.Text = "Nuit"
+        '
+        'btnRemoverLicenca
+        '
+        Me.btnRemoverLicenca.Enabled = False
+        Me.btnRemoverLicenca.Location = New System.Drawing.Point(539, 55)
+        Me.btnRemoverLicenca.Name = "btnRemoverLicenca"
+        Me.btnRemoverLicenca.Size = New System.Drawing.Size(140, 23)
+        Me.btnRemoverLicenca.TabIndex = 29
+        Me.btnRemoverLicenca.Text = "Remover licença"
+        Me.btnRemoverLicenca.UseVisualStyleBackColor = True
         '
         'LicencaControlo
         '
@@ -324,7 +336,8 @@ Partial Class LicencaControlo
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.CancelButton = Me.btnFechar
-        Me.ClientSize = New System.Drawing.Size(737, 379)
+        Me.ClientSize = New System.Drawing.Size(803, 430)
+        Me.Controls.Add(Me.btnRemoverLicenca)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.txtClienteNuit)
         Me.Controls.Add(Me.btnRemover)
@@ -390,4 +403,5 @@ Partial Class LicencaControlo
     Friend WithEvents btnRemover As Button
     Friend WithEvents txtClienteNuit As TextBox
     Friend WithEvents Label6 As Label
+    Friend WithEvents btnRemoverLicenca As Button
 End Class

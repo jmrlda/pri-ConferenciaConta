@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2016
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "pri-fechoConta", "pri-fechoConta\pri-fechoConta.vbproj", "{ECDB2C82-1DFD-419C-B7C0-E39EA19BDF15}"
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "priConferenciaCaixa", "pri-fechoConta\priConferenciaCaixa.vbproj", "{ECDB2C82-1DFD-419C-B7C0-E39EA19BDF15}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Pri-ConferenciaCaixa-Setup-1.0", "Pri-ConferenciaCaixa-Setup-1.0\Pri-ConferenciaCaixa-Setup-1.0.vdproj", "{24DF4881-9BD5-4FBE-8C7F-7B91A0D09DC8}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Pri-ConferenciaCaixa-1.0.1", "Pri-ConferenciaCaixa-Setup-1.0\Pri-ConferenciaCaixa-Setup-1.0.vdproj", "{24DF4881-9BD5-4FBE-8C7F-7B91A0D09DC8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -95,6 +95,8 @@ Public Class registrar
             Try
                 If (Me.cboUtilizador.SelectedIndex > 0) Then
                     administacao.actualizarImagemUtilizador(Me.cboUtilizador.Text, OpenFileDialog1.FileName)
+                    Me.pboxPerfil.ImageLocation = administacao.buscarUtilizadorImagem(Me.cboUtilizador.Text)
+
                 End If
 
             Catch ex As Exception
@@ -108,10 +110,12 @@ Public Class registrar
     Private Sub cboUtilizador_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboUtilizador.SelectedIndexChanged
         If cboUtilizador.SelectedIndex > 0 Then
             Me.btnAlterarImagem.Enabled = True
+            Me.btnNovaSenha.Enabled = True
             Me.pboxPerfil.ImageLocation = administacao.buscarUtilizadorImagem(Me.cboUtilizador.Text)
         Else
             Me.btnAlterarImagem.Enabled = False
-
+            Me.btnNovaSenha.Enabled = False
+            Me.btnRegistrar.Enabled = False
         End If
     End Sub
 

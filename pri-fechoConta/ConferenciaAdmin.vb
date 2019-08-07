@@ -2,11 +2,16 @@
 Imports System.IO
 Imports System.Security.Cryptography
 Imports System.Text
+Imports System.Web.Script.Serialization
 
+' Class ConferenciaAdmin 
+' PROPOSITO : Controlar o acesso ao sistema de actua como intermediario na troca de dados entre base de dados  demais componentes do sistema
+'
+'
 Public Class ConferenciaAdmin
 
     Dim SQLPriEmpre As New sqlControloPriEmpre
-    Dim SQLTerramar As New sqlControlo
+    Dim SQL As New sqlControlo
 
     Dim tblPrimEmpre, tblTerramar As New DataTable
     Dim sqlResult As New SqlDataAdapter
@@ -16,95 +21,111 @@ Public Class ConferenciaAdmin
     Public tesoureiro As String = "Tesoureiro"
 
     Public modulo As String = "priConferenciaConta"
-    Public versao As String = "1.0"
+    Public versao As String = "1.0.2"
+
+
+
 
     Public Function criarTblConferenciaUtilizador() As Boolean
 
-        Dim query As String = "create table  dbo.TDU_ConferenciaUtilizador (CDU_id uniqueIdentifier default (newId()) primary key, CDU_utilizador varchar(50), CDU_senha varchar(200), CDU_nivel varchar(50),CDU_conferenciaLicencaId uniqueidentifier null foreign key references dbo.TDU_ConferenciaLicenca(CDU_id))"
+        Dim query As String = "create table  dbo.TDU_ConferenciaUtilizador (CDU_id uniqueIdentifier default (newId()) primary key, CDU_utilizador varchar(50), CDU_senha varchar(200), CDU_nivel varchar(50), CDU_logado bit default 0, CDU_host varchar(64) null  ,CDU_conferenciaLicencaId uniqueidentifier null foreign key references dbo.TDU_ConferenciaLicenca(CDU_id))"
 
-        Return SQLTerramar.criarTabela(query)
+        Return SQL.criarTabela(query)
     End Function
 
 
     Public Function apagarTblConferenciaUtilizador() As Boolean
         Dim query As String = "drop table  dbo.TDU_ConferenciaUtilizador"
 
-        Return SQLTerramar.criarTabela(query)
+        Return SQL.criarTabela(query)
 
     End Function
     Public Function criarTblLicenca() As Boolean
 
-        Dim query As String = "create table  dbo.TDU_ConferenciaLicenca(CDU_id uniqueIdentifier default (newId()) primary key, CDU_serie_licenca varchar(2018), CDU_numero_utilizador int ,CDU_dataLicenca date, CDU_dataLicencaFim date)"
+        Dim query As String = "create table  dbo.TDU_ConferenciaLicenca(CDU_id uniqueIdentifier default (newId()) primary key, CDU_serie_licenca varchar(2018), CDU_numero_utilizador int ,CDU_dataLicenca varchar(30), CDU_dataLicencaFim varchar(30))"
 
-        Return SQLTerramar.criarTabela(query)
+        Return SQL.criarTabela(query)
     End Function
 
 
     Public Function apagarTblLicenca() As Boolean
         Dim query As String = "drop table  dbo.TDU_ConferenciaLicenca"
 
-        Return SQLTerramar.criarTabela(query)
+        Return SQL.criarTabela(query)
 
     End Function
 
 
     Public Function criarTblConferenciaCaixa() As Boolean
 
-        Dim query As String = "create table dbo.TDU_ConferenciaCaixa (CDU_id uniqueIdentifier default (newId()) primary key, CDU_diarioCaixa int  not null, CDU_modoMovimento nvarchar(50) not null, CDU_cartaoTipo nvarchar(50),CDU_TransacaoNumero int, CDU_quantidade int, CDU_valor money not null, CDU_chequeNumero nvarchar(50), CDU_chequeDescricao nvarchar(50), CDU_dataConferencia datetime not null, CDU_utilizadorTesoureiro nvarchar(50), CDU_saidaDescricao nvarchar(50), CDU_referencia nvarchar(50))"
+        Dim query As String = "create table dbo.TDU_ConferenciaCaixa (CDU_id uniqueIdentifier default (newId()) primary key, CDU_diarioCaixa  integer not null, CDU_modoMovimento nvarchar(50) not null, CDU_cartaoTipo nvarchar(50),CDU_TransacaoNumero  nvarchar(50), CDU_quantidade integer, CDU_valor varchar(64) not null, CDU_chequeNumero nvarchar(50), CDU_chequeDescricao nvarchar(50), CDU_dataConferencia varchar(50), CDU_utilizadorTesoureiro nvarchar(50), CDU_saidaDescricao nvarchar(50), CDU_referencia nvarchar(50),  CDU_IdCabecTesouraria uniqueidentifier not null, CDU_conta nvarchar(32) not null, CDU_data_fecho varchar(255), CDU_data_transacao varchar(32) null)"
 
-        Return SQLTerramar.criarTabela(query)
+        Return SQL.criarTabela(query)
     End Function
 
 
     Public Function apagarTblConferenciaCaixa() As Boolean
         Dim query As String = "drop table  dbo.TDU_ConferenciaCaixa"
 
-        Return SQLTerramar.criarTabela(query)
+        Return SQL.criarTabela(query)
 
     End Function
 
 
 
-    Public Function insertLicenca(serie, numeroUtilizador, dataInicio, dataFim)
+    Public Sub insertLicenca(serie As String, numeroUtilizador As Integer, dataInicio As String, dataFim As String)
         Try
 
-            If (SQLTerramar.temConexao()) Then
-                'sqlAberturaInsert = "INSERT INTO CDU_diarioCaixa, CDU_modoMovimento, CDU_valor VALUES '" + Me.txtCaixaNum.Text + "', '" + modoReceb + "', ' " + valor + "' "
-                'sqlAberturaInsert = "INSERT INTO (CDU_id, CDU_diarioCaixa, CDU_modoMovimento, CDU_valor) VALUES ('" & Me.txtCaixaNum.Text & "', '" & Me.txtCaixaNum.Text & "', '" & modoReceb & "', '" & valor.ToString() & "')"
+
+            If (SQL.temConexao()) Then
                 Dim query As String = "INSERT INTO TDU_ConferenciaLicenca (CDU_serie_licenca , CDU_numero_utilizador, CDU_dataLicenca , CDU_dataLicencaFim ) VALUES ('" & serie & "',  '" & numeroUtilizador & "', '" & dataInicio & "', '" & dataFim & "')"
-                SQLTerramar.abrirCon()
-                Dim cmd = New SqlCommand(query, SQLTerramar.conexao)
-
+                SQL.abrirCon()
+                Dim cmd = New SqlCommand(query, SQL.conexao)
                 cmd.ExecuteNonQuery()
-                SQLTerramar.fecharCon()
+                SQL.fecharCon()
             End If
         Catch ex As Exception
-            MsgBox("erro " + ex.Message())
-            SQLTerramar.fecharCon()
+            MsgBox("[INSERT LICENCA] erro " + ex.Message())
+            SQL.fecharCon()
 
         End Try
-    End Function
+    End Sub
 
-    Public Function removeLicenca(licenca)
+    Public Sub removeLicenca(codigo As String)
         Try
 
-            If (SQLTerramar.temConexao()) Then
-                'sqlAberturaInsert = "INSERT INTO CDU_diarioCaixa, CDU_modoMovimento, CDU_valor VALUES '" + Me.txtCaixaNum.Text + "', '" + modoReceb + "', ' " + valor + "' "
-                'sqlAberturaInsert = "INSERT INTO (CDU_id, CDU_diarioCaixa, CDU_modoMovimento, CDU_valor) VALUES ('" & Me.txtCaixaNum.Text & "', '" & Me.txtCaixaNum.Text & "', '" & modoReceb & "', '" & valor.ToString() & "')"
-                Dim query As String = "remove from TDU_ConferenciaLicenca where CDU_id = '" & licenca & "')"
-                SQLTerramar.abrirCon()
-                Dim cmd = New SqlCommand(query, SQLTerramar.conexao)
+            If (SQL.temConexao()) Then
+                Dim query As String = "delete from TDU_ConferenciaLicenca where CDU_id = '" & codigo & "'"
+                SQL.abrirCon()
+                Dim cmd = New SqlCommand(query, SQL.conexao)
 
                 cmd.ExecuteNonQuery()
-                SQLTerramar.fecharCon()
+                SQL.fecharCon()
             End If
         Catch ex As Exception
-            MsgBox("erro " + ex.Message())
-            SQLTerramar.fecharCon()
+            MessageBox.Show("[REMOVE LICENCA] Erro " + ex.Message(), "Atenção", MessageBoxButtons.OK)
+            SQL.fecharCon()
 
         End Try
-    End Function
+    End Sub
 
+    Public Sub removeLicencaBySerie(licenca)
+        Try
+
+            If (SQL.temConexao()) Then
+                Dim query As String = "delete from TDU_ConferenciaLicenca where CDU_serie_licenca = '" & licenca & "'"
+                SQL.abrirCon()
+                Dim cmd = New SqlCommand(query, SQL.conexao)
+
+                cmd.ExecuteNonQuery()
+                SQL.fecharCon()
+            End If
+        Catch ex As Exception
+            MessageBox.Show("[REMOVE LICENCA By SERIE] Erro " + ex.Message(), "Atenção", MessageBoxButtons.OK)
+            SQL.fecharCon()
+
+        End Try
+    End Sub
 
     Public Function buscarLicencas() As List(Of String)
 
@@ -114,7 +135,7 @@ Public Class ConferenciaAdmin
         Dim listaSerie As New List(Of String)
         listaSerie.Insert(0, "Selecionar")
 
-        tabela = SQLTerramar.buscarDado(query)
+        tabela = SQL.buscarDado(query)
         If (tabela.Rows.Count <> 0) Then
             For i As Integer = 0 To tabela.Rows.Count - 1
                 listaSerie.Add(tabela.Rows(i)("CDU_serie_licenca"))
@@ -123,13 +144,30 @@ Public Class ConferenciaAdmin
 
         Return listaSerie
     End Function
+    Public Function buscarDataFechoDiario(diario As String) As String
+
+        Dim query As String = "select DataFecho from diariocaixa where Diario= '" & diario & "'"
+
+        Dim tabela As New DataTable
+        Dim data As String = ""
+
+        tabela = SQL.buscarDado(query)
+        If (tabela.Rows.Count <> 0) Then
+            For i As Integer = 0 To tabela.Rows.Count - 1
+                data = tabela.Rows(i)("DataFecho")
+            Next
+        End If
+
+        Return data
+    End Function
+
     Public Function existeLicencasBySerie(serie As String) As Boolean
 
         Dim query As String = "select * from TDU_ConferenciaLicenca where CDU_serie_licenca = '" & serie & "'"
         Dim tabela As New DataTable
         Dim rv As Boolean = False
 
-        tabela = SQLTerramar.buscarDado(query)
+        tabela = SQL.buscarDado(query)
         If (tabela.Rows.Count <> 0) Then
             rv = True
         Else
@@ -144,96 +182,93 @@ Public Class ConferenciaAdmin
         Dim tabela As New DataTable
         Dim rv As Boolean = False
 
-        tabela = SQLTerramar.buscarDado(query)
+        tabela = SQL.buscarDado(query)
 
 
         Return tabela.Rows(0)("CDU_id").ToString()
     End Function
 
 
-    Public Function insertConferenciaCaixa(caixa As Integer, movimento As String, cartaoTipo As String, transacaoNumero As String, quantidade As Integer, valor As Double, chequeNumero As Integer, chequeDescricao As String, dataConferencia As Date, tesoureiro As String, saidaDescricao As String, referencia As String)
+    Public Function insertConferenciaCaixa(caixa As Integer, movimento As String, cartaoTipo As String, transacaoNumero As String, quantidade As Integer, valor As Double, chequeNumero As String, chequeDescricao As String, dataConferencia As String, tesoureiro As String, saidaDescricao As String, referencia As String, idCabecTesourario As String, contaPos As String, data_fecho As String, data_transacao As String)
+
         Try
 
-            If (SQLTerramar.temConexao()) Then
-                'sqlAberturaInsert = "INSERT INTO CDU_diarioCaixa, CDU_modoMovimento, CDU_valor VALUES '" + Me.txtCaixaNum.Text + "', '" + modoReceb + "', ' " + valor + "' "
-                'sqlAberturaInsert = "INSERT INTO (CDU_id, CDU_diarioCaixa, CDU_modoMovimento, CDU_valor) VALUES ('" & Me.txtCaixaNum.Text & "', '" & Me.txtCaixaNum.Text & "', '" & modoReceb & "', '" & valor.ToString() & "')"
-                Dim query As String = "INSERT INTO TDU_ConferenciaCaixa ( CDU_diarioCaixa , CDU_modoMovimento , CDU_cartaoTipo , CDU_TransacaoNumero, CDU_quantidade , CDU_valor , CDU_chequeNumero , CDU_chequeDescricao , CDU_dataConferencia , CDU_utilizadorTesoureiro , CDU_saidaDescricao , CDU_referencia  ) " &
-                    "VALUES ('" & caixa & "',  '" & movimento & "', '" & cartaoTipo & "','" & transacaoNumero & "', '" & quantidade & "',  '" & valor & "',  '" & chequeNumero & "',  '" & chequeDescricao & "',  '" & dataConferencia & "',  '" & tesoureiro & "',  '" & saidaDescricao & "',  '" & referencia & "')"
-                SQLTerramar.abrirCon()
-                Dim cmd = New SqlCommand(query, SQLTerramar.conexao)
+            If (SQL.temConexao()) Then
+                Dim query As String = "INSERT INTO TDU_ConferenciaCaixa ( CDU_diarioCaixa , CDU_modoMovimento , CDU_cartaoTipo , CDU_TransacaoNumero, CDU_quantidade , CDU_valor , CDU_chequeNumero , CDU_chequeDescricao , CDU_dataConferencia , CDU_utilizadorTesoureiro , CDU_saidaDescricao , CDU_referencia, CDU_IdCabecTesouraria, CDU_conta, CDU_data_fecho, CDU_data_transacao  ) " &
+                    "VALUES ('" & caixa & "',  '" & movimento & "', '" & cartaoTipo & "','" & transacaoNumero & "', '" & quantidade & "',  '" & valor & "',  '" & chequeNumero & "',  '" & chequeDescricao & "',  '" & dataConferencia & "',  '" & tesoureiro & "',  '" & saidaDescricao & "',  '" & referencia & "', '" & idCabecTesourario & "', '" & contaPos & "', '" & data_fecho & "' ,'" & data_transacao & "' )"
+                SQL.abrirCon()
+
+                Dim cmd = New SqlCommand(query, SQL.conexao)
 
                 cmd.ExecuteNonQuery()
-                SQLTerramar.fecharCon()
+                SQL.fecharCon()
             End If
         Catch ex As Exception
             MessageBox.Show("[INSERT CONFERENCIA CAIXA]: Ocorreu um erro  /> " + ex.Message(), "Atenção - Perigo", MessageBoxButtons.OK)
-            SQLTerramar.fecharCon()
+            SQL.fecharCon()
 
+            Return False
         End Try
+
+        Return True
     End Function
 
-    Public Function removeConferenciaCaixa(caixa)
+    Public Sub removeConferenciaCaixa(caixa)
         Try
 
-            If (SQLTerramar.temConexao()) Then
-                'sqlAberturaInsert = "INSERT INTO CDU_diarioCaixa, CDU_modoMovimento, CDU_valor VALUES '" + Me.txtCaixaNum.Text + "', '" + modoReceb + "', ' " + valor + "' "
-                'sqlAberturaInsert = "INSERT INTO (CDU_id, CDU_diarioCaixa, CDU_modoMovimento, CDU_valor) VALUES ('" & Me.txtCaixaNum.Text & "', '" & Me.txtCaixaNum.Text & "', '" & modoReceb & "', '" & valor.ToString() & "')"
+            If (SQL.temConexao()) Then
                 Dim query As String = "remove from TDU_ConferenciaCaixa where CDU_id = " & caixa & "')"
-                SQLTerramar.abrirCon()
-                Dim cmd = New SqlCommand(query, SQLTerramar.conexao)
+                SQL.abrirCon()
+                Dim cmd = New SqlCommand(query, SQL.conexao)
 
                 cmd.ExecuteNonQuery()
-                SQLTerramar.fecharCon()
+                SQL.fecharCon()
             End If
         Catch ex As Exception
-            MsgBox("erro " + ex.Message())
-            SQLTerramar.fecharCon()
+            MsgBox("[REMOVE CONFERENCIA CAIXA] erro " + ex.Message())
+            SQL.fecharCon()
 
         End Try
-    End Function
+    End Sub
 
 
-    Public Function insertConferenciaUtilizador(utilizador, senha, nivel, licenca)
+    Public Sub insertConferenciaUtilizador(utilizador, senha, nivel, licenca)
         Try
 
-            If (SQLTerramar.temConexao()) Then
-                'sqlAberturaInsert = "INSERT INTO CDU_diarioCaixa, CDU_modoMovimento, CDU_valor VALUES '" + Me.txtCaixaNum.Text + "', '" + modoReceb + "', ' " + valor + "' "
-                'sqlAberturaInsert = "INSERT INTO (CDU_id, CDU_diarioCaixa, CDU_modoMovimento, CDU_valor) VALUES ('" & Me.txtCaixaNum.Text & "', '" & Me.txtCaixaNum.Text & "', '" & modoReceb & "', '" & valor.ToString() & "')"
+            If (SQL.temConexao()) Then
                 Dim query As String = "INSERT INTO TDU_ConferenciaUtilizador ( CDU_utilizador , CDU_senha , CDU_nivel ,CDU_conferenciaLicencaId ) " &
                     "VALUES ('" & utilizador & "',  '" & Encrypt(senha) & "', '" & nivel & "','" & licenca & "')"
-                SQLTerramar.abrirCon()
-                Dim cmd = New SqlCommand(query, SQLTerramar.conexao)
+                SQL.abrirCon()
+                Dim cmd = New SqlCommand(query, SQL.conexao)
 
                 cmd.ExecuteNonQuery()
-                SQLTerramar.fecharCon()
+                SQL.fecharCon()
             End If
         Catch ex As Exception
-            MessageBox.Show("[insertConferenciaUtilizador] Erro " + ex.Message(), "Atenção - Perigo", MessageBoxButtons.OK)
-            SQLTerramar.fecharCon()
+            MessageBox.Show("[INSERT CONFERENCIA UTILIZADOR] Erro " + ex.Message(), "Atenção - Perigo", MessageBoxButtons.OK)
+            SQL.fecharCon()
 
         End Try
-    End Function
+    End Sub
 
-    Public Function removeConferenciaUtilizador(utilizador)
+    Public Sub removeConferenciaUtilizador(utilizador)
         Try
 
-            If (SQLTerramar.temConexao()) Then
-                'sqlAberturaInsert = "INSERT INTO CDU_diarioCaixa, CDU_modoMovimento, CDU_valor VALUES '" + Me.txtCaixaNum.Text + "', '" + modoReceb + "', ' " + valor + "' "
-                'sqlAberturaInsert = "INSERT INTO (CDU_id, CDU_diarioCaixa, CDU_modoMovimento, CDU_valor) VALUES ('" & Me.txtCaixaNum.Text & "', '" & Me.txtCaixaNum.Text & "', '" & modoReceb & "', '" & valor.ToString() & "')"
+            If (SQL.temConexao()) Then
                 Dim query As String = "remove from TDU_ConferenciaUtilizador where CDU_id = " & utilizador & "')"
-                SQLTerramar.abrirCon()
-                Dim cmd = New SqlCommand(query, SQLTerramar.conexao)
+                SQL.abrirCon()
+                Dim cmd = New SqlCommand(query, SQL.conexao)
 
                 cmd.ExecuteNonQuery()
-                SQLTerramar.fecharCon()
+                SQL.fecharCon()
             End If
         Catch ex As Exception
-            MsgBox("erro " + ex.Message())
+            MsgBox("[REMOVE CONFERENCIA UTILIZADOR] erro " + ex.Message())
 
-            SQLTerramar.fecharCon()
+            SQL.fecharCon()
 
         End Try
-    End Function
+    End Sub
 
 
     Public Function setSenhaUtilizador(utilizador As String, nova_senha As String) As Boolean
@@ -241,20 +276,18 @@ Public Class ConferenciaAdmin
         Dim rv As Boolean = False
         Try
 
-            If (SQLTerramar.temConexao()) Then
-                'sqlAberturaInsert = "INSERT INTO CDU_diarioCaixa, CDU_modoMovimento, CDU_valor VALUES '" + Me.txtCaixaNum.Text + "', '" + modoReceb + "', ' " + valor + "' "
-                'sqlAberturaInsert = "INSERT INTO (CDU_id, CDU_diarioCaixa, CDU_modoMovimento, CDU_valor) VALUES ('" & Me.txtCaixaNum.Text & "', '" & Me.txtCaixaNum.Text & "', '" & modoReceb & "', '" & valor.ToString() & "')"
+            If (SQL.temConexao()) Then
                 Dim query As String = "update TDU_ConferenciaUtilizador set CDU_senha = '" + nova_senha + "' where CDU_utilizador = '" + utilizador + "'"
-                SQLTerramar.abrirCon()
-                Dim cmd = New SqlCommand(query, SQLTerramar.conexao)
+                SQL.abrirCon()
+                Dim cmd = New SqlCommand(query, SQL.conexao)
 
                 cmd.ExecuteNonQuery()
-                SQLTerramar.fecharCon()
+                SQL.fecharCon()
                 rv = True
             End If
         Catch ex As Exception
-            MsgBox("erro " + ex.Message())
-            SQLTerramar.fecharCon()
+            MsgBox("[SET SENHA UTILIZADOR] erro " + ex.Message())
+            SQL.fecharCon()
             rv = False
         End Try
 
@@ -320,10 +353,10 @@ Public Class ConferenciaAdmin
 
 
 
-    Public Function criarFicheiroLicenca(texto_str As String)
+    Public Sub criarFicheiroLicenca(texto_str As String)
 
         System.IO.File.WriteAllText("jmrLicenca.lic", texto_str)
-    End Function
+    End Sub
 
     Public Function lerFicheiroLicenca(ficheiro As String) As String
         Dim licenca_encoded As String = System.IO.File.ReadAllText(ficheiro)
@@ -332,29 +365,35 @@ Public Class ConferenciaAdmin
 
 
 
-    ' 
+    ' inicio logar
+    ' PROPOSITO :   entrar no sistema para iniciar as actividades
     ' Argumento:
-    '       * utilizador    - funcionario registrado 
-    '       * senha         - senha do usuario  (ja encriptada )
+    '   * utilizador    - funcionario registrado 
+    '   * senha         - senha do usuario  (ja encriptada )
+    ' RETORNO :  Objecto Utilizador com dados do usuario logado
     '
     Public Function logar(utilizador, senha) As Utilizador
 
         Dim utilizador_logado As New Utilizador
 
         Dim query As String = "select * from TDU_ConferenciaUtilizador where CDU_utilizador = '" + utilizador + "' and CDU_senha ='" + senha + "'"
-
+        Dim estado As Boolean = False
         Dim tabela As New DataTable
         Dim login As Boolean = False
 
-
-        tabela = SQLTerramar.buscarDado(query)
+        tabela = SQL.buscarDado(query)
         If (tabela.Rows.Count <> 0) Then
+
             Dim nivel As String = tabela.Rows(0)("CDU_nivel")
-            utilizador_logado.setId(tabela.Rows(0)("CDU_id"))
             utilizador_logado.setNome(tabela.Rows(0)("CDU_utilizador"))
+
+
+            utilizador_logado.setId(tabela.Rows(0)("CDU_id"))
             utilizador_logado.setNivel(nivel)
             utilizador_logado.setSenha(tabela.Rows(0)("CDU_senha"))
             utilizador_logado.setLogado(True)
+
+
         Else
             utilizador_logado.setLogado(False)
         End If
@@ -364,23 +403,116 @@ Public Class ConferenciaAdmin
     End Function
 
 
+
+    ' Definir presenca do utilizador 
+    Public Function setUtilizadorLogado(usuario, host, logado)
+
+        Dim rv As Boolean = False
+        Try
+
+            If (SQL.temConexao()) Then
+                Dim query As String = "update  TDU_ConferenciaUtilizador set  CDU_host = '" & host & "',  CDU_logado = '" & logado & "' where  CDU_utilizador = '" & usuario & "'"
+                SQL.abrirCon()
+                Dim cmd = New SqlCommand(query, SQL.conexao)
+
+                cmd.ExecuteNonQuery()
+                SQL.fecharCon()
+                rv = True
+            End If
+        Catch ex As Exception
+            MessageBox.Show("[SET UTILIZADOR LOGs] Ocorreu um erro enquanto actualizava estado de presença " + ex.Message, "Atenção", MessageBoxButtons.OK)
+            SQL.fecharCon()
+            rv = False
+
+        End Try
+
+        Return rv
+    End Function
+
+
+    Public Function isUtilizadorLogado(utilizador As String, host As String) As Boolean
+
+        Dim query As String = "select * from TDU_ConferenciaUtilizador where CDU_utilizador = '" & utilizador & "' and CDU_logado = 1 and CDU_host = '" & host & "'"
+        Dim tabela As New DataTable
+        Dim rv As Boolean = False
+
+
+        tabela = SQL.buscarDado(query)
+        If (tabela.Rows.Count <> 0) Then
+            rv = True
+        Else
+            rv = False
+        End If
+
+        Return rv
+    End Function
+
+
+    Public Function isUtilizadorLogadoNoutroComputador(utilizador As String, host As String) As Boolean
+
+        Dim query As String = "select * from TDU_ConferenciaUtilizador where CDU_utilizador = '" & utilizador & "' and CDU_logado = 1"
+        Dim tabela As New DataTable
+        Dim rv As Boolean = False
+        Dim _host As String = ""
+
+        tabela = SQL.buscarDado(query)
+        If (tabela.Rows.Count <> 0) Then
+            _host = tabela.Rows(0)("CDU_host")
+            If _host.Length > 1 And _host <> host Then
+                rv = True
+            Else
+                rv = False
+            End If
+
+        Else
+            rv = False
+        End If
+
+        Return rv
+    End Function
+
+
+
     Public Function removeLicencaUsuario(usuario, nivel)
 
         Dim rv As Boolean = False
         Try
 
-            If (SQLTerramar.temConexao()) Then
+            If (SQL.temConexao()) Then
                 Dim query As String = "delete from TDU_ConferenciaUtilizador where CDU_utilizador = '" & usuario & "' and CDU_nivel = '" & nivel & "'"
-                SQLTerramar.abrirCon()
-                Dim cmd = New SqlCommand(query, SQLTerramar.conexao)
+                SQL.abrirCon()
+                Dim cmd = New SqlCommand(query, SQL.conexao)
 
                 cmd.ExecuteNonQuery()
-                SQLTerramar.fecharCon()
+                SQL.fecharCon()
                 rv = True
             End If
         Catch ex As Exception
-            MsgBox("erro " + ex.Message())
-            SQLTerramar.fecharCon()
+            MsgBox("[REMOVE LICENCA USUARIO] erro " + ex.Message())
+            SQL.fecharCon()
+            rv = False
+
+        End Try
+
+        Return rv
+    End Function
+    Public Function removeUsuarioByLicenca(licenca As String)
+
+        Dim rv As Boolean = False
+        Try
+
+            If (SQL.temConexao()) Then
+                Dim query As String = "delete from TDU_ConferenciaUtilizador where CDU_conferenciaLicencaId = '" & Me.buscarIdLicencasBySerie(licenca) & "' and CDU_nivel not like  'Super administrador'"
+                SQL.abrirCon()
+                Dim cmd = New SqlCommand(query, SQL.conexao)
+
+                cmd.ExecuteNonQuery()
+                SQL.fecharCon()
+                rv = True
+            End If
+        Catch ex As Exception
+            MsgBox("[REMOVE USUARIO BY LICENCA] erro " + ex.Message())
+            SQL.fecharCon()
             rv = False
 
         End Try
@@ -392,18 +524,18 @@ Public Class ConferenciaAdmin
         Dim rv As Boolean = False
         Try
 
-            If (SQLTerramar.temConexao()) Then
+            If (SQL.temConexao()) Then
                 Dim query As String = "update  TDU_ConferenciaUtilizador set  CDU_nivel = '" & nivel & "' where  CDU_utilizador = '" & usuario & "'"
-                SQLTerramar.abrirCon()
-                Dim cmd = New SqlCommand(query, SQLTerramar.conexao)
+                SQL.abrirCon()
+                Dim cmd = New SqlCommand(query, SQL.conexao)
 
                 cmd.ExecuteNonQuery()
-                SQLTerramar.fecharCon()
+                SQL.fecharCon()
                 rv = True
             End If
         Catch ex As Exception
-            MsgBox("erro " + ex.Message())
-            SQLTerramar.fecharCon()
+            MsgBox("[ACTUALIZAR LICENCA USUARIO] erro " + ex.Message())
+            SQL.fecharCon()
             rv = False
 
         End Try
@@ -418,7 +550,7 @@ Public Class ConferenciaAdmin
         Dim rv As Boolean = False
 
 
-        tabela = SQLTerramar.buscarDado(query)
+        tabela = SQL.buscarDado(query)
         If (tabela.Rows.Count <> 0) Then
             rv = True
         Else
@@ -429,23 +561,30 @@ Public Class ConferenciaAdmin
     End Function
 
 
-    Public Function removeLinhasCaixa(diarioCaixa As Integer)
-
+    Public Function removeLinhasCaixa(diarioCaixa As Integer, conta As String, data As String)
+        Dim query As String
         Dim rv As Boolean = False
         Try
 
-            If (SQLTerramar.temConexao()) Then
-                Dim query As String = "delete from TDU_ConferenciaCaixa where CDU_diarioCaixa = '" & diarioCaixa & "'"
-                SQLTerramar.abrirCon()
-                Dim cmd = New SqlCommand(query, SQLTerramar.conexao)
+            If (SQL.temConexao()) Then
+
+                If (conta = "CXMT") Then
+                    query = "delete from TDU_ConferenciaCaixa where CDU_conta = '" & conta & "' and CDU_data_fecho = '" & data & "'"
+                Else
+                    query = "delete from TDU_ConferenciaCaixa where CDU_diarioCaixa = '" & diarioCaixa & "'"
+
+                End If
+
+                SQL.abrirCon()
+                Dim cmd = New SqlCommand(query, SQL.conexao)
 
                 cmd.ExecuteNonQuery()
-                SQLTerramar.fecharCon()
+                SQL.fecharCon()
                 rv = True
             End If
         Catch ex As Exception
-            MsgBox("[removeLinhasCaixa] Erro: " + ex.Message())
-            SQLTerramar.fecharCon()
+            MsgBox("[REMOVE LINHA CAIXA] Erro: " + ex.Message())
+            SQL.fecharCon()
             rv = False
 
         End Try
@@ -453,12 +592,12 @@ Public Class ConferenciaAdmin
         Return rv
     End Function
 
-    Public Function criarEscreverFicheiro(filename As String, texto_str As String)
+    Public Sub criarEscreverFicheiro(filename As String, texto_str As String)
         'If System.IO.Directory.Exists("config") Then
         '    System.IO.Directory.CreateDirectory("config")
         'End If
         System.IO.File.WriteAllText(filename, texto_str)
-    End Function
+    End Sub
 
     Public Function lerFicheiro(ficheiro As String) As String
         Dim licenca_encoded As String = System.IO.File.ReadAllText(ficheiro)
@@ -482,7 +621,7 @@ Public Class ConferenciaAdmin
         Dim licencaFim As New Date
 
         Dim diasRestantes As Integer = 0
-        tabela = SQLTerramar.buscarDado(query)
+        tabela = SQL.buscarDado(query)
         If (tabela.Rows.Count <> 0) Then
             licencaFim = Date.Parse(tabela.Rows(0)("CDU_dataLicencaFim"))
             diasRestantes = DateDiff(DateInterval.Day, hoje, licencaFim)
@@ -546,11 +685,11 @@ Public Class ConferenciaAdmin
 
         Try
 
-            tabela = SQLTerramar.buscarDado(query)
+            tabela = SQL.buscarDado(query)
             If (tabela.Rows.Count <> 0) Then
                 idSerie = tabela.Rows(0)("CDU_conferenciaLicencaId")
 
-                tblSerie = SQLTerramar.buscarDado("select * from TDU_ConferenciaLicenca where CDU_id = '" & idSerie.ToString & "'")
+                tblSerie = SQL.buscarDado("select * from TDU_ConferenciaLicenca where CDU_id = '" & idSerie.ToString & "'")
 
                 If (tblSerie.Rows.Count <> 0) Then
                     serie = tblSerie.Rows(0)("CDU_serie_licenca")
@@ -577,7 +716,7 @@ Public Class ConferenciaAdmin
         Dim licencaFim As New Date
 
         Dim diasRestantes As Integer = 0
-        tabela = SQLTerramar.buscarDado(query)
+        tabela = SQL.buscarDado(query)
         If (tabela.Rows.Count <> 0) Then
             licencaFim = Date.Parse(tabela.Rows(0)("CDU_dataLicencaFim"))
             diasRestantes = DateDiff(DateInterval.Day, hoje, licencaFim)
@@ -592,35 +731,6 @@ Public Class ConferenciaAdmin
     End Function
 
     Public Function LicencaDiasExpiracao_str(licenca As String) As String
-        'Dim licenca_decode As String
-        'Dim licencaDuracaoActivacao As Integer
-        'Dim licencaDiaGerado As Date
-        'Dim hoje As Date = Date.Now()
-
-
-
-        'licenca_decode = Me.Decrypt(licenca)
-        'If (licenca_decode.Length > 0) Then
-
-        '    licencaDiaGerado = Date.Parse(licenca_decode.Split("_")(4))
-        '    licencaDuracaoActivacao = CInt(licenca_decode.Split("_")(5))
-
-
-        '    diasRestantes = DateDiff(DateInterval.Day, hoje, licencaDiaGerado)
-        '    If (diasRestantes <= 0) Then
-        '        msgLicencaExpiracao = "A licenca em uso Expirou. Entre em contacto com a JMR para emissão da nova licença"
-        '    Else
-        '        msgLicencaExpiracao = "A licenca em uso esta preste a terminar dentro de " + diasRestantes + " dias"
-
-
-        '    End If
-        'Else
-
-        '    msgLicencaExpiracao = "A licenca em uso inválido"
-        'End If
-
-
-
 
         Dim query As String = "select * from TDU_ConferenciaLicenca where CDU_serie_licenca = '" & licenca & "'"
         Dim tabela As New DataTable
@@ -630,7 +740,7 @@ Public Class ConferenciaAdmin
         Dim msgLicencaExpiracao As String
 
         Dim diasRestantes As Integer = 0
-        tabela = SQLTerramar.buscarDado(query)
+        tabela = SQL.buscarDado(query)
         If (tabela.Rows.Count <> 0) Then
             licencaFim = Date.Parse(tabela.Rows(0)("CDU_dataLicencaFim"))
             diasRestantes = DateDiff(DateInterval.Day, hoje, licencaFim)
@@ -651,15 +761,15 @@ Public Class ConferenciaAdmin
 
     Public Function testeConexaoBd() As Boolean
 
-        Dim query As String = "select * from TDU_ConferenciaUtilizador "
+        Dim query As String = "select * from Artigo "
         Dim tabela, tblSerie As New DataTable
         Dim rv As Boolean = False
-        Dim idSerie As Guid
+
         Dim serie As String = ""
 
         Try
 
-            tabela = SQLTerramar.buscarDado(query)
+            tabela = SQL.buscarDado(query)
             If (tabela.Rows.Count <> 0) Then
                 rv = True
             End If
@@ -717,4 +827,369 @@ Public Class ConferenciaAdmin
 
         Return path
     End Function
+
+
+
+    Public Function buscarDocumentoMovimentoCodigo() As List(Of String)
+
+        Dim query As String = "select * from DocumentosBancos where MovUtilizadoEmPOS='true' or CDU_fac=1 "
+        Dim query1 As String = "select * from DocumentosTesouraria where Documento in ('ABTCX', 'FCHCX', 'SAICX', 'ENTCX') "
+        'Dim query1 As String = "select * from DocumentosTesouraria   "
+
+        Dim tabela As New DataTable
+
+        Dim listaCodigo As New List(Of String)
+
+
+        tabela = SQL.buscarDado(query)
+        If (tabela.Rows.Count <> 0) Then
+            For i As Integer = 0 To tabela.Rows.Count - 1
+                listaCodigo.Add(tabela.Rows(i)("Movim"))
+
+            Next
+        End If
+        tabela = SQL.buscarDado(query1)
+
+        If (tabela.Rows.Count <> 0) Then
+            For i As Integer = 0 To tabela.Rows.Count - 1
+                If listaCodigo.IndexOf(tabela.Rows(i)("Documento")) < 0 Then
+                    listaCodigo.Add(tabela.Rows(i)("Documento"))
+                End If
+
+            Next
+        End If
+
+        Return listaCodigo
+    End Function
+
+    Public Function buscarDocumentoMovimentoDescricao() As List(Of String)
+
+        Dim query As String = "select * from DocumentosBancos  where MovUtilizadoEmPOS='true' or  CDU_fac=1"
+        Dim query1 As String = "select * from DocumentosTesouraria where Documento in ('ABTCX', 'FCHCX', 'SAICX', 'ENTCX') "
+
+        Dim tabela As New DataTable
+
+        Dim listaDescricao As New List(Of String)
+
+        tabela = SQL.buscarDado(query)
+        If (tabela.Rows.Count <> 0) Then
+            For i As Integer = 0 To tabela.Rows.Count - 1
+                listaDescricao.Add(tabela.Rows(i)("Descricao"))
+            Next
+        End If
+        tabela = SQL.buscarDado(query1)
+
+        If (tabela.Rows.Count <> 0) Then
+            For i As Integer = 0 To tabela.Rows.Count - 1
+                If listaDescricao.IndexOf(tabela.Rows(i)("Descricao")) < 0 Then
+
+                    listaDescricao.Add(tabela.Rows(i)("Descricao"))
+                End If
+            Next
+        End If
+
+        listaDescricao.Add("Venda")
+        Return listaDescricao
+    End Function
+
+
+
+    ' Inicio Consultar
+    ' PROPOSITO: Consulta generica a tabelas da  base de dados e retornar dados de uma coluna especifica
+    ' ARGUMENTO: 
+    '   * query  - consulta
+    '   * coluna - coluna de onde quer-se extrair o valor
+    ' RETORNO :
+    '   * List(OF String) - Lista de String com valores da coluna indicada
+    '
+    Public Function consultaColuna(query As String, coluna As String) As List(Of String)
+        Dim tabela As New DataTable
+
+        Dim listaDescricao As New List(Of String)
+
+        tabela = SQL.buscarDado(query)
+        If (tabela.Rows.Count <> 0) Then
+            For i As Integer = 0 To tabela.Rows.Count - 1
+                listaDescricao.Add(tabela.Rows(i)(coluna))
+            Next
+        End If
+
+        Return listaDescricao
+    End Function
+    ' Fim consultarColuna
+
+
+    ' Inicio Consultar
+    ' PROPOSITO: Consulta generica a tabelas da  base de dados
+    ' ARGUMENTO: 
+    '   * query - consulta
+    ' RETORNO :
+    '   * DataTable - Dados da tabela
+    '
+    Public Function consultar(query As String) As DataTable
+        Dim tabela As New DataTable
+        Dim listaDescricao As New List(Of String)
+
+        tabela = SQL.buscarDado(query)
+        Return tabela
+
+    End Function
+
+    ' Fim consultar
+
+
+
+    Public Function buscarCaixaConferido() As List(Of String)
+
+        'Dim query As String = "SELECT distinct CDU_diarioCaixa  FROM TDU_ConferenciaCaixa "
+        Dim query As String = "select distinct ct.numDoc as numDoc, tc.CDU_diarioCaixa as diarioCaixa from CabecTesouraria as ct, TDU_ConferenciaCaixa as tc, DiarioCaixa as dc where ct.TipoDoc = 'FCHCX' and  ct.IDDiarioCaixa = dc.Id and dc.Diario = tc.CDU_diarioCaixa"
+        Dim tabela As New DataTable
+
+        Dim listaCaixa As New List(Of String)
+
+        tabela = SQL.buscarDado(query)
+        If (tabela.Rows.Count <> 0) Then
+            For i As Integer = 0 To tabela.Rows.Count - 1
+                listaCaixa.Add((tabela.Rows(i)("numDoc") & " / " & tabela.Rows(i)("diarioCaixa")))
+            Next
+        End If
+
+
+        Return listaCaixa
+    End Function
+
+    Public Function buscarContaConferido() As List(Of String)
+
+        Dim query As String = "SELECT distinct CDU_conta  FROM TDU_ConferenciaCaixa"
+        Dim tabela As New DataTable
+
+        Dim listaConta As New List(Of String)
+
+        tabela = SQL.buscarDado(query)
+        If (tabela.Rows.Count <> 0) Then
+            For i As Integer = 0 To tabela.Rows.Count - 1
+                listaConta.Add(tabela.Rows(i)("CDU_conta"))
+            Next
+        End If
+
+        Return listaConta
+    End Function
+
+    Public Function buscarContaConferidoByDiario(diario As String) As List(Of String)
+
+        Dim query As String = "SELECT distinct CDU_conta  FROM TDU_ConferenciaCaixa where CDU_diarioCaixa in (" + diario + ")"
+        Dim tabela As New DataTable
+
+        Dim listaConta As New List(Of String)
+
+        tabela = SQL.buscarDado(query)
+        If (tabela.Rows.Count <> 0) Then
+            For i As Integer = 0 To tabela.Rows.Count - 1
+                listaConta.Add(tabela.Rows(i)("CDU_conta"))
+            Next
+        End If
+
+
+        Return listaConta
+    End Function
+
+
+    Public Function buscarCaixaConferidoByConta(conta As String) As List(Of String)
+
+        Dim query As String = "SELECT distinct CDU_diarioCaixa  FROM TDU_ConferenciaCaixa where CDU_conta in (" + conta + ")"
+        Dim tabela As New DataTable
+
+        Dim listaCaixa As New List(Of String)
+
+        tabela = SQL.buscarDado(query)
+        If (tabela.Rows.Count <> 0) Then
+            For i As Integer = 0 To tabela.Rows.Count - 1
+                listaCaixa.Add(tabela.Rows(i)("CDU_diarioCaixa"))
+            Next
+        End If
+
+
+        Return listaCaixa
+    End Function
+
+
+    Public Function buscarDataByDiario(diario As String) As List(Of String)
+
+        Dim query As String = "SELECT  distinct CDU_dataConferencia  FROM TDU_ConferenciaCaixa where CDU_diarioCaixa = '" + diario + "'"
+        Dim tabela As New DataTable
+
+        Dim listaCaixa As New List(Of String)
+
+        tabela = SQL.buscarDado(query)
+        If (tabela.Rows.Count <> 0) Then
+            For i As Integer = 0 To tabela.Rows.Count - 1
+                listaCaixa.Add(tabela.Rows(i)("CDU_dataConferencia"))
+            Next
+        End If
+
+
+        Return listaCaixa
+    End Function
+
+    Public Function buscarDataByConta(conta As String) As List(Of String)
+
+        Dim query As String = "SELECT distinct CDU_dataConferencia  FROM TDU_ConferenciaCaixa where CDU_conta in (" + conta + ")"
+        Dim tabela As New DataTable
+
+        Dim listaCaixa As New List(Of String)
+
+        tabela = SQL.buscarDado(query)
+        If (tabela.Rows.Count <> 0) Then
+            For i As Integer = 0 To tabela.Rows.Count - 1
+                listaCaixa.Add(tabela.Rows(i)("CDU_dataConferencia"))
+            Next
+        End If
+
+
+        Return listaCaixa
+    End Function
+
+
+
+    Public Function buscarContaConferidoByData(data1 As String, data2 As String) As List(Of String)
+
+        Dim query As String = "select distinct CDU_conta  from TDU_ConferenciaCaixa where CDU_data_fecho between '" + data1 + "' and '" + data2 + "'"
+        Dim tabela As New DataTable
+        Dim listaConta As New List(Of String)
+
+        tabela = SQL.buscarDado(query)
+        If (tabela.Rows.Count <> 0) Then
+            For i As Integer = 0 To tabela.Rows.Count - 1
+                listaConta.Add(tabela.Rows(i)("CDU_conta"))
+
+
+            Next
+        End If
+
+
+        Return listaConta
+    End Function
+
+
+    Public Function buscarCaixaByData(data1 As String, data2 As String) As List(Of String)
+        Dim query As String = "select distinct CDU_diarioCaixa from TDU_ConferenciaCaixa where  CDU_dataConferencia between '" + data1 + "' and '" + data2 + "'"
+        Dim tabela As New DataTable
+        Dim listaConta As New List(Of String)
+
+        tabela = SQL.buscarDado(query)
+        If (tabela.Rows.Count <> 0) Then
+            For i As Integer = 0 To tabela.Rows.Count - 1
+                listaConta.Add(tabela.Rows(i)("CDU_diarioCaixa"))
+
+
+            Next
+        End If
+
+        Return listaConta
+    End Function
+
+
+    Public Function buscarMaxData() As List(Of String)
+        Dim query As String = "select MAX(CDU_dataConferencia) as maxData from TDU_ConferenciaCaixa group by CDU_conta"
+        Dim tabela As New DataTable
+        Dim listaConta As New List(Of String)
+
+        tabela = SQL.buscarDado(query)
+        If (tabela.Rows.Count <> 0) Then
+            For i As Integer = 0 To tabela.Rows.Count - 1
+                listaConta.Add(tabela.Rows(i)("maxData"))
+            Next
+        End If
+
+        Return listaConta
+    End Function
+
+    Public Function buscarMinData() As List(Of String)
+        Dim query As String = "select MIN(CDU_dataConferencia) as maxData from TDU_ConferenciaCaixa group by CDU_conta"
+        Dim tabela As New DataTable
+        Dim listaConta As New List(Of String)
+
+        tabela = SQL.buscarDado(query)
+        If (tabela.Rows.Count <> 0) Then
+            For i As Integer = 0 To tabela.Rows.Count - 1
+                listaConta.Add(tabela.Rows(i)("maxData"))
+            Next
+        End If
+
+        Return listaConta
+    End Function
+
+
+    Public Function countMaxUtilizadorBySerie(serie As String) As Integer
+        Dim query As String = "SELECT CDU_numero_utilizador total_utilizador  FROM TDU_ConferenciaLicenca where CDU_serie_licenca = '" + serie + "'"
+        Dim tabela As New DataTable
+        Dim total_utilizador As Integer
+
+        Try
+
+            tabela = SQL.buscarDado(query)
+            If (tabela.Rows.Count <> 0) Then
+                For i As Integer = 0 To tabela.Rows.Count - 1
+                    total_utilizador = tabela.Rows(i)("total_utilizador")
+                Next
+            End If
+
+        Catch ex As Exception
+            MessageBox.Show("[countMaxUtilizadorBySerie] " + ex.Message())
+            total_utilizador = -1
+        End Try
+
+        Return total_utilizador
+    End Function
+
+    '
+    ' Buscar todos bancos em utilizacao no primavera
+    Public Function buscarBancos() As List(Of String)
+        Dim tabela As New DataTable
+
+        Dim listaDescricao As New List(Of String)
+        listaDescricao.Add("Selecionar")
+        Try
+
+            tabela = SQL.buscarDado("select Descricao from Bancos")
+            If (tabela.Rows.Count <> 0) Then
+                For i As Integer = 0 To tabela.Rows.Count - 1
+                    listaDescricao.Add(tabela.Rows(i)("Descricao"))
+                Next
+            End If
+        Catch ex As Exception
+            MessageBox.Show("[buscarBancos] Ocorreu um erro enquanto buscava bancos " + ex.Message, "Atenção", MessageBoxButtons.OK)
+            SQL.fecharCon()
+
+        End Try
+
+        Return listaDescricao
+    End Function
+
+    '
+    ' Buscar nome da maquina do ultimo utilizador logado
+    Public Function buscarMaquinaRemoto(usuario) As String
+        Dim tabela As New DataTable
+
+        Dim listaDescricao As New List(Of String)
+        Dim maquina As String = ""
+        Try
+
+
+            tabela = SQL.buscarDado("select CDU_host from TDU_ConferenciaUtilizador where cdu_utilizador = '" & usuario & "' ")
+            If (tabela.Rows.Count <> 0) Then
+                maquina = tabela.Rows(0)("CDU_host")
+            End If
+        Catch ex As Exception
+            MessageBox.Show("[buscarMaquinaRemoto] Ocorreu um erro enquanto buscava maquina remoto " + ex.Message, "Atenção", MessageBoxButtons.OK)
+            SQL.fecharCon()
+            maquina = ""
+
+        End Try
+        Return maquina
+    End Function
+
+
+
+
 End Class

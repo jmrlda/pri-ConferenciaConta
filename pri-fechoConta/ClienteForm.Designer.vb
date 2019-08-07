@@ -71,43 +71,51 @@ Partial Class ClienteForm
         'Label1
         '
         Me.Label1.AutoSize = True
+        Me.Label1.BackColor = System.Drawing.Color.Transparent
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.Location = New System.Drawing.Point(16, 52)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(43, 13)
+        Me.Label1.Size = New System.Drawing.Size(49, 15)
         Me.Label1.TabIndex = 4
         Me.Label1.Text = "Codigo:"
         '
         'Label2
         '
         Me.Label2.AutoSize = True
+        Me.Label2.BackColor = System.Drawing.Color.Transparent
+        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.Location = New System.Drawing.Point(16, 92)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(38, 13)
+        Me.Label2.Size = New System.Drawing.Size(44, 15)
         Me.Label2.TabIndex = 5
         Me.Label2.Text = "Nome:"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
+        Me.Label3.BackColor = System.Drawing.Color.Transparent
+        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.Location = New System.Drawing.Point(16, 147)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(30, 13)
+        Me.Label3.Size = New System.Drawing.Size(36, 15)
         Me.Label3.TabIndex = 6
         Me.Label3.Text = "Filial:"
         '
         'Label4
         '
         Me.Label4.AutoSize = True
+        Me.Label4.BackColor = System.Drawing.Color.Transparent
+        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label4.Location = New System.Drawing.Point(16, 125)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(29, 13)
+        Me.Label4.Size = New System.Drawing.Size(32, 15)
         Me.Label4.TabIndex = 7
         Me.Label4.Text = "Nuit:"
         '
         'btnGravar
         '
         Me.btnGravar.Enabled = False
-        Me.btnGravar.Location = New System.Drawing.Point(194, 267)
+        Me.btnGravar.Location = New System.Drawing.Point(202, 280)
         Me.btnGravar.Name = "btnGravar"
         Me.btnGravar.Size = New System.Drawing.Size(75, 23)
         Me.btnGravar.TabIndex = 8
@@ -116,7 +124,7 @@ Partial Class ClienteForm
         '
         'btnFechar
         '
-        Me.btnFechar.Location = New System.Drawing.Point(275, 267)
+        Me.btnFechar.Location = New System.Drawing.Point(283, 280)
         Me.btnFechar.Name = "btnFechar"
         Me.btnFechar.Size = New System.Drawing.Size(75, 23)
         Me.btnFechar.TabIndex = 9
@@ -126,6 +134,8 @@ Partial Class ClienteForm
         'Label5
         '
         Me.Label5.AutoSize = True
+        Me.Label5.BackColor = System.Drawing.Color.Transparent
+        Me.Label5.ForeColor = System.Drawing.Color.Red
         Me.Label5.Location = New System.Drawing.Point(12, 204)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(61, 13)
@@ -135,27 +145,33 @@ Partial Class ClienteForm
         'Label6
         '
         Me.Label6.AutoSize = True
+        Me.Label6.BackColor = System.Drawing.Color.Transparent
+        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label6.Location = New System.Drawing.Point(12, 225)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(392, 13)
+        Me.Label6.Size = New System.Drawing.Size(347, 15)
         Me.Label6.TabIndex = 11
-        Me.Label6.Text = "Sempre que desejar alterar um destes dados,  informe a JMR para actualização e "
+        Me.Label6.Text = "Sempre que desejar alterar um destes dados,  informe a JMR "
         '
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(12, 238)
+        Me.Label7.BackColor = System.Drawing.Color.Transparent
+        Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.Location = New System.Drawing.Point(12, 249)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(127, 13)
+        Me.Label7.Size = New System.Drawing.Size(265, 15)
         Me.Label7.TabIndex = 12
-        Me.Label7.Text = " emissão de nova licença"
+        Me.Label7.Text = " para a actualização e emissão de nova licença"
         '
         'Label8
         '
         Me.Label8.AutoSize = True
+        Me.Label8.BackColor = System.Drawing.Color.Transparent
+        Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label8.Location = New System.Drawing.Point(16, 173)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(46, 13)
+        Me.Label8.Size = New System.Drawing.Size(53, 15)
         Me.Label8.TabIndex = 14
         Me.Label8.Text = "Morada:"
         '
@@ -169,6 +185,7 @@ Partial Class ClienteForm
         'lblMsgErro
         '
         Me.lblMsgErro.AutoSize = True
+        Me.lblMsgErro.BackColor = System.Drawing.Color.Transparent
         Me.lblMsgErro.ForeColor = System.Drawing.Color.Red
         Me.lblMsgErro.Location = New System.Drawing.Point(105, 18)
         Me.lblMsgErro.Name = "lblMsgErro"
@@ -181,6 +198,8 @@ Partial Class ClienteForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.BackgroundImage = Global.pri_fechoConta.My.Resources.Resources.Erpbg01
         Me.ClientSize = New System.Drawing.Size(407, 315)
         Me.Controls.Add(Me.lblMsgErro)
         Me.Controls.Add(Me.Label8)
@@ -204,8 +223,6 @@ Partial Class ClienteForm
         Me.PerformLayout()
 
     End Sub
-
-    Friend Shared WithEvents txtCodigo As TextBox
     Friend WithEvents txtNome As TextBox
     Friend WithEvents txtFilial As TextBox
     Friend WithEvents txtNuit As TextBox
@@ -221,4 +238,5 @@ Partial Class ClienteForm
     Friend WithEvents Label8 As Label
     Friend WithEvents txtMorada As TextBox
     Friend WithEvents lblMsgErro As Label
+    Friend WithEvents txtCodigo As TextBox
 End Class

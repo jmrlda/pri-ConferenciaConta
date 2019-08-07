@@ -24,7 +24,7 @@ Partial Class ConferenciaCaixa
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ConferenciaCaixa))
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.ptxboxUtilizadorAberturaCaixa = New System.Windows.Forms.PictureBox()
+        Me.lblTotalRecebido_ = New System.Windows.Forms.Label()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
@@ -66,30 +66,39 @@ Partial Class ConferenciaCaixa
         Me.lblEstdEntradaCaixa = New System.Windows.Forms.Label()
         Me.lblEstdSaidaCaixa = New System.Windows.Forms.Label()
         Me.mskValRecSaidaCaixa = New System.Windows.Forms.MaskedTextBox()
-        Me.Label19 = New System.Windows.Forms.Label()
-        Me.lblTotalDiferenca = New System.Windows.Forms.Label()
-        Me.lblTotalRecebido = New System.Windows.Forms.Label()
-        Me.lblTotalConferido = New System.Windows.Forms.Label()
+        Me.dtInicio = New System.Windows.Forms.DateTimePicker()
+        Me.lblDiarioCaixa = New System.Windows.Forms.Label()
+        Me.btnBuscar = New System.Windows.Forms.Button()
+        Me.cboContaPos = New System.Windows.Forms.ComboBox()
+        Me.Label21 = New System.Windows.Forms.Label()
+        Me.txtCaixaNum = New System.Windows.Forms.TextBox()
+        Me.ptxboxUtilizadorAberturaCaixa = New System.Windows.Forms.PictureBox()
+        Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.mskDataAbertura = New System.Windows.Forms.MaskedTextBox()
-        Me.txtCaixaNum = New System.Windows.Forms.TextBox()
-        Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.mskSaldoFecho = New System.Windows.Forms.MaskedTextBox()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.mskSaldoAbertura = New System.Windows.Forms.MaskedTextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.txtUtilizadorAbertura = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.txtUtilizadorFecho = New System.Windows.Forms.TextBox()
         Me.mskDataFecho = New System.Windows.Forms.MaskedTextBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.mskSaldoFecho = New System.Windows.Forms.MaskedTextBox()
+        Me.mskSaldoAbertura = New System.Windows.Forms.MaskedTextBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label20 = New System.Windows.Forms.Label()
+        Me.txtUtilizadorConferencia = New System.Windows.Forms.TextBox()
+        Me.lblTotalConferido = New System.Windows.Forms.Label()
+        Me.lblTotalDiferenca = New System.Windows.Forms.Label()
+        Me.Label19 = New System.Windows.Forms.Label()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.lblMsgValor = New System.Windows.Forms.Label()
         Me.btnPrevisualizarReporte = New System.Windows.Forms.Button()
         Me.btnConfereLimpar = New System.Windows.Forms.Button()
         Me.btnConfereAdicionar = New System.Windows.Forms.Button()
         Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
+        Me.dtTransacao = New System.Windows.Forms.DateTimePicker()
         Me.lblFechoContaMovimento = New System.Windows.Forms.Label()
         Me.lblFechoContaReferencia = New System.Windows.Forms.Label()
         Me.lblFechoContaQuantidade = New System.Windows.Forms.Label()
@@ -99,8 +108,10 @@ Partial Class ConferenciaCaixa
         Me.mskValorRecebido = New System.Windows.Forms.MaskedTextBox()
         Me.lblFechoContaCartaoChequeDesc = New System.Windows.Forms.Label()
         Me.cboCartaoTipo = New System.Windows.Forms.ComboBox()
+        Me.Label22 = New System.Windows.Forms.Label()
         Me.txtQuantidade = New System.Windows.Forms.TextBox()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.chkEditar = New System.Windows.Forms.CheckBox()
         Me.btnLimparTabela = New System.Windows.Forms.Button()
         Me.btnFecharConta = New System.Windows.Forms.Button()
         Me.tabelaConferenciaCaixa = New System.Windows.Forms.DataGridView()
@@ -111,6 +122,7 @@ Partial Class ConferenciaCaixa
         Me.descSaidaCaixa = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.quantidade = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.valor = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataTransacao = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.SistemaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EntrarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -121,6 +133,10 @@ Partial Class ConferenciaCaixa
         Me.ConfigurarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ConexaoBaseDeDadosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SistemaToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MovimentosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.UtilizadorCaixaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ListagemToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ConferênciaDeCaixaTotaisToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AjudaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SobreNósToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ManualDeUtilizadorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -132,8 +148,8 @@ Partial Class ConferenciaCaixa
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.lblMsgLicencaExpiracao = New System.Windows.Forms.Label()
         Me.Panel2.SuspendLayout()
-        CType(Me.ptxboxUtilizadorAberturaCaixa, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TableLayoutPanel2.SuspendLayout()
+        CType(Me.ptxboxUtilizadorAberturaCaixa, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.TableLayoutPanel3.SuspendLayout()
@@ -149,26 +165,35 @@ Partial Class ConferenciaCaixa
         '
         Me.Panel2.AutoSize = True
         Me.Panel2.BackColor = System.Drawing.Color.Transparent
-        Me.Panel2.Controls.Add(Me.ptxboxUtilizadorAberturaCaixa)
+        Me.Panel2.Controls.Add(Me.lblTotalRecebido_)
         Me.Panel2.Controls.Add(Me.TableLayoutPanel2)
+        Me.Panel2.Controls.Add(Me.dtInicio)
+        Me.Panel2.Controls.Add(Me.lblDiarioCaixa)
+        Me.Panel2.Controls.Add(Me.btnBuscar)
+        Me.Panel2.Controls.Add(Me.cboContaPos)
+        Me.Panel2.Controls.Add(Me.Label21)
+        Me.Panel2.Controls.Add(Me.txtCaixaNum)
+        Me.Panel2.Controls.Add(Me.ptxboxUtilizadorAberturaCaixa)
+        Me.Panel2.Controls.Add(Me.LinkLabel1)
         Me.Panel2.Controls.Add(Me.TableLayoutPanel1)
+        Me.Panel2.Controls.Add(Me.lblTotalConferido)
+        Me.Panel2.Controls.Add(Me.lblTotalDiferenca)
+        Me.Panel2.Controls.Add(Me.Label19)
         Me.Panel2.Location = New System.Drawing.Point(6, 27)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(1294, 280)
+        Me.Panel2.Size = New System.Drawing.Size(1364, 224)
         Me.Panel2.TabIndex = 0
         '
-        'ptxboxUtilizadorAberturaCaixa
+        'lblTotalRecebido_
         '
-        Me.ptxboxUtilizadorAberturaCaixa.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.ptxboxUtilizadorAberturaCaixa.ErrorImage = Global.pri_fechoConta.My.Resources.Resources._default
-        Me.ptxboxUtilizadorAberturaCaixa.Image = Global.pri_fechoConta.My.Resources.Resources._default
-        Me.ptxboxUtilizadorAberturaCaixa.ImageLocation = ""
-        Me.ptxboxUtilizadorAberturaCaixa.Location = New System.Drawing.Point(1085, 6)
-        Me.ptxboxUtilizadorAberturaCaixa.Name = "ptxboxUtilizadorAberturaCaixa"
-        Me.ptxboxUtilizadorAberturaCaixa.Size = New System.Drawing.Size(184, 179)
-        Me.ptxboxUtilizadorAberturaCaixa.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.ptxboxUtilizadorAberturaCaixa.TabIndex = 1
-        Me.ptxboxUtilizadorAberturaCaixa.TabStop = False
+        Me.lblTotalRecebido_.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTotalRecebido_.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.lblTotalRecebido_.Location = New System.Drawing.Point(598, 204)
+        Me.lblTotalRecebido_.Name = "lblTotalRecebido_"
+        Me.lblTotalRecebido_.Size = New System.Drawing.Size(119, 17)
+        Me.lblTotalRecebido_.TabIndex = 50
+        Me.lblTotalRecebido_.Text = "0.0"
+        Me.lblTotalRecebido_.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'TableLayoutPanel2
         '
@@ -219,14 +244,10 @@ Partial Class ConferenciaCaixa
         Me.TableLayoutPanel2.Controls.Add(Me.lblEstdEntradaCaixa, 4, 6)
         Me.TableLayoutPanel2.Controls.Add(Me.lblEstdSaidaCaixa, 4, 7)
         Me.TableLayoutPanel2.Controls.Add(Me.mskValRecSaidaCaixa, 1, 7)
-        Me.TableLayoutPanel2.Controls.Add(Me.Label19, 0, 8)
-        Me.TableLayoutPanel2.Controls.Add(Me.lblTotalDiferenca, 3, 8)
-        Me.TableLayoutPanel2.Controls.Add(Me.lblTotalRecebido, 1, 8)
-        Me.TableLayoutPanel2.Controls.Add(Me.lblTotalConferido, 2, 8)
         Me.TableLayoutPanel2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TableLayoutPanel2.Location = New System.Drawing.Point(437, 0)
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
-        Me.TableLayoutPanel2.RowCount = 9
+        Me.TableLayoutPanel2.RowCount = 8
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5!))
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5!))
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5!))
@@ -235,15 +256,14 @@ Partial Class ConferenciaCaixa
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5!))
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5!))
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 17.0!))
-        Me.TableLayoutPanel2.Size = New System.Drawing.Size(621, 221)
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(705, 199)
         Me.TableLayoutPanel2.TabIndex = 0
         '
         'Label9
         '
         Me.Label9.AutoSize = True
         Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(252, 0)
+        Me.Label9.Location = New System.Drawing.Point(286, 0)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(79, 13)
         Me.Label9.TabIndex = 0
@@ -253,7 +273,7 @@ Partial Class ConferenciaCaixa
         '
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(142, 0)
+        Me.Label10.Location = New System.Drawing.Point(161, 0)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(80, 13)
         Me.Label10.TabIndex = 2
@@ -265,15 +285,15 @@ Partial Class ConferenciaCaixa
         Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label11.Location = New System.Drawing.Point(3, 0)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(45, 13)
+        Me.Label11.Size = New System.Drawing.Size(59, 13)
         Me.Label11.TabIndex = 3
-        Me.Label11.Text = "Especié"
+        Me.Label11.Text = "Movimento"
         '
         'Label12
         '
         Me.Label12.AutoSize = True
         Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label12.Location = New System.Drawing.Point(3, 25)
+        Me.Label12.Location = New System.Drawing.Point(3, 24)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(95, 13)
         Me.Label12.TabIndex = 4
@@ -283,7 +303,7 @@ Partial Class ConferenciaCaixa
         '
         Me.Label13.AutoSize = True
         Me.Label13.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.Location = New System.Drawing.Point(3, 50)
+        Me.Label13.Location = New System.Drawing.Point(3, 48)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(58, 13)
         Me.Label13.TabIndex = 5
@@ -293,7 +313,7 @@ Partial Class ConferenciaCaixa
         '
         Me.Label14.AutoSize = True
         Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label14.Location = New System.Drawing.Point(3, 75)
+        Me.Label14.Location = New System.Drawing.Point(3, 72)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(127, 13)
         Me.Label14.TabIndex = 6
@@ -303,7 +323,7 @@ Partial Class ConferenciaCaixa
         '
         Me.Label16.AutoSize = True
         Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label16.Location = New System.Drawing.Point(3, 100)
+        Me.Label16.Location = New System.Drawing.Point(3, 96)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(49, 13)
         Me.Label16.TabIndex = 8
@@ -313,17 +333,17 @@ Partial Class ConferenciaCaixa
         '
         Me.Label17.AutoSize = True
         Me.Label17.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label17.Location = New System.Drawing.Point(3, 125)
+        Me.Label17.Location = New System.Drawing.Point(3, 120)
         Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(43, 13)
+        Me.Label17.Size = New System.Drawing.Size(59, 13)
         Me.Label17.TabIndex = 9
-        Me.Label17.Text = "Senhas"
+        Me.Label17.Text = "Devolução"
         '
         'Label18
         '
         Me.Label18.AutoSize = True
         Me.Label18.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label18.Location = New System.Drawing.Point(479, 0)
+        Me.Label18.Location = New System.Drawing.Point(544, 0)
         Me.Label18.Name = "Label18"
         Me.Label18.Size = New System.Drawing.Size(40, 13)
         Me.Label18.TabIndex = 10
@@ -332,7 +352,7 @@ Partial Class ConferenciaCaixa
         'lblEstdSaldoAbert
         '
         Me.lblEstdSaldoAbert.AutoSize = True
-        Me.lblEstdSaldoAbert.Location = New System.Drawing.Point(479, 25)
+        Me.lblEstdSaldoAbert.Location = New System.Drawing.Point(544, 24)
         Me.lblEstdSaldoAbert.Name = "lblEstdSaldoAbert"
         Me.lblEstdSaldoAbert.Size = New System.Drawing.Size(0, 13)
         Me.lblEstdSaldoAbert.TabIndex = 11
@@ -340,7 +360,7 @@ Partial Class ConferenciaCaixa
         'lblEstdNumerario
         '
         Me.lblEstdNumerario.AutoSize = True
-        Me.lblEstdNumerario.Location = New System.Drawing.Point(479, 50)
+        Me.lblEstdNumerario.Location = New System.Drawing.Point(544, 48)
         Me.lblEstdNumerario.Name = "lblEstdNumerario"
         Me.lblEstdNumerario.Size = New System.Drawing.Size(0, 13)
         Me.lblEstdNumerario.TabIndex = 12
@@ -348,7 +368,7 @@ Partial Class ConferenciaCaixa
         'lblEstdPagamentoAutomatico
         '
         Me.lblEstdPagamentoAutomatico.AutoSize = True
-        Me.lblEstdPagamentoAutomatico.Location = New System.Drawing.Point(479, 75)
+        Me.lblEstdPagamentoAutomatico.Location = New System.Drawing.Point(544, 72)
         Me.lblEstdPagamentoAutomatico.Name = "lblEstdPagamentoAutomatico"
         Me.lblEstdPagamentoAutomatico.Size = New System.Drawing.Size(0, 13)
         Me.lblEstdPagamentoAutomatico.TabIndex = 13
@@ -356,7 +376,7 @@ Partial Class ConferenciaCaixa
         'lblEstdCheques
         '
         Me.lblEstdCheques.AutoSize = True
-        Me.lblEstdCheques.Location = New System.Drawing.Point(479, 100)
+        Me.lblEstdCheques.Location = New System.Drawing.Point(544, 96)
         Me.lblEstdCheques.Name = "lblEstdCheques"
         Me.lblEstdCheques.Size = New System.Drawing.Size(0, 13)
         Me.lblEstdCheques.TabIndex = 15
@@ -364,7 +384,7 @@ Partial Class ConferenciaCaixa
         'lblEstdSenhas
         '
         Me.lblEstdSenhas.AutoSize = True
-        Me.lblEstdSenhas.Location = New System.Drawing.Point(479, 125)
+        Me.lblEstdSenhas.Location = New System.Drawing.Point(544, 120)
         Me.lblEstdSenhas.Name = "lblEstdSenhas"
         Me.lblEstdSenhas.Size = New System.Drawing.Size(0, 13)
         Me.lblEstdSenhas.TabIndex = 16
@@ -374,9 +394,9 @@ Partial Class ConferenciaCaixa
         Me.mskValRecAbertura.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.mskValRecAbertura.Enabled = False
         Me.mskValRecAbertura.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.mskValRecAbertura.Location = New System.Drawing.Point(142, 28)
+        Me.mskValRecAbertura.Location = New System.Drawing.Point(161, 27)
         Me.mskValRecAbertura.Name = "mskValRecAbertura"
-        Me.mskValRecAbertura.Size = New System.Drawing.Size(104, 20)
+        Me.mskValRecAbertura.Size = New System.Drawing.Size(119, 20)
         Me.mskValRecAbertura.TabIndex = 17
         Me.mskValRecAbertura.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -385,9 +405,9 @@ Partial Class ConferenciaCaixa
         Me.mskValRecNumerario.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.mskValRecNumerario.Enabled = False
         Me.mskValRecNumerario.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.mskValRecNumerario.Location = New System.Drawing.Point(142, 53)
+        Me.mskValRecNumerario.Location = New System.Drawing.Point(161, 51)
         Me.mskValRecNumerario.Name = "mskValRecNumerario"
-        Me.mskValRecNumerario.Size = New System.Drawing.Size(104, 20)
+        Me.mskValRecNumerario.Size = New System.Drawing.Size(119, 20)
         Me.mskValRecNumerario.TabIndex = 18
         Me.mskValRecNumerario.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -396,9 +416,9 @@ Partial Class ConferenciaCaixa
         Me.mskValRecMultiBim.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.mskValRecMultiBim.Enabled = False
         Me.mskValRecMultiBim.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.mskValRecMultiBim.Location = New System.Drawing.Point(142, 78)
+        Me.mskValRecMultiBim.Location = New System.Drawing.Point(161, 75)
         Me.mskValRecMultiBim.Name = "mskValRecMultiBim"
-        Me.mskValRecMultiBim.Size = New System.Drawing.Size(104, 20)
+        Me.mskValRecMultiBim.Size = New System.Drawing.Size(119, 20)
         Me.mskValRecMultiBim.TabIndex = 19
         Me.mskValRecMultiBim.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -407,19 +427,19 @@ Partial Class ConferenciaCaixa
         Me.mskValRecCheque.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.mskValRecCheque.Enabled = False
         Me.mskValRecCheque.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.mskValRecCheque.Location = New System.Drawing.Point(142, 103)
+        Me.mskValRecCheque.Location = New System.Drawing.Point(161, 99)
         Me.mskValRecCheque.Name = "mskValRecCheque"
-        Me.mskValRecCheque.Size = New System.Drawing.Size(104, 20)
+        Me.mskValRecCheque.Size = New System.Drawing.Size(119, 20)
         Me.mskValRecCheque.TabIndex = 21
         Me.mskValRecCheque.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'mskValRecSenhasCabazes
         '
         Me.mskValRecSenhasCabazes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.mskValRecSenhasCabazes.Enabled = False
-        Me.mskValRecSenhasCabazes.Location = New System.Drawing.Point(142, 128)
+        Me.mskValRecSenhasCabazes.ForeColor = System.Drawing.Color.Red
+        Me.mskValRecSenhasCabazes.Location = New System.Drawing.Point(161, 123)
         Me.mskValRecSenhasCabazes.Name = "mskValRecSenhasCabazes"
-        Me.mskValRecSenhasCabazes.Size = New System.Drawing.Size(104, 20)
+        Me.mskValRecSenhasCabazes.Size = New System.Drawing.Size(119, 20)
         Me.mskValRecSenhasCabazes.TabIndex = 22
         Me.mskValRecSenhasCabazes.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -427,9 +447,9 @@ Partial Class ConferenciaCaixa
         '
         Me.mskValConfAbertura.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.mskValConfAbertura.Enabled = False
-        Me.mskValConfAbertura.Location = New System.Drawing.Point(252, 28)
+        Me.mskValConfAbertura.Location = New System.Drawing.Point(286, 27)
         Me.mskValConfAbertura.Name = "mskValConfAbertura"
-        Me.mskValConfAbertura.Size = New System.Drawing.Size(104, 20)
+        Me.mskValConfAbertura.Size = New System.Drawing.Size(119, 20)
         Me.mskValConfAbertura.TabIndex = 23
         Me.mskValConfAbertura.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -437,9 +457,9 @@ Partial Class ConferenciaCaixa
         '
         Me.mskValConfNumerario.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.mskValConfNumerario.Enabled = False
-        Me.mskValConfNumerario.Location = New System.Drawing.Point(252, 53)
+        Me.mskValConfNumerario.Location = New System.Drawing.Point(286, 51)
         Me.mskValConfNumerario.Name = "mskValConfNumerario"
-        Me.mskValConfNumerario.Size = New System.Drawing.Size(104, 20)
+        Me.mskValConfNumerario.Size = New System.Drawing.Size(119, 20)
         Me.mskValConfNumerario.TabIndex = 24
         Me.mskValConfNumerario.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -447,9 +467,9 @@ Partial Class ConferenciaCaixa
         '
         Me.mskValConfMultiBim.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.mskValConfMultiBim.Enabled = False
-        Me.mskValConfMultiBim.Location = New System.Drawing.Point(252, 78)
+        Me.mskValConfMultiBim.Location = New System.Drawing.Point(286, 75)
         Me.mskValConfMultiBim.Name = "mskValConfMultiBim"
-        Me.mskValConfMultiBim.Size = New System.Drawing.Size(104, 20)
+        Me.mskValConfMultiBim.Size = New System.Drawing.Size(119, 20)
         Me.mskValConfMultiBim.TabIndex = 25
         Me.mskValConfMultiBim.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -457,19 +477,19 @@ Partial Class ConferenciaCaixa
         '
         Me.mskValConfCheques.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.mskValConfCheques.Enabled = False
-        Me.mskValConfCheques.Location = New System.Drawing.Point(252, 103)
+        Me.mskValConfCheques.Location = New System.Drawing.Point(286, 99)
         Me.mskValConfCheques.Name = "mskValConfCheques"
-        Me.mskValConfCheques.Size = New System.Drawing.Size(104, 20)
+        Me.mskValConfCheques.Size = New System.Drawing.Size(119, 20)
         Me.mskValConfCheques.TabIndex = 27
         Me.mskValConfCheques.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'mskValConfSenhas
         '
         Me.mskValConfSenhas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.mskValConfSenhas.Enabled = False
-        Me.mskValConfSenhas.Location = New System.Drawing.Point(252, 128)
+        Me.mskValConfSenhas.ForeColor = System.Drawing.Color.Red
+        Me.mskValConfSenhas.Location = New System.Drawing.Point(286, 123)
         Me.mskValConfSenhas.Name = "mskValConfSenhas"
-        Me.mskValConfSenhas.Size = New System.Drawing.Size(104, 20)
+        Me.mskValConfSenhas.Size = New System.Drawing.Size(119, 20)
         Me.mskValConfSenhas.TabIndex = 28
         Me.mskValConfSenhas.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -477,7 +497,7 @@ Partial Class ConferenciaCaixa
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(362, 0)
+        Me.Label1.Location = New System.Drawing.Point(411, 0)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(53, 13)
         Me.Label1.TabIndex = 29
@@ -487,9 +507,9 @@ Partial Class ConferenciaCaixa
         '
         Me.mskDiferencaAbertura.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.mskDiferencaAbertura.Enabled = False
-        Me.mskDiferencaAbertura.Location = New System.Drawing.Point(362, 28)
+        Me.mskDiferencaAbertura.Location = New System.Drawing.Point(411, 27)
         Me.mskDiferencaAbertura.Name = "mskDiferencaAbertura"
-        Me.mskDiferencaAbertura.Size = New System.Drawing.Size(99, 20)
+        Me.mskDiferencaAbertura.Size = New System.Drawing.Size(127, 20)
         Me.mskDiferencaAbertura.TabIndex = 30
         Me.mskDiferencaAbertura.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -499,9 +519,9 @@ Partial Class ConferenciaCaixa
         Me.mskDiferencaNumerario.Enabled = False
         Me.mskDiferencaNumerario.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.mskDiferencaNumerario.ForeColor = System.Drawing.SystemColors.HighlightText
-        Me.mskDiferencaNumerario.Location = New System.Drawing.Point(362, 53)
+        Me.mskDiferencaNumerario.Location = New System.Drawing.Point(411, 51)
         Me.mskDiferencaNumerario.Name = "mskDiferencaNumerario"
-        Me.mskDiferencaNumerario.Size = New System.Drawing.Size(99, 20)
+        Me.mskDiferencaNumerario.Size = New System.Drawing.Size(127, 20)
         Me.mskDiferencaNumerario.TabIndex = 31
         Me.mskDiferencaNumerario.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -509,9 +529,9 @@ Partial Class ConferenciaCaixa
         '
         Me.mskDiferencaMultiBim.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.mskDiferencaMultiBim.Enabled = False
-        Me.mskDiferencaMultiBim.Location = New System.Drawing.Point(362, 78)
+        Me.mskDiferencaMultiBim.Location = New System.Drawing.Point(411, 75)
         Me.mskDiferencaMultiBim.Name = "mskDiferencaMultiBim"
-        Me.mskDiferencaMultiBim.Size = New System.Drawing.Size(99, 20)
+        Me.mskDiferencaMultiBim.Size = New System.Drawing.Size(127, 20)
         Me.mskDiferencaMultiBim.TabIndex = 32
         Me.mskDiferencaMultiBim.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -519,9 +539,9 @@ Partial Class ConferenciaCaixa
         '
         Me.mskDiferencaCheque.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.mskDiferencaCheque.Enabled = False
-        Me.mskDiferencaCheque.Location = New System.Drawing.Point(362, 103)
+        Me.mskDiferencaCheque.Location = New System.Drawing.Point(411, 99)
         Me.mskDiferencaCheque.Name = "mskDiferencaCheque"
-        Me.mskDiferencaCheque.Size = New System.Drawing.Size(99, 20)
+        Me.mskDiferencaCheque.Size = New System.Drawing.Size(127, 20)
         Me.mskDiferencaCheque.TabIndex = 34
         Me.mskDiferencaCheque.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -529,9 +549,9 @@ Partial Class ConferenciaCaixa
         '
         Me.mskDiferencaSenhasCabazes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.mskDiferencaSenhasCabazes.Enabled = False
-        Me.mskDiferencaSenhasCabazes.Location = New System.Drawing.Point(362, 128)
+        Me.mskDiferencaSenhasCabazes.Location = New System.Drawing.Point(411, 123)
         Me.mskDiferencaSenhasCabazes.Name = "mskDiferencaSenhasCabazes"
-        Me.mskDiferencaSenhasCabazes.Size = New System.Drawing.Size(99, 20)
+        Me.mskDiferencaSenhasCabazes.Size = New System.Drawing.Size(127, 20)
         Me.mskDiferencaSenhasCabazes.TabIndex = 35
         Me.mskDiferencaSenhasCabazes.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -539,29 +559,29 @@ Partial Class ConferenciaCaixa
         '
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(3, 150)
+        Me.Label8.Location = New System.Drawing.Point(3, 144)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(73, 13)
+        Me.Label8.Size = New System.Drawing.Size(88, 13)
         Me.Label8.TabIndex = 36
-        Me.Label8.Text = "Entrada Caixa"
+        Me.Label8.Text = "Entrada de Caixa"
         '
         'Label15
         '
         Me.Label15.AutoSize = True
         Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label15.Location = New System.Drawing.Point(3, 175)
+        Me.Label15.Location = New System.Drawing.Point(3, 168)
         Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(63, 13)
+        Me.Label15.Size = New System.Drawing.Size(78, 13)
         Me.Label15.TabIndex = 37
-        Me.Label15.Text = "Saida Caixa"
+        Me.Label15.Text = "Saida de Caixa"
         '
         'mskValRecEntradaCaixa
         '
         Me.mskValRecEntradaCaixa.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.mskValRecEntradaCaixa.Enabled = False
-        Me.mskValRecEntradaCaixa.Location = New System.Drawing.Point(142, 153)
+        Me.mskValRecEntradaCaixa.Location = New System.Drawing.Point(161, 147)
         Me.mskValRecEntradaCaixa.Name = "mskValRecEntradaCaixa"
-        Me.mskValRecEntradaCaixa.Size = New System.Drawing.Size(104, 20)
+        Me.mskValRecEntradaCaixa.Size = New System.Drawing.Size(119, 20)
         Me.mskValRecEntradaCaixa.TabIndex = 38
         Me.mskValRecEntradaCaixa.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -569,9 +589,9 @@ Partial Class ConferenciaCaixa
         '
         Me.mskValConfEntradaCaixa.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.mskValConfEntradaCaixa.Enabled = False
-        Me.mskValConfEntradaCaixa.Location = New System.Drawing.Point(252, 153)
+        Me.mskValConfEntradaCaixa.Location = New System.Drawing.Point(286, 147)
         Me.mskValConfEntradaCaixa.Name = "mskValConfEntradaCaixa"
-        Me.mskValConfEntradaCaixa.Size = New System.Drawing.Size(104, 20)
+        Me.mskValConfEntradaCaixa.Size = New System.Drawing.Size(119, 20)
         Me.mskValConfEntradaCaixa.TabIndex = 40
         Me.mskValConfEntradaCaixa.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -579,9 +599,9 @@ Partial Class ConferenciaCaixa
         '
         Me.mskValConfSaidaCaixa.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.mskValConfSaidaCaixa.ForeColor = System.Drawing.Color.Red
-        Me.mskValConfSaidaCaixa.Location = New System.Drawing.Point(252, 178)
+        Me.mskValConfSaidaCaixa.Location = New System.Drawing.Point(286, 171)
         Me.mskValConfSaidaCaixa.Name = "mskValConfSaidaCaixa"
-        Me.mskValConfSaidaCaixa.Size = New System.Drawing.Size(104, 20)
+        Me.mskValConfSaidaCaixa.Size = New System.Drawing.Size(119, 20)
         Me.mskValConfSaidaCaixa.TabIndex = 41
         Me.mskValConfSaidaCaixa.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -589,9 +609,9 @@ Partial Class ConferenciaCaixa
         '
         Me.mskDiferencaEntradaCaixa.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.mskDiferencaEntradaCaixa.Enabled = False
-        Me.mskDiferencaEntradaCaixa.Location = New System.Drawing.Point(362, 153)
+        Me.mskDiferencaEntradaCaixa.Location = New System.Drawing.Point(411, 147)
         Me.mskDiferencaEntradaCaixa.Name = "mskDiferencaEntradaCaixa"
-        Me.mskDiferencaEntradaCaixa.Size = New System.Drawing.Size(99, 20)
+        Me.mskDiferencaEntradaCaixa.Size = New System.Drawing.Size(127, 20)
         Me.mskDiferencaEntradaCaixa.TabIndex = 42
         Me.mskDiferencaEntradaCaixa.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -599,16 +619,16 @@ Partial Class ConferenciaCaixa
         '
         Me.mskDiferencaSaidaCaixa.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.mskDiferencaSaidaCaixa.Enabled = False
-        Me.mskDiferencaSaidaCaixa.Location = New System.Drawing.Point(362, 178)
+        Me.mskDiferencaSaidaCaixa.Location = New System.Drawing.Point(411, 171)
         Me.mskDiferencaSaidaCaixa.Name = "mskDiferencaSaidaCaixa"
-        Me.mskDiferencaSaidaCaixa.Size = New System.Drawing.Size(99, 20)
+        Me.mskDiferencaSaidaCaixa.Size = New System.Drawing.Size(127, 20)
         Me.mskDiferencaSaidaCaixa.TabIndex = 43
         Me.mskDiferencaSaidaCaixa.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'lblEstdEntradaCaixa
         '
         Me.lblEstdEntradaCaixa.AutoSize = True
-        Me.lblEstdEntradaCaixa.Location = New System.Drawing.Point(479, 150)
+        Me.lblEstdEntradaCaixa.Location = New System.Drawing.Point(544, 144)
         Me.lblEstdEntradaCaixa.Name = "lblEstdEntradaCaixa"
         Me.lblEstdEntradaCaixa.Size = New System.Drawing.Size(0, 13)
         Me.lblEstdEntradaCaixa.TabIndex = 44
@@ -616,7 +636,7 @@ Partial Class ConferenciaCaixa
         'lblEstdSaidaCaixa
         '
         Me.lblEstdSaidaCaixa.AutoSize = True
-        Me.lblEstdSaidaCaixa.Location = New System.Drawing.Point(479, 175)
+        Me.lblEstdSaidaCaixa.Location = New System.Drawing.Point(544, 168)
         Me.lblEstdSaidaCaixa.Name = "lblEstdSaidaCaixa"
         Me.lblEstdSaidaCaixa.Size = New System.Drawing.Size(0, 13)
         Me.lblEstdSaidaCaixa.TabIndex = 45
@@ -625,49 +645,90 @@ Partial Class ConferenciaCaixa
         '
         Me.mskValRecSaidaCaixa.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.mskValRecSaidaCaixa.ForeColor = System.Drawing.Color.Red
-        Me.mskValRecSaidaCaixa.Location = New System.Drawing.Point(142, 178)
+        Me.mskValRecSaidaCaixa.Location = New System.Drawing.Point(161, 171)
         Me.mskValRecSaidaCaixa.Name = "mskValRecSaidaCaixa"
-        Me.mskValRecSaidaCaixa.Size = New System.Drawing.Size(104, 20)
+        Me.mskValRecSaidaCaixa.Size = New System.Drawing.Size(119, 20)
         Me.mskValRecSaidaCaixa.TabIndex = 39
         Me.mskValRecSaidaCaixa.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'Label19
+        'dtInicio
         '
-        Me.Label19.AutoSize = True
-        Me.Label19.Location = New System.Drawing.Point(3, 200)
-        Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(36, 13)
-        Me.Label19.TabIndex = 46
-        Me.Label19.Text = "Total"
+        Me.dtInicio.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtInicio.Location = New System.Drawing.Point(223, 33)
+        Me.dtInicio.Name = "dtInicio"
+        Me.dtInicio.Size = New System.Drawing.Size(157, 20)
+        Me.dtInicio.TabIndex = 17
+        Me.dtInicio.Visible = False
         '
-        'lblTotalDiferenca
+        'lblDiarioCaixa
         '
-        Me.lblTotalDiferenca.AutoSize = True
-        Me.lblTotalDiferenca.Location = New System.Drawing.Point(362, 200)
-        Me.lblTotalDiferenca.Name = "lblTotalDiferenca"
-        Me.lblTotalDiferenca.Size = New System.Drawing.Size(11, 13)
-        Me.lblTotalDiferenca.TabIndex = 49
-        Me.lblTotalDiferenca.Text = " "
-        Me.lblTotalDiferenca.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.lblDiarioCaixa.AutoSize = True
+        Me.lblDiarioCaixa.Location = New System.Drawing.Point(389, 14)
+        Me.lblDiarioCaixa.Name = "lblDiarioCaixa"
+        Me.lblDiarioCaixa.Size = New System.Drawing.Size(45, 13)
+        Me.lblDiarioCaixa.TabIndex = 16
+        Me.lblDiarioCaixa.Text = "Label22"
+        Me.lblDiarioCaixa.Visible = False
         '
-        'lblTotalRecebido
+        'btnBuscar
         '
-        Me.lblTotalRecebido.AutoSize = True
-        Me.lblTotalRecebido.Location = New System.Drawing.Point(142, 200)
-        Me.lblTotalRecebido.Name = "lblTotalRecebido"
-        Me.lblTotalRecebido.Size = New System.Drawing.Size(0, 13)
-        Me.lblTotalRecebido.TabIndex = 47
-        Me.lblTotalRecebido.TextAlign = System.Drawing.ContentAlignment.TopRight
+        Me.btnBuscar.Location = New System.Drawing.Point(383, 30)
+        Me.btnBuscar.Name = "btnBuscar"
+        Me.btnBuscar.Size = New System.Drawing.Size(51, 23)
+        Me.btnBuscar.TabIndex = 15
+        Me.btnBuscar.Text = "buscar"
+        Me.btnBuscar.UseVisualStyleBackColor = True
         '
-        'lblTotalConferido
+        'cboContaPos
         '
-        Me.lblTotalConferido.AutoSize = True
-        Me.lblTotalConferido.Location = New System.Drawing.Point(252, 200)
-        Me.lblTotalConferido.Name = "lblTotalConferido"
-        Me.lblTotalConferido.Size = New System.Drawing.Size(11, 13)
-        Me.lblTotalConferido.TabIndex = 48
-        Me.lblTotalConferido.Text = " "
-        Me.lblTotalConferido.TextAlign = System.Drawing.ContentAlignment.TopRight
+        Me.cboContaPos.FormattingEnabled = True
+        Me.cboContaPos.Location = New System.Drawing.Point(223, 8)
+        Me.cboContaPos.Name = "cboContaPos"
+        Me.cboContaPos.Size = New System.Drawing.Size(157, 21)
+        Me.cboContaPos.TabIndex = 3
+        '
+        'Label21
+        '
+        Me.Label21.AutoSize = True
+        Me.Label21.Location = New System.Drawing.Point(9, 12)
+        Me.Label21.Name = "Label21"
+        Me.Label21.Size = New System.Drawing.Size(60, 13)
+        Me.Label21.TabIndex = 2
+        Me.Label21.Text = "Conta POS"
+        '
+        'txtCaixaNum
+        '
+        Me.txtCaixaNum.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtCaixaNum.Enabled = False
+        Me.txtCaixaNum.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtCaixaNum.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.txtCaixaNum.Location = New System.Drawing.Point(223, 32)
+        Me.txtCaixaNum.Name = "txtCaixaNum"
+        Me.txtCaixaNum.Size = New System.Drawing.Size(74, 20)
+        Me.txtCaixaNum.TabIndex = 13
+        '
+        'ptxboxUtilizadorAberturaCaixa
+        '
+        Me.ptxboxUtilizadorAberturaCaixa.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.ptxboxUtilizadorAberturaCaixa.ErrorImage = CType(resources.GetObject("ptxboxUtilizadorAberturaCaixa.ErrorImage"), System.Drawing.Image)
+        Me.ptxboxUtilizadorAberturaCaixa.Image = CType(resources.GetObject("ptxboxUtilizadorAberturaCaixa.Image"), System.Drawing.Image)
+        Me.ptxboxUtilizadorAberturaCaixa.ImageLocation = ""
+        Me.ptxboxUtilizadorAberturaCaixa.Location = New System.Drawing.Point(1168, 8)
+        Me.ptxboxUtilizadorAberturaCaixa.Name = "ptxboxUtilizadorAberturaCaixa"
+        Me.ptxboxUtilizadorAberturaCaixa.Size = New System.Drawing.Size(184, 179)
+        Me.ptxboxUtilizadorAberturaCaixa.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.ptxboxUtilizadorAberturaCaixa.TabIndex = 1
+        Me.ptxboxUtilizadorAberturaCaixa.TabStop = False
+        '
+        'LinkLabel1
+        '
+        Me.LinkLabel1.AutoSize = True
+        Me.LinkLabel1.Location = New System.Drawing.Point(9, 33)
+        Me.LinkLabel1.Name = "LinkLabel1"
+        Me.LinkLabel1.Size = New System.Drawing.Size(49, 13)
+        Me.LinkLabel1.TabIndex = 14
+        Me.LinkLabel1.TabStop = True
+        Me.LinkLabel1.Text = " Caixa nº"
         '
         'TableLayoutPanel1
         '
@@ -675,21 +736,21 @@ Partial Class ConferenciaCaixa
         Me.TableLayoutPanel1.ColumnCount = 2
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel1.Controls.Add(Me.Label2, 0, 1)
-        Me.TableLayoutPanel1.Controls.Add(Me.mskDataAbertura, 1, 1)
-        Me.TableLayoutPanel1.Controls.Add(Me.txtCaixaNum, 1, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.LinkLabel1, 0, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.Label2, 0, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.mskDataAbertura, 1, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.Label4, 0, 1)
+        Me.TableLayoutPanel1.Controls.Add(Me.txtUtilizadorAbertura, 1, 1)
+        Me.TableLayoutPanel1.Controls.Add(Me.Label7, 0, 3)
+        Me.TableLayoutPanel1.Controls.Add(Me.Label5, 0, 2)
+        Me.TableLayoutPanel1.Controls.Add(Me.txtUtilizadorFecho, 1, 3)
+        Me.TableLayoutPanel1.Controls.Add(Me.mskDataFecho, 1, 2)
         Me.TableLayoutPanel1.Controls.Add(Me.Label6, 0, 6)
         Me.TableLayoutPanel1.Controls.Add(Me.mskSaldoFecho, 1, 6)
-        Me.TableLayoutPanel1.Controls.Add(Me.Label3, 0, 5)
         Me.TableLayoutPanel1.Controls.Add(Me.mskSaldoAbertura, 1, 5)
-        Me.TableLayoutPanel1.Controls.Add(Me.Label4, 0, 2)
-        Me.TableLayoutPanel1.Controls.Add(Me.txtUtilizadorAbertura, 1, 2)
-        Me.TableLayoutPanel1.Controls.Add(Me.Label7, 0, 4)
-        Me.TableLayoutPanel1.Controls.Add(Me.Label5, 0, 3)
-        Me.TableLayoutPanel1.Controls.Add(Me.txtUtilizadorFecho, 1, 4)
-        Me.TableLayoutPanel1.Controls.Add(Me.mskDataFecho, 1, 3)
-        Me.TableLayoutPanel1.Location = New System.Drawing.Point(3, 3)
+        Me.TableLayoutPanel1.Controls.Add(Me.Label3, 0, 5)
+        Me.TableLayoutPanel1.Controls.Add(Me.Label20, 0, 4)
+        Me.TableLayoutPanel1.Controls.Add(Me.txtUtilizadorConferencia, 1, 4)
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(6, 56)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 7
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571!))
@@ -698,14 +759,15 @@ Partial Class ConferenciaCaixa
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(428, 173)
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(428, 165)
         Me.TableLayoutPanel1.TabIndex = 0
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(3, 24)
+        Me.Label2.Location = New System.Drawing.Point(3, 0)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(76, 13)
         Me.Label2.TabIndex = 1
@@ -716,31 +778,67 @@ Partial Class ConferenciaCaixa
         Me.mskDataAbertura.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.mskDataAbertura.Enabled = False
         Me.mskDataAbertura.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.mskDataAbertura.Location = New System.Drawing.Point(217, 27)
+        Me.mskDataAbertura.Location = New System.Drawing.Point(217, 3)
         Me.mskDataAbertura.Name = "mskDataAbertura"
         Me.mskDataAbertura.Size = New System.Drawing.Size(208, 20)
         Me.mskDataAbertura.TabIndex = 7
         '
-        'txtCaixaNum
+        'Label4
         '
-        Me.txtCaixaNum.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtCaixaNum.Enabled = False
-        Me.txtCaixaNum.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCaixaNum.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.txtCaixaNum.Location = New System.Drawing.Point(217, 3)
-        Me.txtCaixaNum.Name = "txtCaixaNum"
-        Me.txtCaixaNum.Size = New System.Drawing.Size(74, 20)
-        Me.txtCaixaNum.TabIndex = 13
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(3, 24)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(96, 13)
+        Me.Label4.TabIndex = 3
+        Me.Label4.Text = "Utilizador Abertura:"
         '
-        'LinkLabel1
+        'txtUtilizadorAbertura
         '
-        Me.LinkLabel1.AutoSize = True
-        Me.LinkLabel1.Location = New System.Drawing.Point(3, 0)
-        Me.LinkLabel1.Name = "LinkLabel1"
-        Me.LinkLabel1.Size = New System.Drawing.Size(49, 13)
-        Me.LinkLabel1.TabIndex = 14
-        Me.LinkLabel1.TabStop = True
-        Me.LinkLabel1.Text = " Caixa nº"
+        Me.txtUtilizadorAbertura.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtUtilizadorAbertura.Enabled = False
+        Me.txtUtilizadorAbertura.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtUtilizadorAbertura.Location = New System.Drawing.Point(217, 27)
+        Me.txtUtilizadorAbertura.Name = "txtUtilizadorAbertura"
+        Me.txtUtilizadorAbertura.Size = New System.Drawing.Size(208, 20)
+        Me.txtUtilizadorAbertura.TabIndex = 11
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(3, 72)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(86, 13)
+        Me.Label7.TabIndex = 6
+        Me.Label7.Text = "Utilizador Fecho:"
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(3, 48)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(66, 13)
+        Me.Label5.TabIndex = 4
+        Me.Label5.Text = "Data Fecho:"
+        '
+        'txtUtilizadorFecho
+        '
+        Me.txtUtilizadorFecho.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtUtilizadorFecho.Enabled = False
+        Me.txtUtilizadorFecho.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtUtilizadorFecho.Location = New System.Drawing.Point(217, 75)
+        Me.txtUtilizadorFecho.Name = "txtUtilizadorFecho"
+        Me.txtUtilizadorFecho.Size = New System.Drawing.Size(208, 20)
+        Me.txtUtilizadorFecho.TabIndex = 12
+        '
+        'mskDataFecho
+        '
+        Me.mskDataFecho.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.mskDataFecho.Enabled = False
+        Me.mskDataFecho.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.mskDataFecho.Location = New System.Drawing.Point(217, 51)
+        Me.mskDataFecho.Name = "mskDataFecho"
+        Me.mskDataFecho.Size = New System.Drawing.Size(208, 20)
+        Me.mskDataFecho.TabIndex = 9
         '
         'Label6
         '
@@ -762,15 +860,6 @@ Partial Class ConferenciaCaixa
         Me.mskSaldoFecho.TabIndex = 10
         Me.mskSaldoFecho.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(3, 120)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(95, 13)
-        Me.Label3.TabIndex = 2
-        Me.Label3.Text = "Saldo de Abertura:"
-        '
         'mskSaldoAbertura
         '
         Me.mskSaldoAbertura.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
@@ -782,81 +871,94 @@ Partial Class ConferenciaCaixa
         Me.mskSaldoAbertura.TabIndex = 8
         Me.mskSaldoAbertura.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'Label4
+        'Label3
         '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(3, 48)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(96, 13)
-        Me.Label4.TabIndex = 3
-        Me.Label4.Text = "Utilizador Abertura:"
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(3, 120)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(95, 13)
+        Me.Label3.TabIndex = 2
+        Me.Label3.Text = "Saldo de Abertura:"
         '
-        'txtUtilizadorAbertura
+        'Label20
         '
-        Me.txtUtilizadorAbertura.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtUtilizadorAbertura.Enabled = False
-        Me.txtUtilizadorAbertura.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtUtilizadorAbertura.Location = New System.Drawing.Point(217, 51)
-        Me.txtUtilizadorAbertura.Name = "txtUtilizadorAbertura"
-        Me.txtUtilizadorAbertura.Size = New System.Drawing.Size(208, 20)
-        Me.txtUtilizadorAbertura.TabIndex = 11
+        Me.Label20.AutoSize = True
+        Me.Label20.Location = New System.Drawing.Point(3, 96)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(110, 13)
+        Me.Label20.TabIndex = 15
+        Me.Label20.Text = "Utilizador Conferência"
         '
-        'Label7
+        'txtUtilizadorConferencia
         '
-        Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(3, 96)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(86, 13)
-        Me.Label7.TabIndex = 6
-        Me.Label7.Text = "Utilizador Fecho:"
+        Me.txtUtilizadorConferencia.Enabled = False
+        Me.txtUtilizadorConferencia.Location = New System.Drawing.Point(217, 99)
+        Me.txtUtilizadorConferencia.Name = "txtUtilizadorConferencia"
+        Me.txtUtilizadorConferencia.Size = New System.Drawing.Size(208, 20)
+        Me.txtUtilizadorConferencia.TabIndex = 16
         '
-        'Label5
+        'lblTotalConferido
         '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(3, 72)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(66, 13)
-        Me.Label5.TabIndex = 4
-        Me.Label5.Text = "Data Fecho:"
+        Me.lblTotalConferido.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTotalConferido.Location = New System.Drawing.Point(723, 202)
+        Me.lblTotalConferido.Name = "lblTotalConferido"
+        Me.lblTotalConferido.Size = New System.Drawing.Size(119, 17)
+        Me.lblTotalConferido.TabIndex = 48
+        Me.lblTotalConferido.Text = "0.0"
+        Me.lblTotalConferido.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'txtUtilizadorFecho
+        'lblTotalDiferenca
         '
-        Me.txtUtilizadorFecho.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtUtilizadorFecho.Enabled = False
-        Me.txtUtilizadorFecho.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtUtilizadorFecho.Location = New System.Drawing.Point(217, 99)
-        Me.txtUtilizadorFecho.Name = "txtUtilizadorFecho"
-        Me.txtUtilizadorFecho.Size = New System.Drawing.Size(208, 20)
-        Me.txtUtilizadorFecho.TabIndex = 12
+        Me.lblTotalDiferenca.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTotalDiferenca.Location = New System.Drawing.Point(845, 204)
+        Me.lblTotalDiferenca.Name = "lblTotalDiferenca"
+        Me.lblTotalDiferenca.Size = New System.Drawing.Size(130, 16)
+        Me.lblTotalDiferenca.TabIndex = 49
+        Me.lblTotalDiferenca.Text = "0.0"
+        Me.lblTotalDiferenca.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'mskDataFecho
+        'Label19
         '
-        Me.mskDataFecho.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.mskDataFecho.Enabled = False
-        Me.mskDataFecho.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.mskDataFecho.Location = New System.Drawing.Point(217, 75)
-        Me.mskDataFecho.Name = "mskDataFecho"
-        Me.mskDataFecho.Size = New System.Drawing.Size(208, 20)
-        Me.mskDataFecho.TabIndex = 9
+        Me.Label19.AutoSize = True
+        Me.Label19.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label19.Location = New System.Drawing.Point(440, 200)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(45, 17)
+        Me.Label19.TabIndex = 46
+        Me.Label19.Text = "Total"
         '
         'Panel3
         '
         Me.Panel3.BackColor = System.Drawing.Color.Transparent
+        Me.Panel3.Controls.Add(Me.lblMsgValor)
         Me.Panel3.Controls.Add(Me.btnPrevisualizarReporte)
         Me.Panel3.Controls.Add(Me.btnConfereLimpar)
         Me.Panel3.Controls.Add(Me.btnConfereAdicionar)
         Me.Panel3.Controls.Add(Me.TableLayoutPanel3)
-        Me.Panel3.Location = New System.Drawing.Point(0, 313)
+        Me.Panel3.Location = New System.Drawing.Point(7, 257)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(1297, 61)
+        Me.Panel3.Size = New System.Drawing.Size(1363, 61)
         Me.Panel3.TabIndex = 0
+        '
+        'lblMsgValor
+        '
+        Me.lblMsgValor.AutoSize = True
+        Me.lblMsgValor.BackColor = System.Drawing.Color.Gray
+        Me.lblMsgValor.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblMsgValor.ForeColor = System.Drawing.Color.Red
+        Me.lblMsgValor.Location = New System.Drawing.Point(1063, 5)
+        Me.lblMsgValor.Name = "lblMsgValor"
+        Me.lblMsgValor.Size = New System.Drawing.Size(293, 17)
+        Me.lblMsgValor.TabIndex = 4
+        Me.lblMsgValor.Text = "Use somente virgula para separação decimal"
+        Me.lblMsgValor.Visible = False
         '
         'btnPrevisualizarReporte
         '
         Me.btnPrevisualizarReporte.BackColor = System.Drawing.SystemColors.Control
         Me.btnPrevisualizarReporte.Enabled = False
         Me.btnPrevisualizarReporte.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnPrevisualizarReporte.Location = New System.Drawing.Point(1178, 33)
+        Me.btnPrevisualizarReporte.Location = New System.Drawing.Point(1258, 32)
         Me.btnPrevisualizarReporte.Name = "btnPrevisualizarReporte"
         Me.btnPrevisualizarReporte.Size = New System.Drawing.Size(94, 23)
         Me.btnPrevisualizarReporte.TabIndex = 3
@@ -868,7 +970,7 @@ Partial Class ConferenciaCaixa
         Me.btnConfereLimpar.BackColor = System.Drawing.SystemColors.Control
         Me.btnConfereLimpar.Enabled = False
         Me.btnConfereLimpar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnConfereLimpar.Location = New System.Drawing.Point(1067, 33)
+        Me.btnConfereLimpar.Location = New System.Drawing.Point(1147, 32)
         Me.btnConfereLimpar.Name = "btnConfereLimpar"
         Me.btnConfereLimpar.Size = New System.Drawing.Size(104, 23)
         Me.btnConfereLimpar.TabIndex = 2
@@ -881,7 +983,7 @@ Partial Class ConferenciaCaixa
         Me.btnConfereAdicionar.Enabled = False
         Me.btnConfereAdicionar.FlatAppearance.BorderSize = 2
         Me.btnConfereAdicionar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnConfereAdicionar.Location = New System.Drawing.Point(986, 34)
+        Me.btnConfereAdicionar.Location = New System.Drawing.Point(1066, 33)
         Me.btnConfereAdicionar.Name = "btnConfereAdicionar"
         Me.btnConfereAdicionar.Size = New System.Drawing.Size(75, 23)
         Me.btnConfereAdicionar.TabIndex = 1
@@ -890,44 +992,55 @@ Partial Class ConferenciaCaixa
         '
         'TableLayoutPanel3
         '
-        Me.TableLayoutPanel3.ColumnCount = 5
-        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.64674!))
-        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.64674!))
-        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 207.0!))
-        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.74656!))
-        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24.95996!))
+        Me.TableLayoutPanel3.ColumnCount = 6
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.69127!))
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.86577!))
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 93.0!))
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 231.0!))
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.44847!))
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 19.63788!))
         Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.TableLayoutPanel3.Controls.Add(Me.dtTransacao, 2, 1)
         Me.TableLayoutPanel3.Controls.Add(Me.lblFechoContaMovimento, 0, 0)
         Me.TableLayoutPanel3.Controls.Add(Me.lblFechoContaReferencia, 1, 0)
-        Me.TableLayoutPanel3.Controls.Add(Me.lblFechoContaQuantidade, 3, 0)
-        Me.TableLayoutPanel3.Controls.Add(Me.Label28, 4, 0)
+        Me.TableLayoutPanel3.Controls.Add(Me.lblFechoContaQuantidade, 4, 0)
+        Me.TableLayoutPanel3.Controls.Add(Me.Label28, 5, 0)
         Me.TableLayoutPanel3.Controls.Add(Me.cboModoRecebido, 0, 1)
         Me.TableLayoutPanel3.Controls.Add(Me.cboReferenciaModoReceb, 1, 1)
-        Me.TableLayoutPanel3.Controls.Add(Me.mskValorRecebido, 4, 1)
-        Me.TableLayoutPanel3.Controls.Add(Me.lblFechoContaCartaoChequeDesc, 2, 0)
-        Me.TableLayoutPanel3.Controls.Add(Me.cboCartaoTipo, 2, 1)
-        Me.TableLayoutPanel3.Controls.Add(Me.txtQuantidade, 3, 1)
-        Me.TableLayoutPanel3.Location = New System.Drawing.Point(3, 6)
+        Me.TableLayoutPanel3.Controls.Add(Me.mskValorRecebido, 5, 1)
+        Me.TableLayoutPanel3.Controls.Add(Me.lblFechoContaCartaoChequeDesc, 3, 0)
+        Me.TableLayoutPanel3.Controls.Add(Me.cboCartaoTipo, 3, 1)
+        Me.TableLayoutPanel3.Controls.Add(Me.Label22, 2, 0)
+        Me.TableLayoutPanel3.Controls.Add(Me.txtQuantidade, 4, 1)
+        Me.TableLayoutPanel3.Location = New System.Drawing.Point(15, 6)
         Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
         Me.TableLayoutPanel3.RowCount = 2
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel3.Size = New System.Drawing.Size(963, 55)
+        Me.TableLayoutPanel3.Size = New System.Drawing.Size(1042, 55)
         Me.TableLayoutPanel3.TabIndex = 0
+        '
+        'dtTransacao
+        '
+        Me.dtTransacao.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtTransacao.Location = New System.Drawing.Point(424, 30)
+        Me.dtTransacao.Name = "dtTransacao"
+        Me.dtTransacao.Size = New System.Drawing.Size(87, 20)
+        Me.dtTransacao.TabIndex = 18
         '
         'lblFechoContaMovimento
         '
         Me.lblFechoContaMovimento.AutoSize = True
         Me.lblFechoContaMovimento.Location = New System.Drawing.Point(3, 0)
         Me.lblFechoContaMovimento.Name = "lblFechoContaMovimento"
-        Me.lblFechoContaMovimento.Size = New System.Drawing.Size(89, 13)
+        Me.lblFechoContaMovimento.Size = New System.Drawing.Size(62, 13)
         Me.lblFechoContaMovimento.TabIndex = 0
-        Me.lblFechoContaMovimento.Text = "Modo Movimento"
+        Me.lblFechoContaMovimento.Text = " Movimento"
         '
         'lblFechoContaReferencia
         '
         Me.lblFechoContaReferencia.AutoSize = True
-        Me.lblFechoContaReferencia.Location = New System.Drawing.Point(227, 0)
+        Me.lblFechoContaReferencia.Location = New System.Drawing.Point(209, 0)
         Me.lblFechoContaReferencia.Name = "lblFechoContaReferencia"
         Me.lblFechoContaReferencia.Size = New System.Drawing.Size(59, 13)
         Me.lblFechoContaReferencia.TabIndex = 1
@@ -936,7 +1049,7 @@ Partial Class ConferenciaCaixa
         'lblFechoContaQuantidade
         '
         Me.lblFechoContaQuantidade.AutoSize = True
-        Me.lblFechoContaQuantidade.Location = New System.Drawing.Point(658, 0)
+        Me.lblFechoContaQuantidade.Location = New System.Drawing.Point(748, 0)
         Me.lblFechoContaQuantidade.Name = "lblFechoContaQuantidade"
         Me.lblFechoContaQuantidade.Size = New System.Drawing.Size(10, 13)
         Me.lblFechoContaQuantidade.TabIndex = 2
@@ -945,7 +1058,7 @@ Partial Class ConferenciaCaixa
         'Label28
         '
         Me.Label28.AutoSize = True
-        Me.Label28.Location = New System.Drawing.Point(777, 0)
+        Me.Label28.Location = New System.Drawing.Point(902, 0)
         Me.Label28.Name = "Label28"
         Me.Label28.Size = New System.Drawing.Size(31, 13)
         Me.Label28.TabIndex = 3
@@ -957,32 +1070,32 @@ Partial Class ConferenciaCaixa
         Me.cboModoRecebido.FormattingEnabled = True
         Me.cboModoRecebido.Location = New System.Drawing.Point(3, 30)
         Me.cboModoRecebido.Name = "cboModoRecebido"
-        Me.cboModoRecebido.Size = New System.Drawing.Size(218, 21)
+        Me.cboModoRecebido.Size = New System.Drawing.Size(164, 21)
         Me.cboModoRecebido.TabIndex = 4
         '
         'cboReferenciaModoReceb
         '
         Me.cboReferenciaModoReceb.Enabled = False
         Me.cboReferenciaModoReceb.FormattingEnabled = True
-        Me.cboReferenciaModoReceb.Location = New System.Drawing.Point(227, 30)
+        Me.cboReferenciaModoReceb.Location = New System.Drawing.Point(209, 30)
         Me.cboReferenciaModoReceb.Name = "cboReferenciaModoReceb"
-        Me.cboReferenciaModoReceb.Size = New System.Drawing.Size(218, 21)
+        Me.cboReferenciaModoReceb.Size = New System.Drawing.Size(186, 21)
         Me.cboReferenciaModoReceb.TabIndex = 5
         '
         'mskValorRecebido
         '
         Me.mskValorRecebido.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.mskValorRecebido.Enabled = False
-        Me.mskValorRecebido.Location = New System.Drawing.Point(777, 30)
+        Me.mskValorRecebido.Location = New System.Drawing.Point(902, 30)
         Me.mskValorRecebido.Name = "mskValorRecebido"
-        Me.mskValorRecebido.Size = New System.Drawing.Size(183, 20)
+        Me.mskValorRecebido.Size = New System.Drawing.Size(122, 20)
         Me.mskValorRecebido.TabIndex = 9
         Me.mskValorRecebido.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'lblFechoContaCartaoChequeDesc
         '
         Me.lblFechoContaCartaoChequeDesc.AutoSize = True
-        Me.lblFechoContaCartaoChequeDesc.Location = New System.Drawing.Point(451, 0)
+        Me.lblFechoContaCartaoChequeDesc.Location = New System.Drawing.Point(517, 0)
         Me.lblFechoContaCartaoChequeDesc.Name = "lblFechoContaCartaoChequeDesc"
         Me.lblFechoContaCartaoChequeDesc.Size = New System.Drawing.Size(10, 13)
         Me.lblFechoContaCartaoChequeDesc.TabIndex = 12
@@ -990,40 +1103,62 @@ Partial Class ConferenciaCaixa
         '
         'cboCartaoTipo
         '
+        Me.cboCartaoTipo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
         Me.cboCartaoTipo.Enabled = False
         Me.cboCartaoTipo.FormattingEnabled = True
-        Me.cboCartaoTipo.Location = New System.Drawing.Point(451, 30)
+        Me.cboCartaoTipo.Location = New System.Drawing.Point(517, 30)
         Me.cboCartaoTipo.Name = "cboCartaoTipo"
-        Me.cboCartaoTipo.Size = New System.Drawing.Size(197, 21)
+        Me.cboCartaoTipo.Size = New System.Drawing.Size(225, 21)
         Me.cboCartaoTipo.TabIndex = 13
+        '
+        'Label22
+        '
+        Me.Label22.AutoSize = True
+        Me.Label22.Location = New System.Drawing.Point(424, 0)
+        Me.Label22.Name = "Label22"
+        Me.Label22.Size = New System.Drawing.Size(30, 13)
+        Me.Label22.TabIndex = 19
+        Me.Label22.Text = "Data"
         '
         'txtQuantidade
         '
         Me.txtQuantidade.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtQuantidade.Enabled = False
-        Me.txtQuantidade.Location = New System.Drawing.Point(658, 30)
+        Me.txtQuantidade.Location = New System.Drawing.Point(748, 30)
         Me.txtQuantidade.Name = "txtQuantidade"
-        Me.txtQuantidade.Size = New System.Drawing.Size(113, 20)
+        Me.txtQuantidade.Size = New System.Drawing.Size(131, 20)
         Me.txtQuantidade.TabIndex = 10
         '
         'Panel4
         '
         Me.Panel4.BackColor = System.Drawing.SystemColors.ControlLightLight
         Me.Panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel4.Controls.Add(Me.chkEditar)
         Me.Panel4.Controls.Add(Me.btnLimparTabela)
         Me.Panel4.Controls.Add(Me.btnFecharConta)
         Me.Panel4.Controls.Add(Me.tabelaConferenciaCaixa)
-        Me.Panel4.Location = New System.Drawing.Point(3, 380)
+        Me.Panel4.Location = New System.Drawing.Point(3, 320)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(1297, 200)
+        Me.Panel4.Size = New System.Drawing.Size(1367, 260)
         Me.Panel4.TabIndex = 0
+        '
+        'chkEditar
+        '
+        Me.chkEditar.AutoSize = True
+        Me.chkEditar.Enabled = False
+        Me.chkEditar.Location = New System.Drawing.Point(1274, 60)
+        Me.chkEditar.Name = "chkEditar"
+        Me.chkEditar.Size = New System.Drawing.Size(82, 17)
+        Me.chkEditar.TabIndex = 3
+        Me.chkEditar.Text = "Editar Caixa"
+        Me.chkEditar.UseVisualStyleBackColor = True
         '
         'btnLimparTabela
         '
         Me.btnLimparTabela.BackColor = System.Drawing.SystemColors.Control
         Me.btnLimparTabela.Enabled = False
         Me.btnLimparTabela.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnLimparTabela.Location = New System.Drawing.Point(1197, 3)
+        Me.btnLimparTabela.Location = New System.Drawing.Point(1280, 3)
         Me.btnLimparTabela.Name = "btnLimparTabela"
         Me.btnLimparTabela.Size = New System.Drawing.Size(75, 41)
         Me.btnLimparTabela.TabIndex = 1
@@ -1035,7 +1170,7 @@ Partial Class ConferenciaCaixa
         Me.btnFecharConta.BackColor = System.Drawing.SystemColors.Control
         Me.btnFecharConta.Enabled = False
         Me.btnFecharConta.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnFecharConta.Location = New System.Drawing.Point(1197, 155)
+        Me.btnFecharConta.Location = New System.Drawing.Point(1280, 232)
         Me.btnFecharConta.Name = "btnFecharConta"
         Me.btnFecharConta.Size = New System.Drawing.Size(75, 23)
         Me.btnFecharConta.TabIndex = 0
@@ -1046,10 +1181,10 @@ Partial Class ConferenciaCaixa
         '
         Me.tabelaConferenciaCaixa.BackgroundColor = System.Drawing.Color.SlateGray
         Me.tabelaConferenciaCaixa.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.tabelaConferenciaCaixa.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.modoMovimento, Me.Referencia, Me.cartaoTipo, Me.descricao, Me.descSaidaCaixa, Me.quantidade, Me.valor})
-        Me.tabelaConferenciaCaixa.Location = New System.Drawing.Point(3, 3)
+        Me.tabelaConferenciaCaixa.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.modoMovimento, Me.Referencia, Me.cartaoTipo, Me.descricao, Me.descSaidaCaixa, Me.quantidade, Me.valor, Me.DataTransacao})
+        Me.tabelaConferenciaCaixa.Location = New System.Drawing.Point(3, 7)
         Me.tabelaConferenciaCaixa.Name = "tabelaConferenciaCaixa"
-        Me.tabelaConferenciaCaixa.Size = New System.Drawing.Size(1188, 197)
+        Me.tabelaConferenciaCaixa.Size = New System.Drawing.Size(1265, 248)
         Me.tabelaConferenciaCaixa.TabIndex = 0
         '
         'modoMovimento
@@ -1081,7 +1216,7 @@ Partial Class ConferenciaCaixa
         '
         Me.descSaidaCaixa.HeaderText = "Descrição Saida de Caixa"
         Me.descSaidaCaixa.Name = "descSaidaCaixa"
-        Me.descSaidaCaixa.Width = 250
+        Me.descSaidaCaixa.Width = 220
         '
         'quantidade
         '
@@ -1094,13 +1229,18 @@ Partial Class ConferenciaCaixa
         Me.valor.Name = "valor"
         Me.valor.Width = 150
         '
+        'DataTransacao
+        '
+        Me.DataTransacao.HeaderText = "Data Transação"
+        Me.DataTransacao.Name = "DataTransacao"
+        '
         'MenuStrip1
         '
         Me.MenuStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SistemaToolStripMenuItem, Me.FerramentasToolStripMenuItem, Me.ConfigurarToolStripMenuItem, Me.AjudaToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SistemaToolStripMenuItem, Me.FerramentasToolStripMenuItem, Me.ConfigurarToolStripMenuItem, Me.ListagemToolStripMenuItem, Me.AjudaToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(1300, 24)
+        Me.MenuStrip1.Size = New System.Drawing.Size(1370, 24)
         Me.MenuStrip1.TabIndex = 1
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -1144,7 +1284,7 @@ Partial Class ConferenciaCaixa
         '
         'ConfigurarToolStripMenuItem
         '
-        Me.ConfigurarToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ConexaoBaseDeDadosToolStripMenuItem, Me.SistemaToolStripMenuItem1})
+        Me.ConfigurarToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ConexaoBaseDeDadosToolStripMenuItem, Me.SistemaToolStripMenuItem1, Me.MovimentosToolStripMenuItem, Me.UtilizadorCaixaToolStripMenuItem})
         Me.ConfigurarToolStripMenuItem.Name = "ConfigurarToolStripMenuItem"
         Me.ConfigurarToolStripMenuItem.Size = New System.Drawing.Size(76, 20)
         Me.ConfigurarToolStripMenuItem.Text = "Configurar"
@@ -1152,14 +1292,39 @@ Partial Class ConferenciaCaixa
         'ConexaoBaseDeDadosToolStripMenuItem
         '
         Me.ConexaoBaseDeDadosToolStripMenuItem.Name = "ConexaoBaseDeDadosToolStripMenuItem"
-        Me.ConexaoBaseDeDadosToolStripMenuItem.Size = New System.Drawing.Size(138, 22)
+        Me.ConexaoBaseDeDadosToolStripMenuItem.Size = New System.Drawing.Size(141, 22)
         Me.ConexaoBaseDeDadosToolStripMenuItem.Text = "Conexao BD"
         '
         'SistemaToolStripMenuItem1
         '
         Me.SistemaToolStripMenuItem1.Name = "SistemaToolStripMenuItem1"
-        Me.SistemaToolStripMenuItem1.Size = New System.Drawing.Size(138, 22)
+        Me.SistemaToolStripMenuItem1.Size = New System.Drawing.Size(141, 22)
         Me.SistemaToolStripMenuItem1.Text = "Sistema"
+        '
+        'MovimentosToolStripMenuItem
+        '
+        Me.MovimentosToolStripMenuItem.Name = "MovimentosToolStripMenuItem"
+        Me.MovimentosToolStripMenuItem.Size = New System.Drawing.Size(141, 22)
+        Me.MovimentosToolStripMenuItem.Text = "Movimentos"
+        '
+        'UtilizadorCaixaToolStripMenuItem
+        '
+        Me.UtilizadorCaixaToolStripMenuItem.Name = "UtilizadorCaixaToolStripMenuItem"
+        Me.UtilizadorCaixaToolStripMenuItem.Size = New System.Drawing.Size(141, 22)
+        Me.UtilizadorCaixaToolStripMenuItem.Text = "Caixa Perfil"
+        '
+        'ListagemToolStripMenuItem
+        '
+        Me.ListagemToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ConferênciaDeCaixaTotaisToolStripMenuItem})
+        Me.ListagemToolStripMenuItem.Name = "ListagemToolStripMenuItem"
+        Me.ListagemToolStripMenuItem.Size = New System.Drawing.Size(68, 20)
+        Me.ListagemToolStripMenuItem.Text = "Listagens"
+        '
+        'ConferênciaDeCaixaTotaisToolStripMenuItem
+        '
+        Me.ConferênciaDeCaixaTotaisToolStripMenuItem.Name = "ConferênciaDeCaixaTotaisToolStripMenuItem"
+        Me.ConferênciaDeCaixaTotaisToolStripMenuItem.Size = New System.Drawing.Size(233, 22)
+        Me.ConferênciaDeCaixaTotaisToolStripMenuItem.Text = "Conferência de Caixa ( Totais )"
         '
         'AjudaToolStripMenuItem
         '
@@ -1191,15 +1356,15 @@ Partial Class ConferenciaCaixa
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.rodape})
         Me.StatusStrip1.Location = New System.Drawing.Point(0, 588)
         Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(1300, 22)
+        Me.StatusStrip1.Size = New System.Drawing.Size(1370, 22)
         Me.StatusStrip1.TabIndex = 2
         Me.StatusStrip1.Text = "StatusStrip1"
         '
         'rodape
         '
         Me.rodape.Name = "rodape"
-        Me.rodape.Size = New System.Drawing.Size(112, 17)
-        Me.rodape.Text = "Sessão Não Iniciado"
+        Me.rodape.Size = New System.Drawing.Size(111, 17)
+        Me.rodape.Text = "Sessão Não Iniciada"
         '
         'pnlMensagemLicenca
         '
@@ -1207,9 +1372,9 @@ Partial Class ConferenciaCaixa
         Me.pnlMensagemLicenca.Controls.Add(Me.LinkLabel2)
         Me.pnlMensagemLicenca.Controls.Add(Me.PictureBox1)
         Me.pnlMensagemLicenca.Controls.Add(Me.lblMsgLicencaExpiracao)
-        Me.pnlMensagemLicenca.Location = New System.Drawing.Point(341, 1)
+        Me.pnlMensagemLicenca.Location = New System.Drawing.Point(352, 1)
         Me.pnlMensagemLicenca.Name = "pnlMensagemLicenca"
-        Me.pnlMensagemLicenca.Size = New System.Drawing.Size(581, 23)
+        Me.pnlMensagemLicenca.Size = New System.Drawing.Size(1018, 23)
         Me.pnlMensagemLicenca.TabIndex = 3
         Me.pnlMensagemLicenca.Visible = False
         '
@@ -1217,7 +1382,7 @@ Partial Class ConferenciaCaixa
         '
         Me.LinkLabel2.AutoSize = True
         Me.LinkLabel2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LinkLabel2.Location = New System.Drawing.Point(512, 5)
+        Me.LinkLabel2.Location = New System.Drawing.Point(929, 3)
         Me.LinkLabel2.Name = "LinkLabel2"
         Me.LinkLabel2.Size = New System.Drawing.Size(66, 13)
         Me.LinkLabel2.TabIndex = 3
@@ -1226,8 +1391,8 @@ Partial Class ConferenciaCaixa
         '
         'PictureBox1
         '
-        Me.PictureBox1.Image = Global.pri_fechoConta.My.Resources.Resources.perigo
-        Me.PictureBox1.Location = New System.Drawing.Point(3, 0)
+        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
+        Me.PictureBox1.Location = New System.Drawing.Point(9, 0)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(24, 23)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -1250,7 +1415,7 @@ Partial Class ConferenciaCaixa
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
-        Me.ClientSize = New System.Drawing.Size(1300, 610)
+        Me.ClientSize = New System.Drawing.Size(1370, 610)
         Me.Controls.Add(Me.pnlMensagemLicenca)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.Panel4)
@@ -1260,17 +1425,20 @@ Partial Class ConferenciaCaixa
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MainMenuStrip = Me.MenuStrip1
         Me.Name = "ConferenciaCaixa"
-        Me.Text = " PRI-Conferência de Caixa "
+        Me.Text = "Conferência de Caixa"
         Me.Panel2.ResumeLayout(False)
-        CType(Me.ptxboxUtilizadorAberturaCaixa, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel2.PerformLayout()
         Me.TableLayoutPanel2.ResumeLayout(False)
         Me.TableLayoutPanel2.PerformLayout()
+        CType(Me.ptxboxUtilizadorAberturaCaixa, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.TableLayoutPanel1.PerformLayout()
         Me.Panel3.ResumeLayout(False)
+        Me.Panel3.PerformLayout()
         Me.TableLayoutPanel3.ResumeLayout(False)
         Me.TableLayoutPanel3.PerformLayout()
         Me.Panel4.ResumeLayout(False)
+        Me.Panel4.PerformLayout()
         CType(Me.tabelaConferenciaCaixa, System.ComponentModel.ISupportInitialize).EndInit()
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
@@ -1303,10 +1471,8 @@ Partial Class ConferenciaCaixa
     Friend WithEvents lblEstdCheques As Label
     Friend WithEvents lblEstdSenhas As Label
     Friend WithEvents Label2 As Label
-    Friend WithEvents Label3 As Label
     Friend WithEvents Label4 As Label
     Friend WithEvents Label5 As Label
-    Friend WithEvents Label6 As Label
     Friend WithEvents Label7 As Label
     Friend WithEvents TableLayoutPanel3 As TableLayoutPanel
     Friend WithEvents lblFechoContaMovimento As Label
@@ -1329,9 +1495,7 @@ Partial Class ConferenciaCaixa
     Friend WithEvents mskValConfCheques As MaskedTextBox
     Friend WithEvents mskValConfSenhas As MaskedTextBox
     Friend WithEvents mskDataAbertura As MaskedTextBox
-    Friend WithEvents mskSaldoAbertura As MaskedTextBox
     Friend WithEvents mskDataFecho As MaskedTextBox
-    Friend WithEvents mskSaldoFecho As MaskedTextBox
     Friend WithEvents txtUtilizadorFecho As TextBox
     Friend WithEvents txtCaixaNum As TextBox
     Friend WithEvents mskValorRecebido As MaskedTextBox
@@ -1358,18 +1522,7 @@ Partial Class ConferenciaCaixa
     Friend WithEvents cboCartaoTipo As ComboBox
     Friend WithEvents btnConfereLimpar As Button
     Friend WithEvents ptxboxUtilizadorAberturaCaixa As PictureBox
-    Friend WithEvents Label19 As Label
-    Friend WithEvents lblTotalRecebido As Label
-    Friend WithEvents lblTotalDiferenca As Label
-    Friend WithEvents lblTotalConferido As Label
     Friend WithEvents btnLimparTabela As Button
-    Friend WithEvents modoMovimento As DataGridViewTextBoxColumn
-    Friend WithEvents Referencia As DataGridViewTextBoxColumn
-    Friend WithEvents cartaoTipo As DataGridViewTextBoxColumn
-    Friend WithEvents descricao As DataGridViewTextBoxColumn
-    Friend WithEvents descSaidaCaixa As DataGridViewTextBoxColumn
-    Friend WithEvents quantidade As DataGridViewTextBoxColumn
-    Friend WithEvents valor As DataGridViewTextBoxColumn
     Friend WithEvents btnPrevisualizarReporte As Button
     Friend WithEvents MenuStrip1 As MenuStrip
     Friend WithEvents SistemaToolStripMenuItem As ToolStripMenuItem
@@ -1391,4 +1544,35 @@ Partial Class ConferenciaCaixa
     Friend WithEvents pnlMensagemLicenca As Panel
     Friend WithEvents lblMsgLicencaExpiracao As Label
     Friend WithEvents LinkLabel2 As LinkLabel
+    Friend WithEvents MovimentosToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents Label20 As Label
+    Friend WithEvents txtUtilizadorConferencia As TextBox
+    Friend WithEvents UtilizadorCaixaToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mskSaldoAbertura As MaskedTextBox
+    Friend WithEvents Label3 As Label
+    Friend WithEvents cboContaPos As ComboBox
+    Friend WithEvents Label21 As Label
+    Friend WithEvents Label6 As Label
+    Friend WithEvents mskSaldoFecho As MaskedTextBox
+    Friend WithEvents btnBuscar As Button
+    Friend WithEvents ListagemToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ConferênciaDeCaixaTotaisToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents lblDiarioCaixa As Label
+    Friend WithEvents lblMsgValor As Label
+    Friend WithEvents chkEditar As CheckBox
+    Friend WithEvents dtInicio As DateTimePicker
+    Friend WithEvents dtTransacao As DateTimePicker
+    Friend WithEvents Label22 As Label
+    Friend WithEvents modoMovimento As DataGridViewTextBoxColumn
+    Friend WithEvents Referencia As DataGridViewTextBoxColumn
+    Friend WithEvents cartaoTipo As DataGridViewTextBoxColumn
+    Friend WithEvents descricao As DataGridViewTextBoxColumn
+    Friend WithEvents descSaidaCaixa As DataGridViewTextBoxColumn
+    Friend WithEvents quantidade As DataGridViewTextBoxColumn
+    Friend WithEvents valor As DataGridViewTextBoxColumn
+    Friend WithEvents DataTransacao As DataGridViewTextBoxColumn
+    Friend WithEvents lblTotalConferido As Label
+    Friend WithEvents lblTotalDiferenca As Label
+    Friend WithEvents Label19 As Label
+    Friend WithEvents lblTotalRecebido_ As Label
 End Class

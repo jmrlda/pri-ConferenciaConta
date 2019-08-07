@@ -1,3 +1,5 @@
+Imports System.IO
+
 Public Class Conexaobd
 
     Dim administracao As ConferenciaAdmin = New ConferenciaAdmin()
@@ -10,11 +12,11 @@ Public Class Conexaobd
 
         If System.IO.File.Exists(js.CONEXAO_PATH) Then
 
-                ConferenciaCaixa.ISCONEXAOCONFIGURADA = True
-                Me.Close()
+            ConferenciaCaixa.ISCONEXAOCONFIGURADA = True
+            Me.Close()
 
-            Else
-                MessageBox.Show("Configure as conexoes antes de proseguir para qualquer actividade")
+        Else
+            MessageBox.Show("Configure as conexoes antes de proseguir para qualquer actividade")
         End If
 
     End Sub
@@ -28,17 +30,14 @@ Public Class Conexaobd
         End If
     End Sub
 
-    Private Sub btnFechar_Click(sender As Object, e As EventArgs)
-
-    End Sub
 
     Private Sub Conexaobd_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         If System.IO.File.Exists(js.CONEXAO_PATH) Then
 
-                carregarConfiguracao()
-            Else
-                txtBasedados.Text = ""
+            carregarConfiguracao()
+        Else
+            txtBasedados.Text = ""
             txtSenha.Text = ""
             txtServidor.Text = ""
             txtUtilizadorBd.Text = ""
@@ -54,6 +53,7 @@ Public Class Conexaobd
             con.servidor = txtServidor.Text
             con.senha = administracao.Encrypt(txtSenha.Text)
             con.utilizador = txtUtilizadorBd.Text
+            con.net_path = txtPath.Text
             administracao.criarEscreverFicheiro(js.CONEXAO_PATH, js.js.Serialize(con))
 
             MsgBox("Configurações Salvos com sucesso")
@@ -69,9 +69,10 @@ Public Class Conexaobd
 
     Sub carregarConfiguracao()
         Me.txtBasedados.Text = js.getConexao().basedados
-        Me.txtSenha.Text = administracao.Decrypt(js.getConexao().senha)
+        Me.txtSenha.Text = js.getConexao().senha 'administracao.Decrypt(js.getConexao().senha)
         Me.txtServidor.Text = js.getConexao().servidor
         Me.txtUtilizadorBd.Text = js.getConexao().utilizador
+        Me.txtPath.Text = js.getConexao().net_path
     End Sub
 
 
@@ -86,12 +87,20 @@ Public Class Conexaobd
         Return rv
     End Function
 
-    Function checkConexaoBd() As Boolean
 
-    End Function
 
     Private Sub Conexaobd_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
         ConferenciaCaixa.Enabled = True
+
+    End Sub
+
+    Private Sub btnSelecionarCaminho_Click(sender As Object, e As EventArgs) Handles btnSelecionarCaminho.Click
+
+    End Sub
+
+    Private Sub btnTestarCaminho_Click(sender As Object, e As EventArgs) Handles btnTestarCaminho.Click
+
+
 
     End Sub
 End Class

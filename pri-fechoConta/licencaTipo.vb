@@ -90,36 +90,36 @@
                         If checkLicencaProprietario() = True Then
                             dataInic = Date.Now().ToShortDateString
                             dataFim = Date.Now().AddDays(change_duracao_str_int(licencaDuracao_str)).ToShortDateString
-                            If administracao.existeLicencasBySerie(licenca_encode) = False Then
+                            If administracao.existeLicencasBySerie(txtLicencaCodigo.Text) = False Then
 
-                                administracao.insertLicenca(licenca_encode, licencaUtilizadores, dataInic, dataFim)
+                                administracao.insertLicenca(txtLicencaCodigo.Text, licencaUtilizadores, dataInic, dataFim)
                                 LicencaControlo.carregar_licenca()
                                 MessageBox.Show("Licença Válida. Registo Confirmado", "Sucesso", MessageBoxButtons.OK)
 
                                 Me.Close()
 
                             Else
-                                MessageBox.Show("Serie já Registado", "Atenção", MessageBoxButtons.OK)
+                                MessageBox.Show("Esta licença já se encontra activada", "Atenção", MessageBoxButtons.OK)
 
 
                             End If
                         Else
-                            MessageBox.Show("Licença Inválido Para este cliente", "Atenção", MessageBoxButtons.OK)
+                            MessageBox.Show("Licença Inválida para este cliente", "Atenção", MessageBoxButtons.OK)
 
 
                         End If
                     Catch ex As Exception
-                        MessageBox.Show("Ocorreu um erro de Licenciamento. Certifique de que possui uma conexao a base de dados: " + ex.Message, "Erro", MessageBoxButtons.OK)
+                        MessageBox.Show("Ocorreu um erro de Licenciamento. Certifique que existe uma ligação a base de dados: " + ex.Message, "Erro", MessageBoxButtons.OK)
 
                     End Try
                 Else
-                    MessageBox.Show("Licença Ultrapassou a Data de activação. Entre em contacto com o administrador", "Atenção", MessageBoxButtons.OK)
+                    MessageBox.Show("Licença Ultrapassou a Data para activação. Entre em contacto com o administrador", "Atenção", MessageBoxButtons.OK)
 
                 End If
 
 
             Else
-                MessageBox.Show("Licença Inválido. Entre em contacto com o administrador", "Atenção", MessageBoxButtons.OK)
+                MessageBox.Show("Licença Inválida. Por favor contacte a JMR", "Atenção", MessageBoxButtons.OK)
             End If
 
         Else
@@ -135,17 +135,16 @@
 
                         Me.Close()
                     Else
-                        MessageBox.Show("Licença Inválido Para este cliente", "Atenção", MessageBoxButtons.OK)
+                        MessageBox.Show("Licença Inválida para este cliente", "Atenção", MessageBoxButtons.OK)
 
                     End If
 
                 Else
-                        MessageBox.Show("Serie já Registado", "Atenção")
+                    MessageBox.Show("Esta licença já se encontra activada", "Atenção", MessageBoxButtons.OK)
                 End If
 
             Else
-                MessageBox.Show("Licença Ultrapassou a Data de activação. Entre em contacto com o administrador", "Atenção", MessageBoxButtons.OK)
-
+                MessageBox.Show("Licença Ultrapassou a Data para activação. Entre em contacto com o administrador", "Atenção", MessageBoxButtons.OK)
             End If
 
         End If
@@ -215,7 +214,7 @@
 
 
         If campos.Length > 2 Then
-            MessageBox.Show("Licença Invalidade. Certifique de que o(s) campo(s) " + campos + "possuem dados correctos", "Erro  - Licença", MessageBoxButtons.OK)
+            MessageBox.Show("Licença Invalida. verifique se o(s) campo(s) " + campos + "possui(em) dados correctos", "Erro  - Licença", MessageBoxButtons.OK)
 
         End If
         Return rv

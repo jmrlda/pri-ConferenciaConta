@@ -1,4 +1,5 @@
-﻿Imports System
+﻿Imports System.Resources
+Imports System
 Imports System.Reflection
 Imports System.Runtime.InteropServices
 
@@ -8,11 +9,11 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("pri-fechoConta")>
-<Assembly: AssemblyDescription("")>
-<Assembly: AssemblyCompany("HP Inc.")>
-<Assembly: AssemblyProduct("pri-fechoConta")>
-<Assembly: AssemblyCopyright("Copyright © HP Inc. 2019")>
+<Assembly: AssemblyTitle("Conferencia de Caixa")>
+<Assembly: AssemblyDescription("Conferencia de Caixa")>
+<Assembly: AssemblyCompany("jmrlda.")>
+<Assembly: AssemblyProduct("Conferencia de Caixa")>
+<Assembly: AssemblyCopyright("Copyright © jmrlda. 2019")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(True)>
@@ -31,5 +32,6 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")>
 
-<Assembly: AssemblyVersion("1.0.0.0")>
-<Assembly: AssemblyFileVersion("1.0.0.0")>
+<Assembly: AssemblyVersion("1.0.3")>
+<Assembly: AssemblyFileVersion("1.0.3")>
+<Assembly: NeutralResourcesLanguage("pt")>

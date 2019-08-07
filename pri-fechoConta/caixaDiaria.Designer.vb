@@ -32,6 +32,7 @@ Partial Class caixaDiaria
         Me.dgvCaixaDiaria.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvCaixaDiaria.Location = New System.Drawing.Point(12, 1)
         Me.dgvCaixaDiaria.Name = "dgvCaixaDiaria"
+        Me.dgvCaixaDiaria.ReadOnly = True
         Me.dgvCaixaDiaria.Size = New System.Drawing.Size(785, 213)
         Me.dgvCaixaDiaria.TabIndex = 0
         '

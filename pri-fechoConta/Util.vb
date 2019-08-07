@@ -1,9 +1,37 @@
-﻿Imports System.IO
+﻿Imports System.Globalization
+Imports System.IO
 Imports System.Security.Cryptography
 Imports System.Text
+Imports System.Text.RegularExpressions
 
 Public Class Util
 
+
+
+
+    Public dataMainPath As String = ""
+    Public dataPathConfig As String = ""
+    Public dataPathReport As String = ""
+
+
+
+    Public Sub New()
+        dataMainPath = System.AppDomain.CurrentDomain.BaseDirectory()
+
+
+        dataPathConfig = dataMainPath + "config"
+        dataPathReport = dataMainPath + "report"
+
+
+    End Sub
+
+    Public Sub New(path)
+        dataMainPath = path
+        dataPathConfig = dataMainPath + "config"
+        dataPathReport = dataMainPath + "report"
+
+
+    End Sub
 
 
 
@@ -79,6 +107,84 @@ Public Class Util
         End Try
 
         Return cipherText
+    End Function
+
+    Public Function soNumero(valor As String) As String
+        'MsgBox(valor)
+        Console.WriteLine(valor)
+        Dim newValor As String
+        Dim formated As String
+        newValor = "0"
+        If (valor.Length > 0) Then
+            Dim digitsOnly As Regex = New Regex("[a-zA-Z]")
+
+            newValor = digitsOnly.Replace(valor, "")
+            If newValor = "" Then
+                newValor = "0"
+            End If
+        End If
+        formated = Format(newValor, "Standard").Trim()
+        Return formated
+    End Function
+
+
+    Public Function formatNum(val As Integer) As String
+        Dim newVal As String = ""
+        If (val < 10) Then
+            newVal = "0" & val
+        Else
+            newVal = val
+        End If
+
+        Return newVal
+    End Function
+
+
+
+    Public Function removeSpace(str As String) As String
+        Dim i As Integer
+
+        For i = 0 To str.Length - 1
+            If str(i).ToString() = " " Then
+                MsgBox("ok")
+                str.Remove(i)
+
+            End If
+        Next
+
+        Return str
+    End Function
+
+
+    Public Function changeDotToComa(str As String) As String
+        Dim newStr As String
+        Dim ch As Char
+
+        For Each ch In str
+
+            If ch = "." Then
+                ch = ","
+            End If
+
+            newStr = newStr & ch
+        Next
+
+    End Function
+
+
+    Public Function changeComaToDot(str As String) As String
+        Dim newStr As String
+        Dim ch As Char
+
+        For Each ch In str
+
+            If ch = "," Then
+                ch = "."
+            End If
+
+            newStr = newStr & ch
+        Next
+
     End Function
 
 

@@ -127,8 +127,8 @@ Partial Class registrar
         '
         'btnNovaSenha
         '
-        Me.btnNovaSenha.Image = Global.pri_fechoConta.My.Resources.Resources.pencil_edit_button
         resources.ApplyResources(Me.btnNovaSenha, "btnNovaSenha")
+        Me.btnNovaSenha.Image = Global.pri_fechoConta.My.Resources.Resources.pencil_edit_button
         Me.btnNovaSenha.Name = "btnNovaSenha"
         Me.btnNovaSenha.TabStop = False
         Me.btnNovaSenha.UseVisualStyleBackColor = True

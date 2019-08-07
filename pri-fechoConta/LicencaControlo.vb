@@ -12,33 +12,35 @@ Public Class LicencaControlo
     Private Sub OK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLicenciar.Click
         Dim sucesso As Boolean = False
         Dim except_msg As String = ""
-        For Each row As DataGridViewRow In dgvUtilizadoresLicenca.Rows
-            If Not row.IsNewRow Then
+        If (dgvUtilizadoresLicenca.Rows.Count() > 1) Then
+            For Each row As DataGridViewRow In dgvUtilizadoresLicenca.Rows
+                If Not row.IsNewRow Then
 
 
 
-                Dim utilizador As String = row.Cells(0).Value
-                Dim nivel As String = row.Cells(1).Value
-                Dim id_licenca As String = administracao.buscarIdLicencasBySerie(Me.cboLicencaSerie.Text)
-                Try
-                    If (administracao.isUtilizadorLicenciado(utilizador) = False) Then
-                        administracao.insertConferenciaUtilizador(utilizador, Date.Now(), nivel, id_licenca)
-                        sucesso = True
-                    End If
-                Catch ex As Exception
-                    except_msg = ex.ToString()
-                    sucesso = False
-                End Try
+                    Dim utilizador As String = row.Cells(0).Value
+                    Dim nivel As String = row.Cells(1).Value
+                    Dim id_licenca As String = administracao.buscarIdLicencasBySerie(Me.cboLicencaSerie.Text)
+                    Try
+                        If (administracao.isUtilizadorLicenciado(utilizador) = False) Then
+                            administracao.insertConferenciaUtilizador(utilizador, Date.Now(), nivel, id_licenca)
+                            sucesso = True
+                        End If
+                    Catch ex As Exception
+                        except_msg = ex.Message()
+                        sucesso = False
+                    End Try
+                Else
+                    ' MsgBox("Nenhum dado na tabela por gravar")
+
+                End If
+            Next
+            If (sucesso) Then
+                MsgBox("Usuarios registado com sucesso")
+                limpar_campos()
             Else
-                ' MsgBox("Nenhum dado na tabela por gravar")
-
+                MsgBox("Ocorreu um erro enquanto registava usuarios: " + except_msg)
             End If
-        Next
-        If (sucesso) Then
-            MsgBox("Usuarios registado com sucesso")
-            limpar_campos()
-        Else
-            MsgBox("Ocorreu um erro enquanto registava usuarios: " + except_msg)
         End If
     End Sub
 
@@ -139,123 +141,142 @@ Public Class LicencaControlo
     End Sub
 
     Private Sub cboLicencaSerie_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboLicencaSerie.SelectedIndexChanged
-        Dim licenca_decode As String
-        Dim licencaUtilizadores As Integer
-        Dim licenca_modulo As String
-        Dim licencaDuracao_str As String
-        Dim dataInic, dataFim As String
-        Dim licencaClienteNuit As Integer
-        Dim licencaDuracaoActivacao As Integer
-        Dim licencaClienteCodigo As String
-        Dim licencaClienteNome As String
-        Dim licencaClienteMorada As String
-        Dim licencaClienteFilial As String
+        If cboLicencaSerie.SelectedIndex > 0 Then
+            If administracao.isLicencaDentroPrazo(cboLicencaSerie.Text) Then
 
 
-        Dim isSuper As Boolean = False
+                Dim licenca_decode As String
+                Dim licencaUtilizadores As Integer
+                Dim licenca_modulo As String
+                Dim licencaDuracao_str As String
+                Dim dataInic, dataFim As String
+                Dim licencaClienteNuit As Integer
+                Dim licencaDuracaoActivacao As Integer
+                Dim licencaClienteCodigo As String
+                Dim licencaClienteNome As String
+                Dim licencaClienteMorada As String
+                Dim licencaClienteFilial As String
 
 
-        total_utilizadores_licenciados = 0
-        Me.dgvUtilizadoresLicenca.Rows.Clear()
-
-        If (cboLicencaSerie.SelectedIndex > 0) Then
-            licenca_decode = administracao.Decrypt(cboLicencaSerie.Text)
+                Dim isSuper As Boolean = False
 
 
-            If (licenca_decode.Length > 0) Then
-                Me.cboUtilizador.Enabled = True
-                Me.cboNivelUtilizador.Enabled = True
-                Me.btnAdicionar.Enabled = True
+                total_utilizadores_licenciados = 0
+                Me.dgvUtilizadoresLicenca.Rows.Clear()
+
+                If (cboLicencaSerie.SelectedIndex > 0) Then
+                    licenca_decode = administracao.Decrypt(cboLicencaSerie.Text)
+
+
+                    If (licenca_decode.Length > 0) Then
+                        Me.cboUtilizador.Enabled = True
+                        Me.cboNivelUtilizador.Enabled = True
+                        Me.btnAdicionar.Enabled = True
+                        btnRemoverLicenca.Enabled = True
+
+
+                        licencaUtilizadores = licenca_decode.Split("_")(0)
+                        licenca_modulo = licenca_decode.Split("_")(1)
+                        licencaDuracao_str = licenca_decode.Split("_")(2)
+                        licencaClienteNuit = licenca_decode.Split("_")(3)
+                        licencaDuracaoActivacao = licenca_decode.Split("_")(5)
+                        licencaClienteCodigo = licenca_decode.Split("_")(6)
+                        licencaClienteNome = licenca_decode.Split("_")(7)
+                        licencaClienteMorada = licenca_decode.Split("_")(8)
+                        licencaClienteFilial = licenca_decode.Split("_")(9)
 
 
 
-                licencaUtilizadores = licenca_decode.Split("_")(0)
-                licenca_modulo = licenca_decode.Split("_")(1)
-                licencaDuracao_str = licenca_decode.Split("_")(2)
-                licencaClienteNuit = licenca_decode.Split("_")(3)
-                licencaDuracaoActivacao = licenca_decode.Split("_")(5)
-                licencaClienteCodigo = licenca_decode.Split("_")(6)
-                licencaClienteNome = licenca_decode.Split("_")(7)
-                licencaClienteMorada = licenca_decode.Split("_")(8)
-                licencaClienteFilial = licenca_decode.Split("_")(9)
 
 
 
+                        dataInic = Date.Now().ToShortDateString
+                        dataFim = Date.Now().AddDays(util.change_duracao_str_int(licencaDuracao_str)).ToShortDateString
 
+                        Me.txtUtilizadoresNumero.Text = licencaUtilizadores
+                        Me.txtDuracao.Text = licencaDuracao_str
+                        Me.txtClienteNuit.Text = licencaClienteNuit
 
+                        Dim sql As New sqlControlo
+                        Dim user_serie_qr As String = "select * from TDU_ConferenciaUtilizador  where CDU_conferenciaLicencaId = (select CDU_id from TDU_ConferenciaLicenca where CDU_serie_licenca = '" + cboLicencaSerie.Text + "' )"
+                        Dim serie_qr As String = "select * from TDU_ConferenciaLicenca where CDU_serie_licenca = '" + cboLicencaSerie.Text + "'"
 
-                dataInic = Date.Now().ToShortDateString
-                dataFim = Date.Now().AddDays(util.change_duracao_str_int(licencaDuracao_str)).ToShortDateString
-
-                Me.txtUtilizadoresNumero.Text = licencaUtilizadores
-                Me.txtDuracao.Text = licencaDuracao_str
-                Me.txtClienteNuit.Text = licencaClienteNuit
-
-                Dim sql As New sqlControlo
-                Dim user_serie_qr As String = "select * from TDU_ConferenciaUtilizador  where CDU_conferenciaLicencaId = (select CDU_id from TDU_ConferenciaLicenca where CDU_serie_licenca = '" + cboLicencaSerie.Text + "' )"
-                Dim serie_qr As String = "select * from TDU_ConferenciaLicenca where CDU_serie_licenca = '" + cboLicencaSerie.Text + "'"
-
-                Dim tabelaUtilizador, tabelaSerie As New DataTable
-                tabelaUtilizador = sql.buscarDado(user_serie_qr)
-                tabelaSerie = sql.buscarDado(serie_qr)
-                If (tabelaSerie.Rows.Count <> 0) Then
-                    Me.dtpDataInicio.Value = DateValue(tabelaSerie.Rows(0)("CDU_dataLicenca"))
-                    Me.dtpDataFim.Value = DateValue(tabelaSerie.Rows(0)("CDU_dataLicencaFim"))
-                End If
-
-
-                If (tabelaUtilizador.Rows.Count <> 0) Then
-                    Me.dgvUtilizadoresLicenca.Rows.Clear()
-                    For i As Integer = 0 To tabelaUtilizador.Rows.Count - 1
-                        Me.dgvUtilizadoresLicenca.Rows.Add(New String() {tabelaUtilizador.Rows(i)("CDU_utilizador"), tabelaUtilizador.Rows(i)("CDU_nivel")})
-                        total_utilizadores_licenciados += 1
-
-                        If (tabelaUtilizador.Rows(i)("CDU_nivel") = administracao.super) Then
-                            isSuper = True
+                        Dim tabelaUtilizador, tabelaSerie As New DataTable
+                        tabelaUtilizador = sql.buscarDado(user_serie_qr)
+                        tabelaSerie = sql.buscarDado(serie_qr)
+                        If (tabelaSerie.Rows.Count <> 0) Then
+                            Me.dtpDataInicio.Value = DateValue(tabelaSerie.Rows(0)("CDU_dataLicenca"))
+                            Me.dtpDataFim.Value = DateValue(tabelaSerie.Rows(0)("CDU_dataLicencaFim"))
+                            'total_utilizadores_licenciados = tabelaSerie.Rows(0)("CDU_numero_utilizador")
                         End If
-                        'If (cboModoRecebido.Items.IndexOf(tabelaMov.Rows(i)("Descricao")) = -1) Then
-                        '    cboModoRecebido.Items.Add(tabelaMov.Rows(i)("Descricao"))
-                        'End If
-                    Next
 
-                    If (isSuper = True) Then
+
+                        If (tabelaUtilizador.Rows.Count <> 0) Then
+                            Me.dgvUtilizadoresLicenca.Rows.Clear()
+                            For i As Integer = 0 To tabelaUtilizador.Rows.Count - 1
+                                Me.dgvUtilizadoresLicenca.Rows.Add(New String() {tabelaUtilizador.Rows(i)("CDU_utilizador"), tabelaUtilizador.Rows(i)("CDU_nivel")})
+                                total_utilizadores_licenciados += 1
+
+                                If (tabelaUtilizador.Rows(i)("CDU_nivel") = administracao.super) Then
+                                    isSuper = True
+                                End If
+                                'If (cboModoRecebido.Items.IndexOf(tabelaMov.Rows(i)("Descricao")) = -1) Then
+                                '    cboModoRecebido.Items.Add(tabelaMov.Rows(i)("Descricao"))
+                                'End If
+                            Next
+
+                            If (isSuper = True) Then
+                                block_campos()
+                                Me.dgvUtilizadoresLicenca.Enabled = False
+                                Me.btnLicenciar.Enabled = False
+                            Else
+                                unblock_campos()
+                                Me.dgvUtilizadoresLicenca.Enabled = True
+                                Me.btnLicenciar.Enabled = True
+
+                            End If
+
+                        End If
+                    Else
+
+                        MessageBox.Show("Licença  Invalido. Entre em contacto com o administrador", "Atenção")
+                        Me.cboUtilizador.Enabled = False
+                        Me.cboNivelUtilizador.Enabled = False
                         block_campos()
                         Me.dgvUtilizadoresLicenca.Enabled = False
                         Me.btnLicenciar.Enabled = False
-                    Else
-                        unblock_campos()
-                        Me.dgvUtilizadoresLicenca.Enabled = True
-                        Me.btnLicenciar.Enabled = True
-
                     End If
-
+                Else
+                    block_campos()
+                    Me.dgvUtilizadoresLicenca.Enabled = False
+                    Me.btnLicenciar.Enabled = False
                 End If
-            Else
 
-                MessageBox.Show("Licença  Invalido. Entre em contacto com o administrador", "Atenção")
-                Me.cboUtilizador.Enabled = False
-                Me.cboNivelUtilizador.Enabled = False
-                block_campos()
-                Me.dgvUtilizadoresLicenca.Enabled = False
-                Me.btnLicenciar.Enabled = False
+
+            Else
+                Me.btnRemoverLicenca.Enabled = True
+                If MessageBox.Show("Licença expirado! Deseja remover", "Atenção - Importante", MessageBoxButtons.YesNo) = DialogResult.Yes Then
+                    Try
+                        Dim rv As Boolean = administracao.removeUsuarioByLicenca(cboLicencaSerie.Text)
+                        If rv = True Then
+                            administracao.removeLicencaBySerie(cboLicencaSerie.Text)
+                            carregar_licenca()
+                        End If
+                    Catch ex As Exception
+                        MessageBox.Show("[cboLicencaSerie_SelectedIndexChanged] Ocorreu um erro enquanto Removia a licença " + ex.Message())
+                    End Try
+                End If
             End If
+
         Else
-            block_campos()
-            Me.dgvUtilizadoresLicenca.Enabled = False
-            Me.btnLicenciar.Enabled = False
+            btnAdicionar.Enabled = False
+            btnLimpar.Enabled = False
+            btnRemover.Enabled = False
+            btnRemoverLicenca.Enabled = False
+            Me.dgvUtilizadoresLicenca.Rows.Clear()
+
         End If
 
-        'If (cboLicencaSerie.SelectedIndex > 0 And cboNivelUtilizador.SelectedIndex > 0) Then
-        '    licenca_decode = administracao.Decrypt(cboLicencaSerie.Text)
-        '    MsgBox(licenca_decode.Length)
-        'End If
-        'licenca_decode = administracao.Decrypt(cboLicencaSerie.Text)
-        'If (licenca_decode.Length = 0) Then
-        '    MsgBox("Licenca invalida. Por favor contacte um administrador")
-        'Else
-
-        'End If
-        'MsgBox(licenca_decode)
     End Sub
 
 
@@ -346,16 +367,19 @@ Public Class LicencaControlo
         Me.btnAdicionar.Text = "Actualizar"
         Me.actualizar = True
         Me.btnRemover.Enabled = False
+        btnLicenciar.Enabled = False
     End Sub
 
     Private Sub btnRemover_Click(sender As Object, e As EventArgs) Handles btnRemover.Click
         Dim i As Integer = Me.dgvUtilizadoresLicenca.CurrentRow.Index
-        Dim nome As String = dgvUtilizadoresLicenca.Rows(i).Cells(0).Value
-        Dim nivel As String = dgvUtilizadoresLicenca.Rows(i).Cells(1).Value
-        If MessageBox.Show("Tem certeza que deseja apagar a linha " + i.ToString() + ". Dados não serão recuperaods apos confirmar ação?", "Atenção", MessageBoxButtons.YesNo) = DialogResult.Yes Then
-            If administracao.removeLicencaUsuario(nome, nivel) = True Then
-                Me.dgvUtilizadoresLicenca.Rows.RemoveAt(i)
-                total_utilizadores_licenciados -= 1
+        If (i <> Me.dgvUtilizadoresLicenca.Rows.Count() - 1) Then
+            Dim nome As String = dgvUtilizadoresLicenca.Rows(i).Cells(0).Value
+            Dim nivel As String = dgvUtilizadoresLicenca.Rows(i).Cells(1).Value
+            If MessageBox.Show("Tem certeza que deseja apagar a linha " + i.ToString() + ". Dados não serão recuperaods apos confirmar ação?", "Atenção", MessageBoxButtons.YesNo) = DialogResult.Yes Then
+                If administracao.removeLicencaUsuario(nome, nivel) = True Then
+                    Me.dgvUtilizadoresLicenca.Rows.RemoveAt(i)
+                    total_utilizadores_licenciados -= 1
+                End If
             End If
         End If
     End Sub
@@ -364,6 +388,7 @@ Public Class LicencaControlo
         btnAdicionar.Text = "Adicionar"
         Me.cboNivelUtilizador.SelectedIndex = 0
         btnLicenciar.Enabled = True
+
     End Sub
 
     Private Sub cboNivelUtilizador_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboNivelUtilizador.SelectedIndexChanged
@@ -378,4 +403,26 @@ Public Class LicencaControlo
         ConferenciaCaixa.Enabled = True
 
     End Sub
+
+    Private Sub btnRemoverLicenca_Click(sender As Object, e As EventArgs) Handles btnRemoverLicenca.Click
+        Try
+            Dim rv As Boolean = administracao.removeUsuarioByLicenca(cboLicencaSerie.Text)
+            If rv = True Then
+                administracao.removeLicencaBySerie(cboLicencaSerie.Text)
+                carregar_licenca()
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Ocorreu um erro enquanto Removia a licença " + ex.Message())
+        End Try
+    End Sub
+
+    Private Sub dgvUtilizadoresLicenca_RowsAdded(sender As Object, e As DataGridViewRowsAddedEventArgs) Handles dgvUtilizadoresLicenca.RowsAdded
+        If (dgvUtilizadoresLicenca.Rows.Count() > 1) Then
+            btnLicenciar.Enabled = True
+        Else
+            btnLicenciar.Enabled = False
+
+        End If
+    End Sub
+
 End Class
