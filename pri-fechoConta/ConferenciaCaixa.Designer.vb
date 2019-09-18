@@ -24,6 +24,11 @@ Partial Class ConferenciaCaixa
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ConferenciaCaixa))
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.lblDocFim = New System.Windows.Forms.Label()
+        Me.lblDocInicio = New System.Windows.Forms.Label()
+        Me.txtDocFim = New System.Windows.Forms.TextBox()
+        Me.txtDocInicio = New System.Windows.Forms.TextBox()
+        Me.cboFacturaSerie = New System.Windows.Forms.ComboBox()
         Me.lblTotalRecebido_ = New System.Windows.Forms.Label()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
         Me.Label9 = New System.Windows.Forms.Label()
@@ -165,6 +170,11 @@ Partial Class ConferenciaCaixa
         '
         Me.Panel2.AutoSize = True
         Me.Panel2.BackColor = System.Drawing.Color.Transparent
+        Me.Panel2.Controls.Add(Me.lblDocFim)
+        Me.Panel2.Controls.Add(Me.lblDocInicio)
+        Me.Panel2.Controls.Add(Me.txtDocFim)
+        Me.Panel2.Controls.Add(Me.txtDocInicio)
+        Me.Panel2.Controls.Add(Me.cboFacturaSerie)
         Me.Panel2.Controls.Add(Me.lblTotalRecebido_)
         Me.Panel2.Controls.Add(Me.TableLayoutPanel2)
         Me.Panel2.Controls.Add(Me.dtInicio)
@@ -183,6 +193,46 @@ Partial Class ConferenciaCaixa
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(1364, 224)
         Me.Panel2.TabIndex = 0
+        '
+        'lblDocFim
+        '
+        Me.lblDocFim.AutoSize = True
+        Me.lblDocFim.Location = New System.Drawing.Point(310, 38)
+        Me.lblDocFim.Name = "lblDocFim"
+        Me.lblDocFim.Size = New System.Drawing.Size(23, 13)
+        Me.lblDocFim.TabIndex = 55
+        Me.lblDocFim.Text = "Até"
+        '
+        'lblDocInicio
+        '
+        Me.lblDocInicio.AutoSize = True
+        Me.lblDocInicio.Location = New System.Drawing.Point(241, 38)
+        Me.lblDocInicio.Name = "lblDocInicio"
+        Me.lblDocInicio.Size = New System.Drawing.Size(19, 13)
+        Me.lblDocInicio.TabIndex = 54
+        Me.lblDocInicio.Text = "Nº"
+        '
+        'txtDocFim
+        '
+        Me.txtDocFim.Location = New System.Drawing.Point(335, 32)
+        Me.txtDocFim.Name = "txtDocFim"
+        Me.txtDocFim.Size = New System.Drawing.Size(43, 20)
+        Me.txtDocFim.TabIndex = 53
+        '
+        'txtDocInicio
+        '
+        Me.txtDocInicio.Location = New System.Drawing.Point(264, 33)
+        Me.txtDocInicio.Name = "txtDocInicio"
+        Me.txtDocInicio.Size = New System.Drawing.Size(43, 20)
+        Me.txtDocInicio.TabIndex = 52
+        '
+        'cboFacturaSerie
+        '
+        Me.cboFacturaSerie.FormattingEnabled = True
+        Me.cboFacturaSerie.Location = New System.Drawing.Point(276, 8)
+        Me.cboFacturaSerie.Name = "cboFacturaSerie"
+        Me.cboFacturaSerie.Size = New System.Drawing.Size(102, 21)
+        Me.cboFacturaSerie.TabIndex = 51
         '
         'lblTotalRecebido_
         '
@@ -654,9 +704,9 @@ Partial Class ConferenciaCaixa
         'dtInicio
         '
         Me.dtInicio.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtInicio.Location = New System.Drawing.Point(223, 33)
+        Me.dtInicio.Location = New System.Drawing.Point(147, 32)
         Me.dtInicio.Name = "dtInicio"
-        Me.dtInicio.Size = New System.Drawing.Size(157, 20)
+        Me.dtInicio.Size = New System.Drawing.Size(88, 20)
         Me.dtInicio.TabIndex = 17
         Me.dtInicio.Visible = False
         '
@@ -682,9 +732,9 @@ Partial Class ConferenciaCaixa
         'cboContaPos
         '
         Me.cboContaPos.FormattingEnabled = True
-        Me.cboContaPos.Location = New System.Drawing.Point(223, 8)
+        Me.cboContaPos.Location = New System.Drawing.Point(148, 8)
         Me.cboContaPos.Name = "cboContaPos"
-        Me.cboContaPos.Size = New System.Drawing.Size(157, 21)
+        Me.cboContaPos.Size = New System.Drawing.Size(122, 21)
         Me.cboContaPos.TabIndex = 3
         '
         'Label21
@@ -702,7 +752,7 @@ Partial Class ConferenciaCaixa
         Me.txtCaixaNum.Enabled = False
         Me.txtCaixaNum.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtCaixaNum.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.txtCaixaNum.Location = New System.Drawing.Point(223, 32)
+        Me.txtCaixaNum.Location = New System.Drawing.Point(148, 32)
         Me.txtCaixaNum.Name = "txtCaixaNum"
         Me.txtCaixaNum.Size = New System.Drawing.Size(74, 20)
         Me.txtCaixaNum.TabIndex = 13
@@ -734,8 +784,8 @@ Partial Class ConferenciaCaixa
         '
         Me.TableLayoutPanel1.BackColor = System.Drawing.Color.Transparent
         Me.TableLayoutPanel1.ColumnCount = 2
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 32.71028!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 67.28972!))
         Me.TableLayoutPanel1.Controls.Add(Me.Label2, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.mskDataAbertura, 1, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.Label4, 0, 1)
@@ -778,9 +828,9 @@ Partial Class ConferenciaCaixa
         Me.mskDataAbertura.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.mskDataAbertura.Enabled = False
         Me.mskDataAbertura.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.mskDataAbertura.Location = New System.Drawing.Point(217, 3)
+        Me.mskDataAbertura.Location = New System.Drawing.Point(143, 3)
         Me.mskDataAbertura.Name = "mskDataAbertura"
-        Me.mskDataAbertura.Size = New System.Drawing.Size(208, 20)
+        Me.mskDataAbertura.Size = New System.Drawing.Size(269, 20)
         Me.mskDataAbertura.TabIndex = 7
         '
         'Label4
@@ -797,9 +847,9 @@ Partial Class ConferenciaCaixa
         Me.txtUtilizadorAbertura.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtUtilizadorAbertura.Enabled = False
         Me.txtUtilizadorAbertura.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtUtilizadorAbertura.Location = New System.Drawing.Point(217, 27)
+        Me.txtUtilizadorAbertura.Location = New System.Drawing.Point(143, 27)
         Me.txtUtilizadorAbertura.Name = "txtUtilizadorAbertura"
-        Me.txtUtilizadorAbertura.Size = New System.Drawing.Size(208, 20)
+        Me.txtUtilizadorAbertura.Size = New System.Drawing.Size(269, 20)
         Me.txtUtilizadorAbertura.TabIndex = 11
         '
         'Label7
@@ -825,9 +875,9 @@ Partial Class ConferenciaCaixa
         Me.txtUtilizadorFecho.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtUtilizadorFecho.Enabled = False
         Me.txtUtilizadorFecho.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtUtilizadorFecho.Location = New System.Drawing.Point(217, 75)
+        Me.txtUtilizadorFecho.Location = New System.Drawing.Point(143, 75)
         Me.txtUtilizadorFecho.Name = "txtUtilizadorFecho"
-        Me.txtUtilizadorFecho.Size = New System.Drawing.Size(208, 20)
+        Me.txtUtilizadorFecho.Size = New System.Drawing.Size(269, 20)
         Me.txtUtilizadorFecho.TabIndex = 12
         '
         'mskDataFecho
@@ -835,9 +885,9 @@ Partial Class ConferenciaCaixa
         Me.mskDataFecho.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.mskDataFecho.Enabled = False
         Me.mskDataFecho.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.mskDataFecho.Location = New System.Drawing.Point(217, 51)
+        Me.mskDataFecho.Location = New System.Drawing.Point(143, 51)
         Me.mskDataFecho.Name = "mskDataFecho"
-        Me.mskDataFecho.Size = New System.Drawing.Size(208, 20)
+        Me.mskDataFecho.Size = New System.Drawing.Size(269, 20)
         Me.mskDataFecho.TabIndex = 9
         '
         'Label6
@@ -854,9 +904,9 @@ Partial Class ConferenciaCaixa
         Me.mskSaldoFecho.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.mskSaldoFecho.Enabled = False
         Me.mskSaldoFecho.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.mskSaldoFecho.Location = New System.Drawing.Point(217, 147)
+        Me.mskSaldoFecho.Location = New System.Drawing.Point(143, 147)
         Me.mskSaldoFecho.Name = "mskSaldoFecho"
-        Me.mskSaldoFecho.Size = New System.Drawing.Size(208, 20)
+        Me.mskSaldoFecho.Size = New System.Drawing.Size(269, 20)
         Me.mskSaldoFecho.TabIndex = 10
         Me.mskSaldoFecho.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -865,9 +915,9 @@ Partial Class ConferenciaCaixa
         Me.mskSaldoAbertura.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.mskSaldoAbertura.Enabled = False
         Me.mskSaldoAbertura.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.mskSaldoAbertura.Location = New System.Drawing.Point(217, 123)
+        Me.mskSaldoAbertura.Location = New System.Drawing.Point(143, 123)
         Me.mskSaldoAbertura.Name = "mskSaldoAbertura"
-        Me.mskSaldoAbertura.Size = New System.Drawing.Size(208, 20)
+        Me.mskSaldoAbertura.Size = New System.Drawing.Size(269, 20)
         Me.mskSaldoAbertura.TabIndex = 8
         Me.mskSaldoAbertura.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -892,9 +942,9 @@ Partial Class ConferenciaCaixa
         'txtUtilizadorConferencia
         '
         Me.txtUtilizadorConferencia.Enabled = False
-        Me.txtUtilizadorConferencia.Location = New System.Drawing.Point(217, 99)
+        Me.txtUtilizadorConferencia.Location = New System.Drawing.Point(143, 99)
         Me.txtUtilizadorConferencia.Name = "txtUtilizadorConferencia"
-        Me.txtUtilizadorConferencia.Size = New System.Drawing.Size(208, 20)
+        Me.txtUtilizadorConferencia.Size = New System.Drawing.Size(269, 20)
         Me.txtUtilizadorConferencia.TabIndex = 16
         '
         'lblTotalConferido
@@ -1575,4 +1625,9 @@ Partial Class ConferenciaCaixa
     Friend WithEvents lblTotalDiferenca As Label
     Friend WithEvents Label19 As Label
     Friend WithEvents lblTotalRecebido_ As Label
+    Friend WithEvents cboFacturaSerie As ComboBox
+    Friend WithEvents txtDocFim As TextBox
+    Friend WithEvents txtDocInicio As TextBox
+    Friend WithEvents lblDocFim As Label
+    Friend WithEvents lblDocInicio As Label
 End Class

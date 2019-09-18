@@ -130,6 +130,7 @@ Public Class ConferenciaCaixa
         bancos = administracao.buscarBancos()
         startapp()
 
+
     End Sub
 
 
@@ -346,7 +347,7 @@ Public Class ConferenciaCaixa
                         Try
                             Dim rv As Boolean
                             If Me.cboContaPos.SelectedItem = "CXMT" Then
-                                rv = administracao.removeLinhasCaixa(-1, Me.cboContaPos.SelectedItem, dtInicio.Value.ToShortDateString())
+                                rv = administracao.removeLinhasCaixa(CInt(Me.txtDocInicio.Text & "" & Me.txtDocFim.Text), Me.cboContaPos.SelectedItem, dtInicio.Value.ToShortDateString())
                             Else
                                 rv = administracao.removeLinhasCaixa(Me.lblDiarioCaixa.Text, Me.cboContaPos.SelectedItem, "")
 
@@ -1020,14 +1021,14 @@ Public Class ConferenciaCaixa
 
 
             Dim qrCabecTes As String = "select * from cabectesouraria where  IDDiarioCaixa = '" + idCaixa + "'"
-            Dim sqlLinhaTesouraria As String = "select *  from TDU_ConferenciaCaixa where CDU_Conta=  '" + cboContaPos.SelectedItem + "' and CDU_data_fecho = '" + dtInicio.Value.ToShortDateString() + "'"
+            Dim sqlLinhaTesouraria As String = "select *  from TDU_ConferenciaCaixa where CDU_diarioCaixa = '" & CInt(Me.txtDocInicio.Text & "0" & Me.txtDocFim.Text) & "' and CDU_Conta=  '" + cboContaPos.SelectedItem + "' and CDU_data_fecho = '" + dtInicio.Value.ToShortDateString() + "'"
 
 
             Dim qrLinhaTes As String
             Dim tipo_movimento As String
             Dim tipoMov As String = ""
 
-            qrLinhaTes = "select *  from Historico where DataDoc = '" & reverter_str(dtInicio.Value.ToShortDateString()) & "'  and TipoDoc = 'RE'  and Moeda='MT'"
+            qrLinhaTes = "select *  from Historico where DataDoc = '" & reverter_str(dtInicio.Value.ToShortDateString()) & "'  and TipoDoc = 'RE'  and Moeda='MT' and serie='" & Me.cboFacturaSerie.Text & "' and NumDocint>= '" & CInt(Me.txtDocInicio.Text) & "' and NumDocInt <='" & CInt(Me.txtDocFim.Text) & "'"
 
             tabelaLinhaTesouraria = SQL.buscarDado(qrLinhaTes)
             Dim listaMov As Movimentos = New Movimentos
@@ -1263,7 +1264,7 @@ Public Class ConferenciaCaixa
 
 
 
-                tabela = SQL.buscarDado("select dc.*, ct.NumDoc as NumDoc from diarioCaixa as dc, cabecTesouraria as ct where dc.Conta = '" + contaPos + "' and ct.NumDoc = '" + diario + "'  and ct.TipoDoc='FCHCX'  and dc.Id=ct.IDDiarioCaixa  and Serie = (select Serie from SeriesTesouraria where TipoDoc = 'FCHCX' and SeriePorDefeito = 1) ")
+                tabela = SQL.buscarDado("Select dc.*, ct.NumDoc As NumDoc from diarioCaixa As dc, cabecTesouraria As ct where dc.Conta = '" + contaPos + "' and ct.NumDoc = '" + diario + "'  and ct.TipoDoc='FCHCX'  and dc.Id=ct.IDDiarioCaixa  and Serie = (select Serie from SeriesTesouraria where TipoDoc = 'FCHCX' and SeriePorDefeito = 1) ")
                 'tabela = SQL.buscarDado("select distinct dc.*, ct.NumDoc as NumDoc, ct.Serie from diarioCaixa as dc, cabecTesouraria as ct where dc.Conta = 'cxp02' and ct.NumDoc = '12' and ct.TipoDoc='FCHCX' and ct.Serie='B2019'   and dc.Id=ct.IDDiarioCaixa ")
                 If (tabela.Rows.Count <> 0) Then
                     Me.txtCaixaNum.Text = tabela.Rows(0)("NumDoc")
@@ -1623,7 +1624,7 @@ Public Class ConferenciaCaixa
 
             If (ok = True) Or (ok = False And result = DialogResult.Yes) Then
                 If Me.cboContaPos.SelectedItem = "CXMT" Then
-                    rv = administracao.removeLinhasCaixa(-1, Me.cboContaPos.SelectedItem, dtInicio.Value.ToShortDateString())
+                    rv = administracao.removeLinhasCaixa((Me.txtDocInicio.Text & "0" & Me.txtDocFim.Text), Me.cboContaPos.SelectedItem, dtInicio.Value.ToShortDateString())
                 Else
                     rv = administracao.removeLinhasCaixa(Me.lblDiarioCaixa.Text, Me.cboContaPos.SelectedItem, "")
 
@@ -1635,7 +1636,7 @@ Public Class ConferenciaCaixa
 
                         If Me.cboContaPos.SelectedItem = "CXMT" Then
                             dataDiario = dtInicio.Value.ToShortDateString()
-                            diario = -1
+                            diario = CInt(Me.txtDocInicio.Text & "0" & Me.txtDocFim.Text)
                         Else
                             dataDiario = administracao.buscarDataFechoDiario(lblDiarioCaixa.Text)
                             diario = lblDiarioCaixa.Text
@@ -2729,6 +2730,7 @@ Public Class ConferenciaCaixa
                 report.cryRpt.SetParameterValue("entrada_conferido", mskValConfEntradaCaixa.Text)
                 report.cryRpt.SetParameterValue("saida_conferido", mskValConfSaidaCaixa.Text)
                 report.cryRpt.SetParameterValue("total_conferido", lblTotalConferido.Text)
+                report.cryRpt.SetParameterValue("diario", (Me.txtDocInicio.Text + "0" & Me.txtDocFim.Text))
 
             Else
                 report.cryRpt.SetParameterValue("diario", CInt(lblDiarioCaixa.Text))
@@ -3410,6 +3412,10 @@ Public Class ConferenciaCaixa
                     Me.dtInicio.Visible = True
                     Me.txtCaixaNum.Visible = False
                     txtUtilizadorFecho.Enabled = True
+                    Dim serie As List(Of String) = New List(Of String)
+                    serie = administracao.buscarSerie()
+                    serie.Insert(0, "Selecionar")
+                    Me.cboFacturaSerie.DataSource = serie
 
                     'buscarCaixaFactura()
                 Else
@@ -3655,6 +3661,7 @@ Public Class ConferenciaCaixa
     Private Sub mskValorRecebido_Leave(sender As Object, e As EventArgs) Handles mskValorRecebido.Leave
         Me.mskValorRecebido.Text = utilitario.soNumero(Me.mskValorRecebido.Text)
     End Sub
+
 
     Private Sub getContaBancaria()
         Dim contas As List(Of String) = New List(Of String)

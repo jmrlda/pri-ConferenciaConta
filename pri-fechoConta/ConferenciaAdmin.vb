@@ -571,7 +571,7 @@ Public Class ConferenciaAdmin
                 If (conta = "CXMT") Then
                     query = "delete from TDU_ConferenciaCaixa where CDU_conta = '" & conta & "' and CDU_data_fecho = '" & data & "'"
                 Else
-                    query = "delete from TDU_ConferenciaCaixa where CDU_diarioCaixa = '" & diarioCaixa & "'"
+                    query = "delete from TDU_ConferenciaCaixa where CDU_diarioCaixa = '" & diarioCaixa & "' and CDU_data_fecho = '" & data & "'"
 
                 End If
 
@@ -1190,6 +1190,19 @@ Public Class ConferenciaAdmin
     End Function
 
 
+    Public Function buscarSerie() As List(Of String)
+        Dim query As String = "select Serie from SeriesCCT where tipodoc='RE'"
+        Dim tabela As New DataTable
+        Dim listaConta As New List(Of String)
 
+        tabela = SQL.buscarDado(query)
+        If (tabela.Rows.Count <> 0) Then
+            For i As Integer = 0 To tabela.Rows.Count - 1
+                listaConta.Add(tabela.Rows(i)("Serie"))
+            Next
+        End If
+
+        Return listaConta
+    End Function
 
 End Class
