@@ -1032,21 +1032,23 @@ Public Class ConferenciaCaixa
             tabelaLinhaTesouraria = SQL.buscarDado(qrLinhaTes)
             Dim listaMov As Movimentos = New Movimentos
             listaMov = js.getListaMovimento()
-
+            Dim val As Double
             tipoMov = "ValorTotal"
             If (tabelaLinhaTesouraria.Rows.Count <> 0) Then
                 For j As Integer = 0 To tabelaLinhaTesouraria.Rows.Count - 1
                     IDCABECTESOURARIA = tabelaLinhaTesouraria.Rows(0)("IdDoc").ToString()
                     If Not IsDBNull(tabelaLinhaTesouraria.Rows(0)("ModoPag")) Then
 
-                        tipo_movimento = tabelaLinhaTesouraria.Rows(j)("ModoPag").ToString()
+                        tipo_movimento = tabelaLinhaTesouraria.Rows(j)("ModoPag").ToString().Trim()
                     Else
                         tipo_movimento = ""
                     End If
+
                     ' consultando numerario
-                    rv = numerarioMov.ToList.FindIndex(Function(x) x = tipo_movimento)
+                    rv = numerarioMov.ToList.FindIndex(Function(x As String) x = tipo_movimento)
                     If (rv >= 0) Then
-                        numerarioTotal += tabelaLinhaTesouraria.Rows(j)(tipoMov)
+
+                        numerarioTotal += (tabelaLinhaTesouraria.Rows(j)(tipoMov))
                     End If
 
                     ' consultando multibanco
@@ -1067,37 +1069,38 @@ Public Class ConferenciaCaixa
 
                 chequeTotal = chequeTotal * -1
                 multibancoTotal = multibancoTotal * -1
-                numerarioTotal = numerarioTotal * -1
-
+                If (numerarioTotal < 0) Then
+                    numerarioTotal = numerarioTotal * -1
+                End If
 
 
 
                 Me.mskValRecNumerario.Text = numerarioTotal - outrosTotal
-                Me.mskValRecCheque.Text = chequeTotal
-                Me.mskValRecMultiBim.Text = multibancoTotal
-                If outrosTotal < 0 Then
+                    Me.mskValRecCheque.Text = chequeTotal
+                    Me.mskValRecMultiBim.Text = multibancoTotal
+                    If outrosTotal < 0 Then
 
-                    outrosTotal = outrosTotal * -1
+                        outrosTotal = outrosTotal * -1
+                    End If
+                    Me.mskValRecSenhasCabazes.Text = outrosTotal
+                    Me.mskValRecEntradaCaixa.Text = entradaTotal
+
+                    If saidaTotal > 0 Then
+                        saidaTotal = saidaTotal * -1
+                    End If
+                    Me.mskValRecSaidaCaixa.Text = saidaTotal
+                    mskValRecSaidaCaixa.ForeColor = Color.Red
+
+                    carregar_valor()
+
+                    numerarioTotal = 0
+                    chequeTotal = 0
+                    multibancoTotal = 0
+                    outrosTotal = 0
+                    entradaTotal = 0
+                    saidaTotal = 0
                 End If
-                Me.mskValRecSenhasCabazes.Text = outrosTotal
-                Me.mskValRecEntradaCaixa.Text = entradaTotal
-
-                If saidaTotal > 0 Then
-                    saidaTotal = saidaTotal * -1
-                End If
-                Me.mskValRecSaidaCaixa.Text = saidaTotal
-                mskValRecSaidaCaixa.ForeColor = Color.Red
-
-                carregar_valor()
-
-                numerarioTotal = 0
-                chequeTotal = 0
-                multibancoTotal = 0
-                outrosTotal = 0
-                entradaTotal = 0
-                saidaTotal = 0
-            End If
-            tblLinhaTesourariaBd = SQL.buscarDado(sqlLinhaTesouraria)
+                tblLinhaTesourariaBd = SQL.buscarDado(sqlLinhaTesouraria)
 
             If (tblLinhaTesourariaBd.Rows.Count <> 0) Then
                 multibancoConferidoTotal = 0

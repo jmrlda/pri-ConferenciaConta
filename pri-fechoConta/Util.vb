@@ -157,7 +157,7 @@ Public Class Util
 
 
     Public Function changeDotToComa(str As String) As String
-        Dim newStr As String
+        Dim newStr As String = ""
         Dim ch As Char
 
         For Each ch In str
@@ -168,12 +168,12 @@ Public Class Util
 
             newStr = newStr & ch
         Next
-
+        Return newStr
     End Function
 
 
     Public Function changeComaToDot(str As String) As String
-        Dim newStr As String
+        Dim newStr As String = ""
         Dim ch As Char
 
         For Each ch In str
@@ -185,6 +185,7 @@ Public Class Util
             newStr = newStr & ch
         Next
 
+        Return newStr
     End Function
 
 
