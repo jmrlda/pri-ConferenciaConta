@@ -120,14 +120,6 @@ Partial Class ConferenciaCaixa
         Me.btnLimparTabela = New System.Windows.Forms.Button()
         Me.btnFecharConta = New System.Windows.Forms.Button()
         Me.tabelaConferenciaCaixa = New System.Windows.Forms.DataGridView()
-        Me.modoMovimento = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Referencia = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.cartaoTipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.descricao = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.descSaidaCaixa = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.quantidade = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.valor = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataTransacao = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.SistemaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EntrarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -152,6 +144,16 @@ Partial Class ConferenciaCaixa
         Me.LinkLabel2 = New System.Windows.Forms.LinkLabel()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.lblMsgLicencaExpiracao = New System.Windows.Forms.Label()
+        Me.modoMovimento = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Referencia = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cartaoTipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.descricao = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.descSaidaCaixa = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.quantidade = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.valor = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataTransacao = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.recibo_inicial = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.recibo_final = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel2.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
         CType(Me.ptxboxUtilizadorAberturaCaixa, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -199,32 +201,36 @@ Partial Class ConferenciaCaixa
         Me.lblDocFim.AutoSize = True
         Me.lblDocFim.Location = New System.Drawing.Point(310, 38)
         Me.lblDocFim.Name = "lblDocFim"
-        Me.lblDocFim.Size = New System.Drawing.Size(23, 13)
+        Me.lblDocFim.Size = New System.Drawing.Size(13, 13)
         Me.lblDocFim.TabIndex = 55
-        Me.lblDocFim.Text = "Até"
+        Me.lblDocFim.Text = "a"
+        Me.lblDocFim.Visible = False
         '
         'lblDocInicio
         '
         Me.lblDocInicio.AutoSize = True
-        Me.lblDocInicio.Location = New System.Drawing.Point(241, 38)
+        Me.lblDocInicio.Location = New System.Drawing.Point(225, 38)
         Me.lblDocInicio.Name = "lblDocInicio"
-        Me.lblDocInicio.Size = New System.Drawing.Size(19, 13)
+        Me.lblDocInicio.Size = New System.Drawing.Size(34, 13)
         Me.lblDocInicio.TabIndex = 54
-        Me.lblDocInicio.Text = "Nº"
+        Me.lblDocInicio.Text = "De nº"
+        Me.lblDocInicio.Visible = False
         '
         'txtDocFim
         '
-        Me.txtDocFim.Location = New System.Drawing.Point(335, 32)
+        Me.txtDocFim.Location = New System.Drawing.Point(329, 32)
         Me.txtDocFim.Name = "txtDocFim"
-        Me.txtDocFim.Size = New System.Drawing.Size(43, 20)
+        Me.txtDocFim.Size = New System.Drawing.Size(49, 20)
         Me.txtDocFim.TabIndex = 53
+        Me.txtDocFim.Visible = False
         '
         'txtDocInicio
         '
-        Me.txtDocInicio.Location = New System.Drawing.Point(264, 33)
+        Me.txtDocInicio.Location = New System.Drawing.Point(261, 33)
         Me.txtDocInicio.Name = "txtDocInicio"
-        Me.txtDocInicio.Size = New System.Drawing.Size(43, 20)
+        Me.txtDocInicio.Size = New System.Drawing.Size(49, 20)
         Me.txtDocInicio.TabIndex = 52
+        Me.txtDocInicio.Visible = False
         '
         'cboFacturaSerie
         '
@@ -233,6 +239,7 @@ Partial Class ConferenciaCaixa
         Me.cboFacturaSerie.Name = "cboFacturaSerie"
         Me.cboFacturaSerie.Size = New System.Drawing.Size(102, 21)
         Me.cboFacturaSerie.TabIndex = 51
+        Me.cboFacturaSerie.Visible = False
         '
         'lblTotalRecebido_
         '
@@ -704,7 +711,7 @@ Partial Class ConferenciaCaixa
         'dtInicio
         '
         Me.dtInicio.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtInicio.Location = New System.Drawing.Point(147, 32)
+        Me.dtInicio.Location = New System.Drawing.Point(136, 32)
         Me.dtInicio.Name = "dtInicio"
         Me.dtInicio.Size = New System.Drawing.Size(88, 20)
         Me.dtInicio.TabIndex = 17
@@ -732,7 +739,7 @@ Partial Class ConferenciaCaixa
         'cboContaPos
         '
         Me.cboContaPos.FormattingEnabled = True
-        Me.cboContaPos.Location = New System.Drawing.Point(148, 8)
+        Me.cboContaPos.Location = New System.Drawing.Point(136, 8)
         Me.cboContaPos.Name = "cboContaPos"
         Me.cboContaPos.Size = New System.Drawing.Size(122, 21)
         Me.cboContaPos.TabIndex = 3
@@ -752,7 +759,7 @@ Partial Class ConferenciaCaixa
         Me.txtCaixaNum.Enabled = False
         Me.txtCaixaNum.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtCaixaNum.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.txtCaixaNum.Location = New System.Drawing.Point(148, 32)
+        Me.txtCaixaNum.Location = New System.Drawing.Point(138, 32)
         Me.txtCaixaNum.Name = "txtCaixaNum"
         Me.txtCaixaNum.Size = New System.Drawing.Size(74, 20)
         Me.txtCaixaNum.TabIndex = 13
@@ -784,8 +791,8 @@ Partial Class ConferenciaCaixa
         '
         Me.TableLayoutPanel1.BackColor = System.Drawing.Color.Transparent
         Me.TableLayoutPanel1.ColumnCount = 2
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 32.71028!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 67.28972!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 34.58445!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 65.41555!))
         Me.TableLayoutPanel1.Controls.Add(Me.Label2, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.mskDataAbertura, 1, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.Label4, 0, 1)
@@ -811,7 +818,7 @@ Partial Class ConferenciaCaixa
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(428, 165)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(373, 165)
         Me.TableLayoutPanel1.TabIndex = 0
         '
         'Label2
@@ -828,9 +835,9 @@ Partial Class ConferenciaCaixa
         Me.mskDataAbertura.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.mskDataAbertura.Enabled = False
         Me.mskDataAbertura.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.mskDataAbertura.Location = New System.Drawing.Point(143, 3)
+        Me.mskDataAbertura.Location = New System.Drawing.Point(131, 3)
         Me.mskDataAbertura.Name = "mskDataAbertura"
-        Me.mskDataAbertura.Size = New System.Drawing.Size(269, 20)
+        Me.mskDataAbertura.Size = New System.Drawing.Size(239, 20)
         Me.mskDataAbertura.TabIndex = 7
         '
         'Label4
@@ -847,9 +854,9 @@ Partial Class ConferenciaCaixa
         Me.txtUtilizadorAbertura.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtUtilizadorAbertura.Enabled = False
         Me.txtUtilizadorAbertura.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtUtilizadorAbertura.Location = New System.Drawing.Point(143, 27)
+        Me.txtUtilizadorAbertura.Location = New System.Drawing.Point(131, 27)
         Me.txtUtilizadorAbertura.Name = "txtUtilizadorAbertura"
-        Me.txtUtilizadorAbertura.Size = New System.Drawing.Size(269, 20)
+        Me.txtUtilizadorAbertura.Size = New System.Drawing.Size(239, 20)
         Me.txtUtilizadorAbertura.TabIndex = 11
         '
         'Label7
@@ -875,9 +882,9 @@ Partial Class ConferenciaCaixa
         Me.txtUtilizadorFecho.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtUtilizadorFecho.Enabled = False
         Me.txtUtilizadorFecho.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtUtilizadorFecho.Location = New System.Drawing.Point(143, 75)
+        Me.txtUtilizadorFecho.Location = New System.Drawing.Point(131, 75)
         Me.txtUtilizadorFecho.Name = "txtUtilizadorFecho"
-        Me.txtUtilizadorFecho.Size = New System.Drawing.Size(269, 20)
+        Me.txtUtilizadorFecho.Size = New System.Drawing.Size(239, 20)
         Me.txtUtilizadorFecho.TabIndex = 12
         '
         'mskDataFecho
@@ -885,9 +892,9 @@ Partial Class ConferenciaCaixa
         Me.mskDataFecho.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.mskDataFecho.Enabled = False
         Me.mskDataFecho.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.mskDataFecho.Location = New System.Drawing.Point(143, 51)
+        Me.mskDataFecho.Location = New System.Drawing.Point(131, 51)
         Me.mskDataFecho.Name = "mskDataFecho"
-        Me.mskDataFecho.Size = New System.Drawing.Size(269, 20)
+        Me.mskDataFecho.Size = New System.Drawing.Size(239, 20)
         Me.mskDataFecho.TabIndex = 9
         '
         'Label6
@@ -904,9 +911,9 @@ Partial Class ConferenciaCaixa
         Me.mskSaldoFecho.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.mskSaldoFecho.Enabled = False
         Me.mskSaldoFecho.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.mskSaldoFecho.Location = New System.Drawing.Point(143, 147)
+        Me.mskSaldoFecho.Location = New System.Drawing.Point(131, 147)
         Me.mskSaldoFecho.Name = "mskSaldoFecho"
-        Me.mskSaldoFecho.Size = New System.Drawing.Size(269, 20)
+        Me.mskSaldoFecho.Size = New System.Drawing.Size(239, 20)
         Me.mskSaldoFecho.TabIndex = 10
         Me.mskSaldoFecho.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -915,9 +922,9 @@ Partial Class ConferenciaCaixa
         Me.mskSaldoAbertura.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.mskSaldoAbertura.Enabled = False
         Me.mskSaldoAbertura.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.mskSaldoAbertura.Location = New System.Drawing.Point(143, 123)
+        Me.mskSaldoAbertura.Location = New System.Drawing.Point(131, 123)
         Me.mskSaldoAbertura.Name = "mskSaldoAbertura"
-        Me.mskSaldoAbertura.Size = New System.Drawing.Size(269, 20)
+        Me.mskSaldoAbertura.Size = New System.Drawing.Size(239, 20)
         Me.mskSaldoAbertura.TabIndex = 8
         Me.mskSaldoAbertura.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -942,9 +949,9 @@ Partial Class ConferenciaCaixa
         'txtUtilizadorConferencia
         '
         Me.txtUtilizadorConferencia.Enabled = False
-        Me.txtUtilizadorConferencia.Location = New System.Drawing.Point(143, 99)
+        Me.txtUtilizadorConferencia.Location = New System.Drawing.Point(131, 99)
         Me.txtUtilizadorConferencia.Name = "txtUtilizadorConferencia"
-        Me.txtUtilizadorConferencia.Size = New System.Drawing.Size(269, 20)
+        Me.txtUtilizadorConferencia.Size = New System.Drawing.Size(239, 20)
         Me.txtUtilizadorConferencia.TabIndex = 16
         '
         'lblTotalConferido
@@ -1189,7 +1196,7 @@ Partial Class ConferenciaCaixa
         Me.Panel4.Controls.Add(Me.tabelaConferenciaCaixa)
         Me.Panel4.Location = New System.Drawing.Point(3, 320)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(1367, 260)
+        Me.Panel4.Size = New System.Drawing.Size(1367, 285)
         Me.Panel4.TabIndex = 0
         '
         'chkEditar
@@ -1231,58 +1238,11 @@ Partial Class ConferenciaCaixa
         '
         Me.tabelaConferenciaCaixa.BackgroundColor = System.Drawing.Color.SlateGray
         Me.tabelaConferenciaCaixa.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.tabelaConferenciaCaixa.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.modoMovimento, Me.Referencia, Me.cartaoTipo, Me.descricao, Me.descSaidaCaixa, Me.quantidade, Me.valor, Me.DataTransacao})
+        Me.tabelaConferenciaCaixa.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.modoMovimento, Me.Referencia, Me.cartaoTipo, Me.descricao, Me.descSaidaCaixa, Me.quantidade, Me.valor, Me.DataTransacao, Me.recibo_inicial, Me.recibo_final})
         Me.tabelaConferenciaCaixa.Location = New System.Drawing.Point(3, 7)
         Me.tabelaConferenciaCaixa.Name = "tabelaConferenciaCaixa"
-        Me.tabelaConferenciaCaixa.Size = New System.Drawing.Size(1265, 248)
+        Me.tabelaConferenciaCaixa.Size = New System.Drawing.Size(1265, 277)
         Me.tabelaConferenciaCaixa.TabIndex = 0
-        '
-        'modoMovimento
-        '
-        Me.modoMovimento.HeaderText = "Modo Movimento"
-        Me.modoMovimento.Name = "modoMovimento"
-        Me.modoMovimento.ReadOnly = True
-        Me.modoMovimento.Width = 150
-        '
-        'Referencia
-        '
-        Me.Referencia.HeaderText = "Referência"
-        Me.Referencia.Name = "Referencia"
-        Me.Referencia.Width = 200
-        '
-        'cartaoTipo
-        '
-        Me.cartaoTipo.HeaderText = "Cartão Tipo / Cheque Descrição"
-        Me.cartaoTipo.Name = "cartaoTipo"
-        Me.cartaoTipo.Width = 150
-        '
-        'descricao
-        '
-        Me.descricao.HeaderText = "Transação número / Cheque Número"
-        Me.descricao.Name = "descricao"
-        Me.descricao.Width = 150
-        '
-        'descSaidaCaixa
-        '
-        Me.descSaidaCaixa.HeaderText = "Descrição Saida de Caixa"
-        Me.descSaidaCaixa.Name = "descSaidaCaixa"
-        Me.descSaidaCaixa.Width = 220
-        '
-        'quantidade
-        '
-        Me.quantidade.HeaderText = "Quantidade"
-        Me.quantidade.Name = "quantidade"
-        '
-        'valor
-        '
-        Me.valor.HeaderText = "Valor"
-        Me.valor.Name = "valor"
-        Me.valor.Width = 150
-        '
-        'DataTransacao
-        '
-        Me.DataTransacao.HeaderText = "Data Transação"
-        Me.DataTransacao.Name = "DataTransacao"
         '
         'MenuStrip1
         '
@@ -1404,7 +1364,7 @@ Partial Class ConferenciaCaixa
         'StatusStrip1
         '
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.rodape})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 588)
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 608)
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Size = New System.Drawing.Size(1370, 22)
         Me.StatusStrip1.TabIndex = 2
@@ -1460,12 +1420,69 @@ Partial Class ConferenciaCaixa
         Me.lblMsgLicencaExpiracao.Size = New System.Drawing.Size(0, 17)
         Me.lblMsgLicencaExpiracao.TabIndex = 0
         '
+        'modoMovimento
+        '
+        Me.modoMovimento.HeaderText = "Modo Movimento"
+        Me.modoMovimento.Name = "modoMovimento"
+        Me.modoMovimento.ReadOnly = True
+        Me.modoMovimento.Width = 150
+        '
+        'Referencia
+        '
+        Me.Referencia.HeaderText = "Referência"
+        Me.Referencia.Name = "Referencia"
+        Me.Referencia.Width = 200
+        '
+        'cartaoTipo
+        '
+        Me.cartaoTipo.HeaderText = "Cartão Tipo / Cheque Descrição"
+        Me.cartaoTipo.Name = "cartaoTipo"
+        Me.cartaoTipo.Width = 150
+        '
+        'descricao
+        '
+        Me.descricao.HeaderText = "Transação número / Cheque Número"
+        Me.descricao.Name = "descricao"
+        Me.descricao.Width = 150
+        '
+        'descSaidaCaixa
+        '
+        Me.descSaidaCaixa.HeaderText = "Descrição Saida de Caixa"
+        Me.descSaidaCaixa.Name = "descSaidaCaixa"
+        Me.descSaidaCaixa.Width = 220
+        '
+        'quantidade
+        '
+        Me.quantidade.HeaderText = "Quantidade"
+        Me.quantidade.Name = "quantidade"
+        '
+        'valor
+        '
+        Me.valor.HeaderText = "Valor"
+        Me.valor.Name = "valor"
+        Me.valor.Width = 150
+        '
+        'DataTransacao
+        '
+        Me.DataTransacao.HeaderText = "Data Transação"
+        Me.DataTransacao.Name = "DataTransacao"
+        '
+        'recibo_inicial
+        '
+        Me.recibo_inicial.HeaderText = "recibo inicial"
+        Me.recibo_inicial.Name = "recibo_inicial"
+        '
+        'recibo_final
+        '
+        Me.recibo_final.HeaderText = "recibo final"
+        Me.recibo_final.Name = "recibo_final"
+        '
         'ConferenciaCaixa
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
-        Me.ClientSize = New System.Drawing.Size(1370, 610)
+        Me.ClientSize = New System.Drawing.Size(1370, 630)
         Me.Controls.Add(Me.pnlMensagemLicenca)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.Panel4)
@@ -1613,14 +1630,6 @@ Partial Class ConferenciaCaixa
     Friend WithEvents dtInicio As DateTimePicker
     Friend WithEvents dtTransacao As DateTimePicker
     Friend WithEvents Label22 As Label
-    Friend WithEvents modoMovimento As DataGridViewTextBoxColumn
-    Friend WithEvents Referencia As DataGridViewTextBoxColumn
-    Friend WithEvents cartaoTipo As DataGridViewTextBoxColumn
-    Friend WithEvents descricao As DataGridViewTextBoxColumn
-    Friend WithEvents descSaidaCaixa As DataGridViewTextBoxColumn
-    Friend WithEvents quantidade As DataGridViewTextBoxColumn
-    Friend WithEvents valor As DataGridViewTextBoxColumn
-    Friend WithEvents DataTransacao As DataGridViewTextBoxColumn
     Friend WithEvents lblTotalConferido As Label
     Friend WithEvents lblTotalDiferenca As Label
     Friend WithEvents Label19 As Label
@@ -1630,4 +1639,14 @@ Partial Class ConferenciaCaixa
     Friend WithEvents txtDocInicio As TextBox
     Friend WithEvents lblDocFim As Label
     Friend WithEvents lblDocInicio As Label
+    Friend WithEvents modoMovimento As DataGridViewTextBoxColumn
+    Friend WithEvents Referencia As DataGridViewTextBoxColumn
+    Friend WithEvents cartaoTipo As DataGridViewTextBoxColumn
+    Friend WithEvents descricao As DataGridViewTextBoxColumn
+    Friend WithEvents descSaidaCaixa As DataGridViewTextBoxColumn
+    Friend WithEvents quantidade As DataGridViewTextBoxColumn
+    Friend WithEvents valor As DataGridViewTextBoxColumn
+    Friend WithEvents DataTransacao As DataGridViewTextBoxColumn
+    Friend WithEvents recibo_inicial As DataGridViewTextBoxColumn
+    Friend WithEvents recibo_final As DataGridViewTextBoxColumn
 End Class

@@ -21,12 +21,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_05F756525A0247C494D4EB03F432FBF9"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_0CCFC6E4E51E445CB5102C4BBAA61567"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -81,12 +75,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_49E105486AD14079AD4D040A77780C64"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_51D139F76CFEA02A07A0E9686CD3708C"
         "OwnerKey" = "8:_ED6C7B3A759E456B8593EA3274FDE071"
         "MsmSig" = "8:_UNDEFINED"
@@ -95,12 +83,6 @@
         {
         "MsmKey" = "8:_51D139F76CFEA02A07A0E9686CD3708C"
         "OwnerKey" = "8:_F4EFD5415E954C64B93CB3AFD99D389B"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_521965B46FFB41A29C5CBC0731457F01"
-        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -213,12 +195,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_A9BAE5329E124FC98204300B8FA85D2D"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_B1D262EF8AAB4280B828F99C0D643616"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -231,12 +207,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_CF2FBB4CF67341B78BD06F4AAA0E52EC"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_CFFE0C09ACFC469381324168A0325841"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -244,12 +214,6 @@
         "Entry"
         {
         "MsmKey" = "8:_DFEEFD65D3ED45C982FDDAC415E662D0"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_E2A0EF68FE1C41CCBDD15B5005B305C4"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -597,26 +561,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_05F756525A0247C494D4EB03F432FBF9"
-            {
-            "SourcePath" = "8:\\\\192.168.10.1\\jmrfc\\report\\PRIFFTJMR.rpt"
-            "TargetName" = "8:PRIFFTJMR.rpt"
-            "Tag" = "8:"
-            "Folder" = "8:_112BB83B45EE4FAB90A434DB02413C65"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_0CCFC6E4E51E445CB5102C4BBAA61567"
             {
             "AssemblyRegister" = "3:1"
@@ -885,26 +829,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_49E105486AD14079AD4D040A77780C64"
-            {
-            "SourcePath" = "8:\\\\192.168.10.1\\jmrfc\\report\\PRIFTJMR.rpt"
-            "TargetName" = "8:PRIFTJMR.rpt"
-            "Tag" = "8:"
-            "Folder" = "8:_112BB83B45EE4FAB90A434DB02413C65"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_51D139F76CFEA02A07A0E9686CD3708C"
             {
             "AssemblyRegister" = "3:1"
@@ -934,26 +858,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_521965B46FFB41A29C5CBC0731457F01"
-            {
-            "SourcePath" = "8:\\\\192.168.10.1\\jmrfc\\config\\movimento.json"
-            "TargetName" = "8:movimento.json"
-            "Tag" = "8:"
-            "Folder" = "8:_5C318EC85F7741528DF8FE57EE02464C"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_58BC410E081C947280EAFD4416BB412D"
@@ -1286,26 +1190,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A9BAE5329E124FC98204300B8FA85D2D"
-            {
-            "SourcePath" = "8:\\\\192.168.10.1\\jmrfc\\report\\PRIFCJMR.rpt"
-            "TargetName" = "8:PRIFCJMR.rpt"
-            "Tag" = "8:"
-            "Folder" = "8:_112BB83B45EE4FAB90A434DB02413C65"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_B1D262EF8AAB4280B828F99C0D643616"
             {
             "AssemblyRegister" = "3:1"
@@ -1368,26 +1252,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CF2FBB4CF67341B78BD06F4AAA0E52EC"
-            {
-            "SourcePath" = "8:\\\\192.168.10.1\\jmrfc\\config\\cliente.json"
-            "TargetName" = "8:cliente.json"
-            "Tag" = "8:"
-            "Folder" = "8:_5C318EC85F7741528DF8FE57EE02464C"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_CFFE0C09ACFC469381324168A0325841"
             {
             "AssemblyRegister" = "3:1"
@@ -1436,26 +1300,6 @@
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_689FCDD11E57438A9617C7B56935485E"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E2A0EF68FE1C41CCBDD15B5005B305C4"
-            {
-            "SourcePath" = "8:\\\\192.168.10.1\\jmrfc\\config\\conexaobd.json"
-            "TargetName" = "8:conexaobd.json"
-            "Tag" = "8:"
-            "Folder" = "8:_5C318EC85F7741528DF8FE57EE02464C"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -2236,7 +2080,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_ED6C7B3A759E456B8593EA3274FDE071"
             {
-            "SourcePath" = "8:..\\pri-fechoConta\\obj\\x86\\Debug\\pri_fechoConta.exe"
+            "SourcePath" = "8:..\\pri-fechoConta\\obj\\x86\\Release\\pri_fechoConta.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_689FCDD11E57438A9617C7B56935485E"

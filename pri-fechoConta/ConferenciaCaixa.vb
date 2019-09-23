@@ -126,7 +126,7 @@ Public Class ConferenciaCaixa
 
         End While
         carregarConfiguracao()
-        'restoreCsvToDatabase("C:\Users\jmr-guirruta\Documents\develop\projectos\primavera\bd\lista_artigos.json")
+        restoreCsvToDatabase("C:\Users\jmr-guirruta\Documents\develop\projectos\primavera\bd\lista_artigos.json")
         bancos = administracao.buscarBancos()
         startapp()
 
@@ -325,6 +325,9 @@ Public Class ConferenciaCaixa
 
     End Sub
     Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles btnConfereAdicionar.Click
+        Dim rec_inicial As Integer = 0
+        Dim rec_final As Integer = 0
+        Dim rec_serie As String = ""
 
         cboCartaoTipo.AutoCompleteMode = AutoCompleteMode.Suggest
         cboCartaoTipo.AutoCompleteSource = AutoCompleteSource.CustomSource
@@ -347,9 +350,12 @@ Public Class ConferenciaCaixa
                         Try
                             Dim rv As Boolean
                             If Me.cboContaPos.SelectedItem = "CXMT" Then
-                                rv = administracao.removeLinhasCaixa(CInt(Me.txtDocInicio.Text & "" & Me.txtDocFim.Text), Me.cboContaPos.SelectedItem, dtInicio.Value.ToShortDateString())
+                                rec_inicial = Me.txtDocInicio.Text
+                                rec_final = Me.txtDocFim.Text
+                                rec_serie = Me.cboFacturaSerie.Text
+                                rv = administracao.removeLinhasCaixa(CInt(Me.txtDocInicio.Text & "" & Me.txtDocFim.Text), Me.cboContaPos.SelectedItem, dtInicio.Value.ToShortDateString(), rec_inicial, rec_final, rec_serie)
                             Else
-                                rv = administracao.removeLinhasCaixa(Me.lblDiarioCaixa.Text, Me.cboContaPos.SelectedItem, "")
+                                rv = administracao.removeLinhasCaixa(Me.lblDiarioCaixa.Text, Me.cboContaPos.SelectedItem, "", rec_inicial, rec_final, rec_serie)
 
 
                             End If
@@ -1002,10 +1008,9 @@ Public Class ConferenciaCaixa
 
 
         Dim idCaixa As String
-        Dim idLinhaTesouraria, movimento As String
+        Dim movimento As String
         Dim rv As Integer
         Dim diario As String = txtCaixaNum.Text
-        Dim diarioCaixa As String
         Dim tabela, tblLinhaTesourariaBd, tblPrimEmpre, tabelaEntradaSaida, cabecTesouraria, tabelaLinhaTesouraria As New DataTable
 
 
@@ -1021,7 +1026,7 @@ Public Class ConferenciaCaixa
 
 
             Dim qrCabecTes As String = "select * from cabectesouraria where  IDDiarioCaixa = '" + idCaixa + "'"
-            Dim sqlLinhaTesouraria As String = "select *  from TDU_ConferenciaCaixa where CDU_diarioCaixa = '" & CInt(Me.txtDocInicio.Text & "0" & Me.txtDocFim.Text) & "' and CDU_Conta=  '" + cboContaPos.SelectedItem + "' and CDU_data_fecho = '" + dtInicio.Value.ToShortDateString() + "'"
+            Dim sqlLinhaTesouraria As String = "select *  from TDU_ConferenciaCaixa where CDU_rec_num_inicial = '" & CInt(Me.txtDocInicio.Text) & "' and  CDU_rec_num_final = '" & CInt(Me.txtDocFim.Text) & "' and  CDU_rec_serie = '" & Me.cboFacturaSerie.Text & "' and CDU_Conta=  '" + cboContaPos.SelectedItem + "' and CDU_data_fecho = '" + dtInicio.Value.ToShortDateString() + "'"
 
 
             Dim qrLinhaTes As String
@@ -1033,7 +1038,6 @@ Public Class ConferenciaCaixa
             tabelaLinhaTesouraria = SQL.buscarDado(qrLinhaTes)
             Dim listaMov As Movimentos = New Movimentos
             listaMov = js.getListaMovimento()
-            Dim val As Double
             tipoMov = "ValorTotal"
             If (tabelaLinhaTesouraria.Rows.Count <> 0) Then
                 For j As Integer = 0 To tabelaLinhaTesouraria.Rows.Count - 1
@@ -1619,14 +1623,21 @@ Public Class ConferenciaCaixa
         Dim dataDiario As String = ""
         Dim diario As String = ""
         Dim dataTransacao = ""
+        Dim rec_inicial As Integer = 0
+        Dim rec_final As Integer = 0
+        Dim rec_serie As String = ""
         Try
 
 
             If (ok = True) Or (ok = False And result = DialogResult.Yes) Then
                 If Me.cboContaPos.SelectedItem = "CXMT" Then
-                    rv = administracao.removeLinhasCaixa((Me.txtDocInicio.Text & "0" & Me.txtDocFim.Text), Me.cboContaPos.SelectedItem, dtInicio.Value.ToShortDateString())
+                    rec_inicial = Me.txtDocInicio.Text
+                    rec_final = Me.txtDocFim.Text
+                    rec_serie = Me.cboFacturaSerie.Text
+                    rv = administracao.removeLinhasCaixa((Me.txtDocInicio.Text & "0" & Me.txtDocFim.Text), Me.cboContaPos.SelectedItem, dtInicio.Value.ToShortDateString(), rec_inicial, rec_final, rec_serie)
+
                 Else
-                    rv = administracao.removeLinhasCaixa(Me.lblDiarioCaixa.Text, Me.cboContaPos.SelectedItem, "")
+                    rv = administracao.removeLinhasCaixa(Me.lblDiarioCaixa.Text, Me.cboContaPos.SelectedItem, "", rec_inicial, rec_final, rec_serie)
 
 
                 End If
@@ -1660,27 +1671,28 @@ Public Class ConferenciaCaixa
                         End If
 
                         If (check_abertura_caixa_mov(modoReceb)) Then
-                            rv = administracao.insertConferenciaCaixa(diario, modoReceb, "", "", 1, valor, 0, "", Date.Now().ToShortDateString, utilizador_logado.getNome(), "", "", IDCABECTESOURARIA, Me.cboContaPos.SelectedItem, dataDiario, dataTransacao)
+
+                            rv = administracao.insertConferenciaCaixa(diario, modoReceb, "", "", 1, valor, 0, "", Date.Now().ToShortDateString, utilizador_logado.getNome(), "", "", IDCABECTESOURARIA, Me.cboContaPos.SelectedItem, dataDiario, dataTransacao, rec_inicial, rec_final, rec_serie)
                         End If
 
                         If (check_saida_caixa_mov(modoReceb) Or check_pagamento_caixa_mov(modoReceb)) Then
-                            rv = administracao.insertConferenciaCaixa(diario, modoReceb, "", "", 1, valor, 0, "", Date.Now().ToShortDateString, utilizador_logado.getNome(), descricao_saida_caixa, "", IDCABECTESOURARIA, Me.cboContaPos.SelectedItem, dataDiario, dataTransacao)
+                            rv = administracao.insertConferenciaCaixa(diario, modoReceb, "", "", 1, valor, 0, "", Date.Now().ToShortDateString, utilizador_logado.getNome(), descricao_saida_caixa, "", IDCABECTESOURARIA, Me.cboContaPos.SelectedItem, dataDiario, dataTransacao, rec_inicial, rec_final, rec_serie)
                         End If
 
 
                         If (check_entrada_caixa_mov(modoReceb)) Then
-                            rv = administracao.insertConferenciaCaixa(diario, modoReceb, "", "", 1, valor, 0, "", Date.Now().ToShortDateString, utilizador_logado.getNome(), "", "", IDCABECTESOURARIA, Me.cboContaPos.SelectedItem, dataDiario, dataTransacao)
+                            rv = administracao.insertConferenciaCaixa(diario, modoReceb, "", "", 1, valor, 0, "", Date.Now().ToShortDateString, utilizador_logado.getNome(), "", "", IDCABECTESOURARIA, Me.cboContaPos.SelectedItem, dataDiario, dataTransacao, rec_inicial, rec_final, rec_serie)
                         End If
                         If (check_numerario_mov(modoReceb)) Then
-                            rv = administracao.insertConferenciaCaixa(diario, modoReceb, "", "", quantidade, valor, 0, "", Date.Now().ToShortDateString, utilizador_logado.getNome(), "", modoRecebRef, IDCABECTESOURARIA, Me.cboContaPos.SelectedItem, dataDiario, dataTransacao)
+                            rv = administracao.insertConferenciaCaixa(diario, modoReceb, "", "", quantidade, valor, 0, "", Date.Now().ToShortDateString, utilizador_logado.getNome(), "", modoRecebRef, IDCABECTESOURARIA, Me.cboContaPos.SelectedItem, dataDiario, dataTransacao, rec_inicial, rec_final, rec_serie)
                         End If
 
                         If (check_multibanco_mov(modoReceb)) Then
-                            rv = administracao.insertConferenciaCaixa(diario, modoReceb, tipo_cartao, transacao_cheque_numero, quantidade, valor, 0, "", Date.Now().ToShortDateString, utilizador_logado.getNome(), "", modoRecebRef, IDCABECTESOURARIA, Me.cboContaPos.SelectedItem, dataDiario, dataTransacao)
+                            rv = administracao.insertConferenciaCaixa(diario, modoReceb, tipo_cartao, transacao_cheque_numero, quantidade, valor, 0, "", Date.Now().ToShortDateString, utilizador_logado.getNome(), "", modoRecebRef, IDCABECTESOURARIA, Me.cboContaPos.SelectedItem, dataDiario, dataTransacao, rec_inicial, rec_final, rec_serie)
                         End If
 
                         If (check_cheque_mov(modoReceb)) Then
-                            rv = administracao.insertConferenciaCaixa(diario, modoReceb, "", "", quantidade, valor, transacao_cheque_numero, tipo_cartao, Date.Now().ToShortDateString, utilizador_logado.getNome(), "", modoRecebRef, IDCABECTESOURARIA, Me.cboContaPos.SelectedItem, dataDiario, dataTransacao)
+                            rv = administracao.insertConferenciaCaixa(diario, modoReceb, "", "", quantidade, valor, transacao_cheque_numero, tipo_cartao, Date.Now().ToShortDateString, utilizador_logado.getNome(), "", modoRecebRef, IDCABECTESOURARIA, Me.cboContaPos.SelectedItem, dataDiario, dataTransacao, rec_inicial, rec_final, rec_serie)
                         End If
                         If rv = False Then
                             Exit For
@@ -2731,6 +2743,9 @@ Public Class ConferenciaCaixa
                 report.cryRpt.SetParameterValue("saida_conferido", mskValConfSaidaCaixa.Text)
                 report.cryRpt.SetParameterValue("total_conferido", lblTotalConferido.Text)
                 report.cryRpt.SetParameterValue("diario", (Me.txtDocInicio.Text + "0" & Me.txtDocFim.Text))
+                report.cryRpt.SetParameterValue("numDocInicial", (Me.txtDocInicio.Text))
+                report.cryRpt.SetParameterValue("numDocFinal", (Me.txtDocFim.Text))
+                report.cryRpt.SetParameterValue("doc_serie", (Me.cboFacturaSerie.Text))
 
             Else
                 report.cryRpt.SetParameterValue("diario", CInt(lblDiarioCaixa.Text))
@@ -3412,16 +3427,28 @@ Public Class ConferenciaCaixa
                     Me.dtInicio.Visible = True
                     Me.txtCaixaNum.Visible = False
                     txtUtilizadorFecho.Enabled = True
+                    Me.cboFacturaSerie.Visible = True
+                    Me.lblDocFim.Visible = True
+                    Me.lblDocInicio.Visible = True
+                    Me.txtDocFim.Visible = True
+                    Me.txtDocInicio.Visible = True
                     Dim serie As List(Of String) = New List(Of String)
+
                     serie = administracao.buscarSerie()
                     serie.Insert(0, "Selecionar")
                     Me.cboFacturaSerie.DataSource = serie
+
 
                     'buscarCaixaFactura()
                 Else
                     Me.dtInicio.Visible = False
                     Me.txtCaixaNum.Visible = True
                     txtUtilizadorFecho.Enabled = False
+                    Me.cboFacturaSerie.Visible = False
+                    Me.lblDocFim.Visible = False
+                    Me.lblDocInicio.Visible = False
+                    Me.txtDocFim.Visible = False
+                    Me.txtDocInicio.Visible = False
 
                     'buscarCaixa()
 
@@ -3503,9 +3530,15 @@ Public Class ConferenciaCaixa
 
                     buscarCaixa()
                 Else
-                    buscarCaixaFactura()
+                    If (Me.cboFacturaSerie.SelectedIndex > 0) Then
+
+                        buscarCaixaFactura()
+                    Else
+
+                        MessageBox.Show("Selecione a serie  ", "Atencao", MessageBoxButtons.OK)
+                    End If
                 End If
-            Else
+                    Else
                 MessageBox.Show("Selecione a Conta Caixa", "Atencao", MessageBoxButtons.OK)
             End If
         Else
@@ -3662,6 +3695,17 @@ Public Class ConferenciaCaixa
         Me.mskValorRecebido.Text = utilitario.soNumero(Me.mskValorRecebido.Text)
     End Sub
 
+    Private Sub txtDocInicio_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtDocInicio.KeyPress
+        If Not Char.IsNumber(e.KeyChar) AndAlso Not Char.IsControl(e.KeyChar) Then
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub txtDocFim_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtDocFim.KeyPress
+        If Not Char.IsNumber(e.KeyChar) AndAlso Not Char.IsControl(e.KeyChar) Then
+            e.Handled = True
+        End If
+    End Sub
 
     Private Sub getContaBancaria()
         Dim contas As List(Of String) = New List(Of String)
@@ -3722,7 +3766,6 @@ Public Class ConferenciaCaixa
         js.MaxJsonLength = 999999999
         Dim db As Object = New Object()
         Dim count As Integer = 0
-        Dim elmnt As Object()
         If System.IO.File.Exists(filename) Then
 
             Dim jsStr As String = File.ReadAllText(filename)
@@ -3734,7 +3777,7 @@ Public Class ConferenciaCaixa
 
                     administracao.insertConferenciaCaixa(db(i)("diariocaixa"), db(i)("modomovimento"), db(i)("cartao"), db(i)("transacao"), db(i)("quantidade"),
                                               db(i)("valor"), db(i)("chequenum"), db(i)("chequedesc"), db(i)("data_conferencia"), db(i)("utilizador_tes"),
-                                              db(i)("saidadesc"), db(i)("referencia"), db(i)("idCabec"), db(i)("conta"), db(i)("datafecho"), db(i)("datatransacao"))
+                                              db(i)("saidadesc"), db(i)("referencia"), db(i)("idCabec"), db(i)("conta"), db(i)("datafecho"), db(i)("datatransacao"), 0, 0, "")
                 Catch ex As Exception
                     Console.WriteLine("Ocorreu um erro ")
                     Console.WriteLine(ex.Message())
