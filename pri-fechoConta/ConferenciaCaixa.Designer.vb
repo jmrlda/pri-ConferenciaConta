@@ -78,7 +78,7 @@ Partial Class ConferenciaCaixa
         Me.Label21 = New System.Windows.Forms.Label()
         Me.txtCaixaNum = New System.Windows.Forms.TextBox()
         Me.ptxboxUtilizadorAberturaCaixa = New System.Windows.Forms.PictureBox()
-        Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
+        Me.listaCaixa = New System.Windows.Forms.LinkLabel()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.mskDataAbertura = New System.Windows.Forms.MaskedTextBox()
@@ -120,6 +120,16 @@ Partial Class ConferenciaCaixa
         Me.btnLimparTabela = New System.Windows.Forms.Button()
         Me.btnFecharConta = New System.Windows.Forms.Button()
         Me.tabelaConferenciaCaixa = New System.Windows.Forms.DataGridView()
+        Me.modoMovimento = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Referencia = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cartaoTipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.descricao = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.descSaidaCaixa = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.quantidade = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.valor = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataTransacao = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.recibo_inicial = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.recibo_final = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.SistemaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EntrarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -144,16 +154,6 @@ Partial Class ConferenciaCaixa
         Me.LinkLabel2 = New System.Windows.Forms.LinkLabel()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.lblMsgLicencaExpiracao = New System.Windows.Forms.Label()
-        Me.modoMovimento = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Referencia = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.cartaoTipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.descricao = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.descSaidaCaixa = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.quantidade = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.valor = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataTransacao = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.recibo_inicial = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.recibo_final = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel2.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
         CType(Me.ptxboxUtilizadorAberturaCaixa, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -186,7 +186,7 @@ Partial Class ConferenciaCaixa
         Me.Panel2.Controls.Add(Me.Label21)
         Me.Panel2.Controls.Add(Me.txtCaixaNum)
         Me.Panel2.Controls.Add(Me.ptxboxUtilizadorAberturaCaixa)
-        Me.Panel2.Controls.Add(Me.LinkLabel1)
+        Me.Panel2.Controls.Add(Me.listaCaixa)
         Me.Panel2.Controls.Add(Me.TableLayoutPanel1)
         Me.Panel2.Controls.Add(Me.lblTotalConferido)
         Me.Panel2.Controls.Add(Me.lblTotalDiferenca)
@@ -777,15 +777,15 @@ Partial Class ConferenciaCaixa
         Me.ptxboxUtilizadorAberturaCaixa.TabIndex = 1
         Me.ptxboxUtilizadorAberturaCaixa.TabStop = False
         '
-        'LinkLabel1
+        'listaCaixa
         '
-        Me.LinkLabel1.AutoSize = True
-        Me.LinkLabel1.Location = New System.Drawing.Point(9, 33)
-        Me.LinkLabel1.Name = "LinkLabel1"
-        Me.LinkLabel1.Size = New System.Drawing.Size(49, 13)
-        Me.LinkLabel1.TabIndex = 14
-        Me.LinkLabel1.TabStop = True
-        Me.LinkLabel1.Text = " Caixa nº"
+        Me.listaCaixa.AutoSize = True
+        Me.listaCaixa.Location = New System.Drawing.Point(9, 33)
+        Me.listaCaixa.Name = "listaCaixa"
+        Me.listaCaixa.Size = New System.Drawing.Size(49, 13)
+        Me.listaCaixa.TabIndex = 14
+        Me.listaCaixa.TabStop = True
+        Me.listaCaixa.Text = " Caixa nº"
         '
         'TableLayoutPanel1
         '
@@ -1244,6 +1244,63 @@ Partial Class ConferenciaCaixa
         Me.tabelaConferenciaCaixa.Size = New System.Drawing.Size(1265, 277)
         Me.tabelaConferenciaCaixa.TabIndex = 0
         '
+        'modoMovimento
+        '
+        Me.modoMovimento.HeaderText = "Modo Movimento"
+        Me.modoMovimento.Name = "modoMovimento"
+        Me.modoMovimento.ReadOnly = True
+        Me.modoMovimento.Width = 150
+        '
+        'Referencia
+        '
+        Me.Referencia.HeaderText = "Referência"
+        Me.Referencia.Name = "Referencia"
+        Me.Referencia.Width = 200
+        '
+        'cartaoTipo
+        '
+        Me.cartaoTipo.HeaderText = "Cartão Tipo / Cheque Descrição"
+        Me.cartaoTipo.Name = "cartaoTipo"
+        Me.cartaoTipo.Width = 150
+        '
+        'descricao
+        '
+        Me.descricao.HeaderText = "Transação número / Cheque Número"
+        Me.descricao.Name = "descricao"
+        Me.descricao.Width = 150
+        '
+        'descSaidaCaixa
+        '
+        Me.descSaidaCaixa.HeaderText = "Descrição Saida de Caixa"
+        Me.descSaidaCaixa.Name = "descSaidaCaixa"
+        Me.descSaidaCaixa.Width = 220
+        '
+        'quantidade
+        '
+        Me.quantidade.HeaderText = "Quantidade"
+        Me.quantidade.Name = "quantidade"
+        '
+        'valor
+        '
+        Me.valor.HeaderText = "Valor"
+        Me.valor.Name = "valor"
+        Me.valor.Width = 150
+        '
+        'DataTransacao
+        '
+        Me.DataTransacao.HeaderText = "Data Transação"
+        Me.DataTransacao.Name = "DataTransacao"
+        '
+        'recibo_inicial
+        '
+        Me.recibo_inicial.HeaderText = "recibo inicial"
+        Me.recibo_inicial.Name = "recibo_inicial"
+        '
+        'recibo_final
+        '
+        Me.recibo_final.HeaderText = "recibo final"
+        Me.recibo_final.Name = "recibo_final"
+        '
         'MenuStrip1
         '
         Me.MenuStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible
@@ -1420,63 +1477,6 @@ Partial Class ConferenciaCaixa
         Me.lblMsgLicencaExpiracao.Size = New System.Drawing.Size(0, 17)
         Me.lblMsgLicencaExpiracao.TabIndex = 0
         '
-        'modoMovimento
-        '
-        Me.modoMovimento.HeaderText = "Modo Movimento"
-        Me.modoMovimento.Name = "modoMovimento"
-        Me.modoMovimento.ReadOnly = True
-        Me.modoMovimento.Width = 150
-        '
-        'Referencia
-        '
-        Me.Referencia.HeaderText = "Referência"
-        Me.Referencia.Name = "Referencia"
-        Me.Referencia.Width = 200
-        '
-        'cartaoTipo
-        '
-        Me.cartaoTipo.HeaderText = "Cartão Tipo / Cheque Descrição"
-        Me.cartaoTipo.Name = "cartaoTipo"
-        Me.cartaoTipo.Width = 150
-        '
-        'descricao
-        '
-        Me.descricao.HeaderText = "Transação número / Cheque Número"
-        Me.descricao.Name = "descricao"
-        Me.descricao.Width = 150
-        '
-        'descSaidaCaixa
-        '
-        Me.descSaidaCaixa.HeaderText = "Descrição Saida de Caixa"
-        Me.descSaidaCaixa.Name = "descSaidaCaixa"
-        Me.descSaidaCaixa.Width = 220
-        '
-        'quantidade
-        '
-        Me.quantidade.HeaderText = "Quantidade"
-        Me.quantidade.Name = "quantidade"
-        '
-        'valor
-        '
-        Me.valor.HeaderText = "Valor"
-        Me.valor.Name = "valor"
-        Me.valor.Width = 150
-        '
-        'DataTransacao
-        '
-        Me.DataTransacao.HeaderText = "Data Transação"
-        Me.DataTransacao.Name = "DataTransacao"
-        '
-        'recibo_inicial
-        '
-        Me.recibo_inicial.HeaderText = "recibo inicial"
-        Me.recibo_inicial.Name = "recibo_inicial"
-        '
-        'recibo_final
-        '
-        Me.recibo_final.HeaderText = "recibo final"
-        Me.recibo_final.Name = "recibo_final"
-        '
         'ConferenciaCaixa
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1567,7 +1567,7 @@ Partial Class ConferenciaCaixa
     Friend WithEvents txtCaixaNum As TextBox
     Friend WithEvents mskValorRecebido As MaskedTextBox
     Friend WithEvents txtQuantidade As TextBox
-    Friend WithEvents LinkLabel1 As LinkLabel
+    Friend WithEvents listaCaixa As LinkLabel
     Friend WithEvents Label1 As Label
     Friend WithEvents mskDiferencaAbertura As MaskedTextBox
     Friend WithEvents mskDiferencaNumerario As MaskedTextBox

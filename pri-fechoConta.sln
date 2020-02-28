@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28010.2016
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29424.173
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "priConferenciaCaixa", "pri-fechoConta\priConferenciaCaixa.vbproj", "{ECDB2C82-1DFD-419C-B7C0-E39EA19BDF15}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Pri-ConferenciaCaixa-1.0.1", "Pri-ConferenciaCaixa-Setup-1.0\Pri-ConferenciaCaixa-Setup-1.0.vdproj", "{24DF4881-9BD5-4FBE-8C7F-7B91A0D09DC8}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Pri-ConferenciaCaixa", "Pri-ConferenciaCaixa-Setup-1.0\Pri-ConferenciaCaixa-Setup-1.0.vdproj", "{D79AA35B-B072-4F7B-BED7-C93605C57C6B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,12 +23,14 @@ Global
 		{ECDB2C82-1DFD-419C-B7C0-E39EA19BDF15}.Release|Any CPU.Build.0 = Release|Any CPU
 		{ECDB2C82-1DFD-419C-B7C0-E39EA19BDF15}.Release|x86.ActiveCfg = Release|x86
 		{ECDB2C82-1DFD-419C-B7C0-E39EA19BDF15}.Release|x86.Build.0 = Release|x86
-		{24DF4881-9BD5-4FBE-8C7F-7B91A0D09DC8}.Debug|Any CPU.ActiveCfg = Debug
-		{24DF4881-9BD5-4FBE-8C7F-7B91A0D09DC8}.Debug|x86.ActiveCfg = Debug
-		{24DF4881-9BD5-4FBE-8C7F-7B91A0D09DC8}.Debug|x86.Build.0 = Debug
-		{24DF4881-9BD5-4FBE-8C7F-7B91A0D09DC8}.Release|Any CPU.ActiveCfg = Release
-		{24DF4881-9BD5-4FBE-8C7F-7B91A0D09DC8}.Release|x86.ActiveCfg = Release
-		{24DF4881-9BD5-4FBE-8C7F-7B91A0D09DC8}.Release|x86.Build.0 = Release
+		{D79AA35B-B072-4F7B-BED7-C93605C57C6B}.Debug|Any CPU.ActiveCfg = Debug
+		{D79AA35B-B072-4F7B-BED7-C93605C57C6B}.Debug|Any CPU.Build.0 = Debug
+		{D79AA35B-B072-4F7B-BED7-C93605C57C6B}.Debug|x86.ActiveCfg = Debug
+		{D79AA35B-B072-4F7B-BED7-C93605C57C6B}.Debug|x86.Build.0 = Debug
+		{D79AA35B-B072-4F7B-BED7-C93605C57C6B}.Release|Any CPU.ActiveCfg = Release
+		{D79AA35B-B072-4F7B-BED7-C93605C57C6B}.Release|Any CPU.Build.0 = Release
+		{D79AA35B-B072-4F7B-BED7-C93605C57C6B}.Release|x86.ActiveCfg = Release
+		{D79AA35B-B072-4F7B-BED7-C93605C57C6B}.Release|x86.Build.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -571,7 +571,7 @@ Public Class ConferenciaAdmin
                 If (conta = "CXMT") Then
                     query = "delete from TDU_ConferenciaCaixa where CDU_conta = '" & conta & "' and CDU_data_fecho = '" & data & "'  and CDU_rec_num_inicial = '" & rec_inicial & "' and CDU_rec_num_final = '" & rec_final & "'   and CDU_rec_serie = '" & rec_serie & "'"
                 Else
-                    query = "delete from TDU_ConferenciaCaixa where CDU_diarioCaixa = '" & diarioCaixa & "' and CDU_data_fecho = '" & data & "'"
+                    query = "delete from TDU_ConferenciaCaixa where CDU_diarioCaixa = '" & diarioCaixa & "'"
 
                 End If
 
