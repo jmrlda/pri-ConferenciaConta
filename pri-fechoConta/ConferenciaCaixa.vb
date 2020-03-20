@@ -1240,27 +1240,8 @@ Public Class ConferenciaCaixa
 
             calcularTotalConferido_diferenca()
 
-            'For i As Integer = 0 To tabela.Rows.Count - 1
-            ''Dim DataType() As String = myTableData.Rows(i).Item(1)
-            'Me.txtCaixaNum.Text = tabela.Rows(i)("diario")
-            'Next
-            'Else
-
-            '    MsgBox("Resultado não encontrado para o Diario numero " + diario.ToString())
-            '    DIARIO_CONFERIDO = False
-
-            '    limpar_campos()
-            '    trancarLinhaFechoConta()
 
         End If
-        'End If
-        'Else
-        '    'MsgBox("invalido")
-        '    limpar_campos()
-        '    trancarLinhaFechoConta()
-        'End If
-
-
 
         calcularTotalRecebido()
 
@@ -1272,10 +1253,12 @@ Public Class ConferenciaCaixa
 
                 End If
             End If
+            btnPrevisualizarReporte.Enabled = True
 
 
         Else
             conferir_devolucao()
+            btnPrevisualizarReporte.Enabled = False
 
         End If
 
@@ -1512,7 +1495,7 @@ Public Class ConferenciaCaixa
                         saidaConferidoTotal = 0
                         entradaConferidoTotal = 0
                         aberturaConferidoTotal = 0
-                        btnPrevisualizarReporte.Enabled = True
+                        '   btnPrevisualizarReporte.Enabled = True
                         DIARIO_CONFERIDO = True
                         For i As Integer = 0 To tblLinhaTesourariaBd.Rows.Count - 1
                             movimento = tblLinhaTesourariaBd.Rows(i)("CDU_modoMovimento").ToString()
@@ -1637,9 +1620,11 @@ Public Class ConferenciaCaixa
                 End If
             End If
 
+            btnPrevisualizarReporte.Enabled = True
 
         Else
             conferir_devolucao()
+            btnPrevisualizarReporte.Enabled = False
 
         End If
 
@@ -1650,6 +1635,12 @@ Public Class ConferenciaCaixa
     Private Sub btnFecharConta_Click(sender As Object, e As EventArgs) Handles btnFecharConta.Click
 
         salvar_conferencia_caixa()
+
+        'Me.txtCaixaNum.Clear()
+        'Me.cboContaPos.SelectedIndex = 0
+        'Me.cboFacturaSerie.SelectedIndex = 0
+        'btnPrevisualizarReporte.Enabled = False
+
     End Sub
 
     Private Sub mskValRecNumerario_TextChanged(sender As Object, e As EventArgs) Handles mskValRecNumerario.TextChanged
@@ -1914,6 +1905,8 @@ Public Class ConferenciaCaixa
         entradaTotal = 0
         saidaTotal = 0
         multibancoTotal = 0
+
+
 
         tabelaConferenciaCaixa.Rows.Clear()
 
@@ -2615,6 +2608,9 @@ Public Class ConferenciaCaixa
 
         'report.Show()
         ' ReporteView.Show(Me)
+
+        'salvar_conferencia_caixa()
+        'buscar()
 
         Dim reportPath As String
         Dim path As Util = New Util()
@@ -3468,38 +3464,9 @@ Public Class ConferenciaCaixa
     End Sub
 
     Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
-        If (utilizador_logado.getLogado() = True) Then
-            If (Me.cboContaPos.SelectedIndex > 0) Then
-                If Me.cboContaPos.SelectedItem <> "CXMT" Then
-                    If (Me.cboFacturaSerie.SelectedIndex > 0) Then
-
-                        buscarCaixa()
-                    Else
-
-                        MessageBox.Show("Selecione a serie  ", "Atencao", MessageBoxButtons.OK)
-                    End If
-                Else
-                    If (Me.cboFacturaSerie.SelectedIndex > 0) Then
-
-                        buscarCaixaFactura()
-                    Else
-
-                        MessageBox.Show("Selecione a serie  ", "Atencao", MessageBoxButtons.OK)
-                    End If
-                End If
-            Else
-                MessageBox.Show("Selecione a Conta Caixa", "Atencao", MessageBoxButtons.OK)
-            End If
-
-        Else
-            naoLogado()
-            If MessageBox.Show("Por favor entre no Sistema para iniciar uma actividade. Deseja entrar ?", "Atenção", MessageBoxButtons.YesNo) = DialogResult.Yes Then
-                Entrar.ShowDialog(Me)
-            End If
-        End If
 
 
-
+        buscar()
 
     End Sub
 
@@ -3526,6 +3493,8 @@ Public Class ConferenciaCaixa
 
 
     Private Sub chkEditar_CheckedChanged_2(sender As Object, e As EventArgs) Handles chkEditar.CheckedChanged
+        btnPrevisualizarReporte.Enabled = False
+
         If utilizador_logado.getNivel() <> "Tesoureiro" Then
 
             If chkEditar.Checked = True Then
@@ -3926,7 +3895,6 @@ Public Class ConferenciaCaixa
                 limpar_campos()
                 limpar_campo_fechoconta()
                 tabelaConferenciaCaixa.Rows.Clear()
-                btnPrevisualizarReporte.Enabled = True
                 Dim old As String = Me.txtCaixaNum.Text
                 Me.txtCaixaNum.Text = ""
                 dtInicio.Refresh()
@@ -3971,6 +3939,43 @@ Public Class ConferenciaCaixa
         Return rv
 
     End Function
+
+
+
+
+    '
+    Sub buscar()
+        If (utilizador_logado.getLogado() = True) Then
+            If (Me.cboContaPos.SelectedIndex > 0) Then
+                If Me.cboContaPos.SelectedItem <> "CXMT" Then
+                    If (Me.cboFacturaSerie.SelectedIndex > 0) Then
+
+                        buscarCaixa()
+                    Else
+
+                        MessageBox.Show("Selecione a serie  ", "Atencao", MessageBoxButtons.OK)
+                    End If
+                Else
+                    If (Me.cboFacturaSerie.SelectedIndex > 0) Then
+
+                        buscarCaixaFactura()
+                    Else
+
+                        MessageBox.Show("Selecione a serie  ", "Atencao", MessageBoxButtons.OK)
+                    End If
+                End If
+            Else
+                MessageBox.Show("Selecione a Conta Caixa", "Atencao", MessageBoxButtons.OK)
+            End If
+
+        Else
+            naoLogado()
+            If MessageBox.Show("Por favor entre no Sistema para iniciar uma actividade. Deseja entrar ?", "Atenção", MessageBoxButtons.YesNo) = DialogResult.Yes Then
+                Entrar.ShowDialog(Me)
+            End If
+        End If
+
+    End Sub
 
 
 End Class
