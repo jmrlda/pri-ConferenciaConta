@@ -1265,7 +1265,8 @@ Public Class ConferenciaCaixa
         calcularTotalRecebido()
 
         If DIARIO_CONFERIDO Then
-            If is_conferido_movimento_devolucao() = False Then
+
+            If ha_devolucao() = True And is_conferido_movimento_devolucao() = False Then
                 If MessageBox.Show("Caixa ja conferido sem o registo da devolução! Deseja registrar?", "Atenção ", MessageBoxButtons.YesNo) = DialogResult.Yes Then
                     conferir_devolucao()
 
@@ -1629,7 +1630,7 @@ Public Class ConferenciaCaixa
 
         calcularTotalRecebido()
         If DIARIO_CONFERIDO Then
-            If is_conferido_movimento_devolucao() = False Then
+            If ha_devolucao() = True And is_conferido_movimento_devolucao() = False Then
                 If MessageBox.Show("Caixa ja conferido sem o registo da devolução! Deseja registrar?", "Atenção ", MessageBoxButtons.YesNo) = DialogResult.Yes Then
                     conferir_devolucao()
 
@@ -3763,7 +3764,7 @@ Public Class ConferenciaCaixa
         'If (idx >= 0) Then
         '    MsgBox("Saida de Caixa Ja conferido. Edite a linha  nº " + (idx + 1).ToString() + "  para actualizar")
         'Else
-        If (is_conferido_movimento_devolucao() = False) Then
+        If (ha_devolucao() = True And is_conferido_movimento_devolucao() = False) Then
             If CDbl(Me.mskValRecSenhasCabazes.Text) > 0 Then
 
                 Dim checkDiferenca As Double = 0
@@ -3944,6 +3945,7 @@ Public Class ConferenciaCaixa
 
         Dim rv As Boolean = False
         Dim modoReceb As String = ""
+
         For Each row As DataGridViewRow In tabelaConferenciaCaixa.Rows
             modoReceb = row.Cells(0).Value
 
@@ -3954,10 +3956,21 @@ Public Class ConferenciaCaixa
 
         Next
 
-
         Return rv
     End Function
 
+
+    Function ha_devolucao() As Boolean
+        Dim rv As Boolean = False
+
+        If CDbl(mskValRecSenhasCabazes.Text) > 0 Then
+            rv = True
+
+        End If
+
+        Return rv
+
+    End Function
 
 
 End Class
