@@ -170,14 +170,15 @@
                 ' cryRpt.Load("PUT CRYSTAL REPORT PATH HERE\CrystalReport1.rpt")
                 report.cryRpt.Load(reportPath)
                 report.cryRpt.SetDatabaseLogon(utilizador, senha, servidor, basedados)
-                'With report.crConnectionInfo
-                '    .ServerName = servidor
-                '    'If you are connecting to Oracle there is no DatabaseName. Use an empty string. 
-                '    'For example, .DatabaseName = ""
-                '    .DatabaseName = basedados
-                '    .UserID = utilizador
-                '    .Password = senha
-                'End With
+                With report.crConnectionInfo
+                    .ServerName = servidor
+                    'If you are connecting to Oracle there is no DatabaseName. Use an empty string. 
+                    'For example, .DatabaseName = ""
+                    .DatabaseName = basedados
+                    .UserID = utilizador
+                    .Password = senha
+                End With
+
 
                 report.cryRpt.SetParameterValue("byConta", "False")
                 report.cryRpt.SetParameterValue("byDiario", "False")
@@ -243,7 +244,7 @@
 
                         End If
                     Else
-                            report.cryRpt.SetParameterValue("diario", "0")
+                        report.cryRpt.SetParameterValue("diario", "0")
                     End If
 
                     If (chkboxContaOrigem.Checked = False And chkboxData.Checked = True) Then
@@ -392,7 +393,8 @@
                 '
 
                 report.CrystalReportViewer1.ReportSource = report.cryRpt
-                report.CrystalReportViewer1.Refresh()
+
+                'report.CrystalReportViewer1.Refresh()
                 report.ShowDialog()
             End If
 
@@ -527,5 +529,7 @@
         Return data1
     End Function
 
-
+    Private Sub btnFechar_Click(sender As Object, e As EventArgs) Handles btnFechar.Click
+        Me.Close()
+    End Sub
 End Class

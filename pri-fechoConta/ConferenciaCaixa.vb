@@ -2628,17 +2628,18 @@ Public Class ConferenciaCaixa
 
 
         If (System.IO.File.Exists(reportPath) = True) Then
-            report.cryRpt.Load(reportPath)
 
+            report.cryRpt.Load(reportPath)
             report.cryRpt.SetDatabaseLogon(utilizador, senha, servidor, basedados)
-            'With report.crConnectionInfo
-            '    .ServerName = servidor
-            '    'If you are connecting to Oracle there is no DatabaseName. Use an empty string. 
-            '    'For example, .DatabaseName = ""
-            '    .DatabaseName = basedados
-            '    .UserID = utilizador
-            '    .Password = senha
-            'End With
+            With report.crConnectionInfo
+                .ServerName = servidor
+                'If you are connecting to Oracle there is no DatabaseName. Use an empty string. 
+                'For example, .DatabaseName = ""
+                .DatabaseName = basedados
+                .UserID = utilizador
+                .Password = senha
+            End With
+
 
 
             'report.setDiario(CInt(lblDiarioCaixa.Text))
@@ -2679,7 +2680,7 @@ Public Class ConferenciaCaixa
 
             report.CrystalReportViewer1.ReportSource = report.cryRpt
 
-            report.CrystalReportViewer1.Refresh()
+            'report.CrystalReportViewer1.Refresh()
 
             report.ShowDialog()
 
@@ -3958,10 +3959,16 @@ Public Class ConferenciaCaixa
                 Else
                     If (Me.cboFacturaSerie.SelectedIndex > 0) Then
 
-                        buscarCaixaFactura()
+                        If (txtDocInicio.Text.Length > 0 And txtDocFim.Text.Length > 0) Then
+
+                            buscarCaixaFactura()
+                        Else
+                            MessageBox.Show("Indique o número do  Documento inicial e final", "Atencao", MessageBoxButtons.OK)
+                        End If
+
                     Else
 
-                        MessageBox.Show("Selecione a serie  ", "Atencao", MessageBoxButtons.OK)
+                            MessageBox.Show("Selecione a serie  ", "Atencao", MessageBoxButtons.OK)
                     End If
                 End If
             Else

@@ -649,7 +649,9 @@ Public Class ConferenciaAdmin
         licenca_decode = Me.Decrypt(licenca)
         If (licenca_decode.Length > 0) Then
 
-            licencaDiaGerado = Date.Parse(licenca_decode.Split("_")(4))
+            Dim data = licenca_decode.Split("_")(4)
+            data = data.Split(" ")(0)
+            licencaDiaGerado = Date.Parse(data)
             licencaDuracaoActivacao = CInt(licenca_decode.Split("_")(5))
 
             dataDuracao = Date.Now().AddDays(licencaDuracaoActivacao)

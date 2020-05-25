@@ -722,9 +722,9 @@ Partial Class ConferenciaCaixa
         Me.lblDiarioCaixa.AutoSize = True
         Me.lblDiarioCaixa.Location = New System.Drawing.Point(389, 14)
         Me.lblDiarioCaixa.Name = "lblDiarioCaixa"
-        Me.lblDiarioCaixa.Size = New System.Drawing.Size(45, 13)
+        Me.lblDiarioCaixa.Size = New System.Drawing.Size(13, 13)
         Me.lblDiarioCaixa.TabIndex = 16
-        Me.lblDiarioCaixa.Text = "Label22"
+        Me.lblDiarioCaixa.Text = "0"
         Me.lblDiarioCaixa.Visible = False
         '
         'btnBuscar
