@@ -10,6 +10,8 @@ Public Class sqlControlo
     'Me.txtServidor.Text = js.getConexao().servidor
     'Me.txtUtilizadorBd.Text = js.getConexao().utilizador
     Public sqlCon As New SqlConnection With {.ConnectionString = "Server=" + js.getConexao().servidor + ";Database=" + js.getConexao().basedados + ";User=" + js.getConexao().utilizador + ";Pwd=" + utilitario.Decrypt(js.getConexao().senha)}
+    Public sqlConAdmin As New SqlConnection With {.ConnectionString = "Server=" + js.getConexaoAdmin.servidor + ";Database=" + js.getConexaoAdmin().basedados + ";User=" + js.getConexaoAdmin().utilizador + ";Pwd=" + utilitario.Decrypt(js.getConexaoAdmin().senha)}
+
     Public sqlCmd As SqlCommand
 
 
@@ -20,6 +22,7 @@ Public Class sqlControlo
             sqlCon.Open()
 
             sqlCon.Close()
+
 
             Return True
 
@@ -109,7 +112,7 @@ Public Class sqlControlo
         Catch ex As Exception
 
             rv = False
-            ' MsgBox("[criarTabela] Ocorreu um erro  na criacão de tabela " + ex.Message(), MsgBoxStyle.Critical, " MaS InfoTech- Warning")
+            Console.WriteLine("[criarTabela] Ocorreu um erro  na criacão de tabela " + ex.Message(), MsgBoxStyle.Critical, " MaS InfoTech- Warning")
             sqlCmd.Connection.Close()
 
         End Try
@@ -125,6 +128,13 @@ Public Class sqlControlo
 
     End Sub
 
+    Sub ajustarConexaoAdmin()
+        If sqlCon.ConnectionString = "Server=;Database=;User=;Pwd=" Then
+            sqlCon = New SqlConnection With {.ConnectionString = "Server=" + js.getConexaoAdmin().servidor + ";Database=" + js.getConexaoAdmin().basedados + ";User=" + js.getConexaoAdmin().utilizador + ";Pwd=" + utilitario.Decrypt(js.getConexaoAdmin().senha)}
+
+        End If
+
+    End Sub
     Public Function resetComissaoInterveniente()
 
         Try
