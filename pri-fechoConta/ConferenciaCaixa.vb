@@ -1898,34 +1898,10 @@ Public Class ConferenciaCaixa
     End Sub
 
     Private Sub mskValorRecebido_TextChanged(sender As Object, e As EventArgs) Handles mskValorRecebido.TextChanged
+        ' Se mskValorRecebido estiver vazio
+        ' restaurar para o valor inicial (padrao)
         If (mskValorRecebido.Text.Length <= 0) Then
-
             mskValorRecebido.Text = "0,00"
-
-        End If
-        Dim start As Integer = mskValorRecebido.SelectionStart
-        'mskValorRecebido.Text = utilitario.soNumero(mskValorRecebido.Text)
-        'mskvalorRecebidoResetCursor(start)
-
-
-        If (is_numerario_mov()) Then
-            'mskValorRecebido.Text = utilitario.soNumero(mskValorRecebido.Text)
-
-            'Else
-
-            '    If mskValorRecebido.Text.Length > 2 Then
-            '        Dim T As String = mskValorRecebido.Text.Substring(mskValorRecebido.Text.Length - 3)
-            '        Console.WriteLine(T)
-            '        Dim F As Boolean = True
-            '        For Each C As Char In T
-            '            If Not Char.IsNumber(C) Then F = False
-            '        Next
-            '        If F Then
-            '            mskValorRecebido.Text &= "."
-            '            mskValorRecebido.Text = utilitario.soNumero(mskValorRecebido.Text)
-            '            mskValorRecebido.SelectionStart = mskValorRecebido.Text.Length
-            '        End If
-            '    End If
         End If
 
 
@@ -2016,32 +1992,27 @@ Public Class ConferenciaCaixa
     Private Sub mskValRecEntradaCaixa_TextChanged(sender As Object, e As EventArgs) Handles mskValRecEntradaCaixa.TextChanged
 
         Try
-            'If (Me.mskValRecEntradaCaixa.Text.Length > 0 And IsNumeric(Me.mskValRecEntradaCaixa.Text)) Then
             Me.mskValRecEntradaCaixa.Text = utilitario.soNumero(mskValRecEntradaCaixa.Text)
-
-            'Me.mskValRecEntradaCaixa.Text = FormatCurrency(Me.mskValRecEntradaCaixa.Text).TrimStart("$")
-            'End If
         Catch ex As Exception
-
+            MessageBox.Show("Erro na formatação de um valor não numerico no Campo de 'Recebimento Entrada Caixa'")
         End Try
     End Sub
 
     Private Sub mskValRecSaidaCaixa_TextChanged(sender As Object, e As EventArgs) Handles mskValRecSaidaCaixa.TextChanged
 
-        Me.mskValRecSaidaCaixa.Text = utilitario.soNumero(mskValRecSaidaCaixa.Text)
+        Try
+            Me.mskValRecSaidaCaixa.Text = utilitario.soNumero(mskValRecSaidaCaixa.Text)
+        Catch ex As Exception
+            MessageBox.Show("Erro na formatação de um valor não numerico no Campo de 'Recebimento Saida Caixa'")
+        End Try
     End Sub
 
     Private Sub mskValConfEntradaCaixa_TextChanged(sender As Object, e As EventArgs) Handles mskValConfEntradaCaixa.TextChanged
 
         Try
-            'If (Me.mskValConfEntradaCaixa.Text.Length > 0 And IsNumeric(Me.mskValConfEntradaCaixa.Text)) Then
-
-            'Me.mskValConfEntradaCaixa.Text = FormatCurrency(Me.mskValConfEntradaCaixa.Text).TrimStart("$")
             Me.mskValConfEntradaCaixa.Text = utilitario.soNumero(mskValConfEntradaCaixa.Text)
-
-            'End If
-
         Catch ex As Exception
+            MessageBox.Show("Erro na formatação de um valor não numerico no Campo de 'Recebimento Saida Caixa'")
 
         End Try
     End Sub
@@ -2060,20 +2031,9 @@ Public Class ConferenciaCaixa
 
     Private Sub mskDiferencaSaidaCaixa_TextChanged(sender As Object, e As EventArgs) Handles mskDiferencaSaidaCaixa.TextChanged
 
-
-
-
         Try
             Me.mskDiferencaSaidaCaixa.Text = utilitario.soNumero(mskDiferencaSaidaCaixa.Text)
 
-
-            'diferenca = CDbl(Me.mskDiferencaSaidaCaixa.Text)
-            'If (diferenca < 0) Then
-            '    Me.mskDiferencaSaidaCaixa.Text = FormatCurrency(Format(diferenca, "Fixed")).TrimStart("(").TrimEnd(")").TrimStart("$").Insert(0, "-")
-
-            'Else
-            '    Me.mskDiferencaSaidaCaixa.Text = FormatCurrency(Format(diferenca, "Fixed")).TrimStart("$")
-            'End If
         Catch ex As Exception
 
         End Try
@@ -4064,9 +4024,6 @@ Public Class ConferenciaCaixa
             Else
 
 
-                ' remover  o zero da posição inicial se o texto estiver no formato inicial              
-
-
                 'inserir dados onde o cursor estiver posicionado
                 curPos = mskValorRecebido.SelectionStart
 
@@ -4093,8 +4050,20 @@ Public Class ConferenciaCaixa
             Currency = strCurrency & "," & strCurrencyCent
             start = mskValorRecebido.SelectionStart
 
+
+            'contar o numero de pontos no mskValorRecebido antes e depois da formatação
+            ' para detectar se houve adição de pontos como separador de milhares para posicionamento
+            ' correcto do cursor.
+            Dim countDot1 As Integer = countChar(mskValorRecebido.Text, ".")
             mskValorRecebido.Text = utilitario.soNumero(Currency)
-            mskvalorRecebidoResetCursor(start)
+            Dim countDot2 As Integer = countChar(mskValorRecebido.Text, ".")
+            If (countDot2 > countDot1) Then
+                mskvalorRecebidoResetCursor(start + 1)
+
+            Else
+                mskvalorRecebidoResetCursor(start)
+
+            End If
 
 
 
@@ -4120,14 +4089,6 @@ Public Class ConferenciaCaixa
 
     End Sub
 
-    Private Sub mskValorRecebido_Enter(sender As Object, e As EventArgs) Handles mskValorRecebido.Enter
-        'If (mskValorRecebido.Text = "0,00") Then
-        '    Dim onEnterValue As String = ""
-        ' mskValorRecebido.Text =",00"
-
-        'End If
-
-    End Sub
 
     Private Sub cboFiltroCaixaFactura_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboFiltroCaixaFactura.SelectedIndexChanged
         If (cboFiltroCaixaFactura.SelectedIndex = 0) Then
@@ -4439,7 +4400,20 @@ Public Class ConferenciaCaixa
 
     End Sub
 
+    ' Contar caracteres dentro de uma string 
+    ' e retornar a quantidade.
+    Function countChar(text As String, c As Char)
+        Dim max As Integer = text.Length
+        Dim total As Integer = 0
+        For i As Integer = 0 To max - 1
+            If (text(i) = c) Then
+                total = total + 1
+            End If
 
+        Next
+
+        Return total
+    End Function
 
 End Class
 
