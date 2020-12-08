@@ -1,4 +1,6 @@
-﻿Public Class FiltroConferencia
+﻿Imports CrystalDecisions.Shared
+
+Public Class FiltroConferencia
     Dim js As JmrJson = New JmrJson()
     Dim SQL As New sqlControlo
     Dim utilitario As New Util
@@ -149,14 +151,23 @@
     End Sub
 
     Private Sub btnPrevisualizar_Click(sender As Object, e As EventArgs) Handles btnPrevisualizar.Click
+        ' report.CrystalReportViewer1.ReportSource = New Object()
+
         report.Reporte_origem = "FECHO TOTAL"
+        'report.cryRpt.ParameterFields.Clear()
+
+
         Dim reportPath As String
         Dim path As Util = New Util()
         Dim arrayVazio As String() = {""}
         reportPath = path.dataPathReport + "\PRIFTJMR.rpt"
         Dim msgParametroErro As String = ""
         Dim flagParametroErro As Boolean = False
-        If (chkboxContaOrigem.Checked And lstboxContaOrigemSelecionados.Items.Count <= 0) Or (chkboxDiarioCaixa.Checked And lstboxDiariosConferidoSelecionados.Items.Count <= 0) Then
+        If (chkboxContaOrigem.Checked = False And chkboxDiarioCaixa.Checked = False And chkboxData.Checked = False) Then
+            msgParametroErro = "Selecione um parametro"
+            flagParametroErro = True
+
+        ElseIf (chkboxContaOrigem.Checked = True And lstboxContaOrigemSelecionados.Items.Count <= 0) Or (chkboxDiarioCaixa.Checked = True And lstboxDiariosConferidoSelecionados.Items.Count <= 0) Then
             msgParametroErro = "Ao selecionar um parametro, escolha pelo menos um  filtro"
             flagParametroErro = True
         End If
@@ -169,15 +180,8 @@
             If (System.IO.File.Exists(reportPath) = True) Then
                 ' cryRpt.Load("PUT CRYSTAL REPORT PATH HERE\CrystalReport1.rpt")
                 report.cryRpt.Load(reportPath)
-                report.cryRpt.SetDatabaseLogon(utilizador, senha, servidor, basedados)
-                'With report.crConnectionInfo
-                '    .ServerName = servidor
-                '    'If you are connecting to Oracle there is no DatabaseName. Use an empty string. 
-                '    'For example, .DatabaseName = ""
-                '    .DatabaseName = basedados
-                '    .UserID = utilizador
-                '    .Password = senha
-                'End With
+
+
 
                 report.cryRpt.SetParameterValue("byConta", "False")
                 report.cryRpt.SetParameterValue("byDiario", "False")
@@ -205,8 +209,8 @@
 
                     If (chkboxDiarioCaixa.Checked = False And chkboxData.Checked = True) Then
                         Dim data1, data2 As String
-                        data1 = utilitario.formatNum(dtInicial.Value.Day) & "/" & utilitario.formatNum(dtInicial.Value.Month) & "/" & dtInicial.Value.Year & ""
-                        data2 = utilitario.formatNum(dtFinal.Value.Day) & "/" & utilitario.formatNum(dtFinal.Value.Month) & "/" & dtFinal.Value.Year & ""
+                        data1 = utilitario.formatNum(dtInicial.Value.Day) & "-" & utilitario.formatNum(dtInicial.Value.Month) & "-" & dtInicial.Value.Year & ""
+                        data2 = utilitario.formatNum(dtFinal.Value.Day) & "-" & utilitario.formatNum(dtFinal.Value.Month) & "-" & dtFinal.Value.Year & ""
 
                         lista = administracao.buscarContaConferidoByData(data1, data2)
                         report.cryRpt.SetParameterValue("Conta", getArrayListbox_(lista).lista.Split(","))
@@ -243,15 +247,15 @@
 
                         End If
                     Else
-                            report.cryRpt.SetParameterValue("diario", "0")
+                        report.cryRpt.SetParameterValue("diario", "0")
                     End If
 
                     If (chkboxContaOrigem.Checked = False And chkboxData.Checked = True) Then
                         Dim data1, data2 As String
 
-                        data1 = utilitario.formatNum(dtInicial.Value.Day) & "/" & utilitario.formatNum(dtInicial.Value.Month) & "/" & dtInicial.Value.Year & ""
+                        data1 = utilitario.formatNum(dtInicial.Value.Day) & "-" & utilitario.formatNum(dtInicial.Value.Month) & "-" & dtInicial.Value.Year & ""
 
-                        data2 = utilitario.formatNum(dtFinal.Value.Day) & utilitario.formatNum(dtFinal.Value.Month) & "/" & dtFinal.Value.Year & ""
+                        data2 = utilitario.formatNum(dtFinal.Value.Day) & "-" & utilitario.formatNum(dtFinal.Value.Month) & "-" & dtFinal.Value.Year & ""
 
 
                         lista = administracao.buscarCaixaByData(data1, data2)
@@ -389,11 +393,44 @@
                 End If
                 '
                 ' Fim Verificar se foi selecionado parametro DATA
-                '
-
-                report.CrystalReportViewer1.ReportSource = report.cryRpt
+                report.CrystalReportViewer1.ReportSource = Nothing
                 report.CrystalReportViewer1.Refresh()
-                report.ShowDialog()
+                report.CrystalReportViewer1.ReportSource = report.cryRpt
+
+                'report.CrystalReportViewer1.Refresh()
+                report.cryRpt.SetDatabaseLogon(utilizador, senha, servidor, basedados)
+                With report.crConnectionInfo
+                    .ServerName = servidor
+                    'If you are connecting to Oracle there is no DatabaseName. Use an empty string. 
+                    'For example, .DatabaseName = ""
+                    .DatabaseName = basedados
+                    .UserID = utilizador
+                    .Password = senha
+                End With
+
+                'Dim pdfFilePath As String = System.IO.Path.Combine(Application.StartupPath, path.dataPathReport + "\" + "fechoTotal" + ".pdf")
+                Try
+                    report.ShowDialog()
+
+                Catch ex As Exception
+                    MessageBox.Show("Ocorreu um erro de formatação\n" + ex.Message, "Atenção")
+                End Try
+                'If System.IO.File.Exists(pdfFilePath) Then
+                '    System.IO.File.Delete(pdfFilePath)
+                'End If
+
+                'report.cryRpt.ExportToDisk(ExportFormatType.PortableDocFormat, pdfFilePath)
+                'pdfView pdf = New pdfView()
+
+
+                'Me.OpenFileDialog1.FileName = String.Empty
+                'Me.OpenFileDialog1.ShowDialog()
+                'If System.IO.File.Exists(pdfFilePath) Then
+                '    pdfView.AxAcroPDF1.src = pdfFilePath
+                '    pdfView.AxAcroPDF1.Show()
+                '    pdfView.AxAcroPDF1.Refresh()
+                '    pdfView.Show()
+                'End If
             End If
 
         Else
@@ -527,5 +564,7 @@
         Return data1
     End Function
 
-
+    Private Sub btnFechar_Click(sender As Object, e As EventArgs) Handles btnFechar.Click
+        Me.Close()
+    End Sub
 End Class

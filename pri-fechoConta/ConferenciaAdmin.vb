@@ -58,7 +58,7 @@ Public Class ConferenciaAdmin
 
     Public Function criarTblConferenciaCaixa() As Boolean
 
-        Dim query As String = "create table dbo.TDU_ConferenciaCaixa (CDU_id uniqueIdentifier default (newId()) primary key, CDU_diarioCaixa  integer not null, CDU_modoMovimento nvarchar(50) not null, CDU_cartaoTipo nvarchar(50),CDU_TransacaoNumero  nvarchar(50), CDU_quantidade integer, CDU_valor varchar(64) not null, CDU_chequeNumero nvarchar(50), CDU_chequeDescricao nvarchar(50), CDU_dataConferencia varchar(50), CDU_utilizadorTesoureiro nvarchar(50), CDU_saidaDescricao nvarchar(50), CDU_referencia nvarchar(50),  CDU_IdCabecTesouraria uniqueidentifier not null, CDU_conta nvarchar(32) not null, CDU_data_fecho varchar(255), CDU_data_transacao varchar(32) null)"
+        Dim query As String = "create table TDU_ConferenciaCaixa (CDU_id uniqueIdentifier default (newId()) primary key, CDU_diarioCaixa  bigint not null, CDU_modoMovimento nvarchar(50) not null, CDU_cartaoTipo nvarchar(50),CDU_TransacaoNumero  nvarchar(50), CDU_quantidade integer, CDU_valor varchar(64) not null, CDU_chequeNumero nvarchar(50), CDU_chequeDescricao nvarchar(50), CDU_dataConferencia varchar(50), CDU_utilizadorTesoureiro nvarchar(50), CDU_saidaDescricao nvarchar(50), CDU_referencia nvarchar(50),  CDU_IdCabecTesouraria uniqueidentifier not null, CDU_conta nvarchar(32) not null, CDU_data_fecho varchar(255), CDU_data_transacao varchar(32) null, CDU_rec_num_inicial bigint default(0), CDU_rec_num_final bigint default(0), CDU_rec_serie nvarchar(32),  CDU_utilizadorCXMT varchar(32) null)"
 
         Return SQL.criarTabela(query)
     End Function
@@ -71,14 +71,19 @@ Public Class ConferenciaAdmin
 
     End Function
 
+    Public Function adicionarCDUfacNoDocumentosBancos() As Boolean
 
+        Dim query As String = "ALTER TABLE dbo.DocumentosBancos ADD CDU_fac bit"
+
+        Return SQL.criarTabela(query)
+    End Function
 
     Public Sub insertLicenca(serie As String, numeroUtilizador As Integer, dataInicio As String, dataFim As String)
         Try
 
 
             If (SQL.temConexao()) Then
-                Dim query As String = "INSERT INTO TDU_ConferenciaLicenca (CDU_serie_licenca , CDU_numero_utilizador, CDU_dataLicenca , CDU_dataLicencaFim ) VALUES ('" & serie & "',  '" & numeroUtilizador & "', '" & dataInicio & "', '" & dataFim & "')"
+                Dim query As String = "INSERT INTO TDU_ConferenciaLicenca (CDU_serie_licenca , CDU_numero_utilizador, CDU_dataLicenca , CDU_dataLicencaFim ) VALUES ('" & serie & "',  '" & numeroUtilizador & "', Convert(Date, '" & dataInicio & "', 105), Convert(Date, '" & dataFim & "', 105))"
                 SQL.abrirCon()
                 Dim cmd = New SqlCommand(query, SQL.conexao)
                 cmd.ExecuteNonQuery()
@@ -189,13 +194,13 @@ Public Class ConferenciaAdmin
     End Function
 
 
-    Public Function insertConferenciaCaixa(caixa As Integer, movimento As String, cartaoTipo As String, transacaoNumero As String, quantidade As Integer, valor As Double, chequeNumero As String, chequeDescricao As String, dataConferencia As String, tesoureiro As String, saidaDescricao As String, referencia As String, idCabecTesourario As String, contaPos As String, data_fecho As String, data_transacao As String)
+    Public Function insertConferenciaCaixa(caixa As Long, movimento As String, cartaoTipo As String, transacaoNumero As String, quantidade As Integer, valor As Double, chequeNumero As String, chequeDescricao As String, dataConferencia As String, tesoureiro As String, saidaDescricao As String, referencia As String, idCabecTesourario As String, contaPos As String, data_fecho As String, data_transacao As String, rec_inicial As Integer, rec_final As Integer, rec_serie As String, Optional utilizadorCaixa As String = "")
 
         Try
 
             If (SQL.temConexao()) Then
-                Dim query As String = "INSERT INTO TDU_ConferenciaCaixa ( CDU_diarioCaixa , CDU_modoMovimento , CDU_cartaoTipo , CDU_TransacaoNumero, CDU_quantidade , CDU_valor , CDU_chequeNumero , CDU_chequeDescricao , CDU_dataConferencia , CDU_utilizadorTesoureiro , CDU_saidaDescricao , CDU_referencia, CDU_IdCabecTesouraria, CDU_conta, CDU_data_fecho, CDU_data_transacao  ) " &
-                    "VALUES ('" & caixa & "',  '" & movimento & "', '" & cartaoTipo & "','" & transacaoNumero & "', '" & quantidade & "',  '" & valor & "',  '" & chequeNumero & "',  '" & chequeDescricao & "',  '" & dataConferencia & "',  '" & tesoureiro & "',  '" & saidaDescricao & "',  '" & referencia & "', '" & idCabecTesourario & "', '" & contaPos & "', '" & data_fecho & "' ,'" & data_transacao & "' )"
+                Dim query As String = "INSERT INTO TDU_ConferenciaCaixa ( CDU_diarioCaixa , CDU_modoMovimento , CDU_cartaoTipo , CDU_TransacaoNumero, CDU_quantidade , CDU_valor , CDU_chequeNumero , CDU_chequeDescricao , CDU_dataConferencia , CDU_utilizadorTesoureiro , CDU_saidaDescricao , CDU_referencia, CDU_IdCabecTesouraria, CDU_conta, CDU_data_fecho, CDU_data_transacao, CDU_rec_num_inicial, CDU_rec_num_final, CDU_rec_serie, CDU_utilizadorCXMT) " &
+                    "VALUES ('" & caixa & "',  '" & movimento & "', '" & cartaoTipo & "','" & transacaoNumero & "', '" & quantidade & "',  '" & valor & "',  '" & chequeNumero & "',  '" & chequeDescricao & "',  '" & dataConferencia & "',  '" & tesoureiro & "',  '" & saidaDescricao & "',  '" & referencia & "', '" & idCabecTesourario & "', '" & contaPos & "', '" & data_fecho & "' ,'" & data_transacao & "', '" & rec_inicial & "', '" & rec_final & "', '" & rec_serie & "'  , '" & utilizadorCaixa & "' )"
                 SQL.abrirCon()
 
                 Dim cmd = New SqlCommand(query, SQL.conexao)
@@ -561,7 +566,7 @@ Public Class ConferenciaAdmin
     End Function
 
 
-    Public Function removeLinhasCaixa(diarioCaixa As Integer, conta As String, data As String)
+    Public Function removeLinhasCaixa(diarioCaixa As Long, conta As String, data As String, rec_inicial As Integer, rec_final As Integer, rec_serie As String, Optional utilizadorCaixa As String = Nothing)
         Dim query As String
         Dim rv As Boolean = False
         Try
@@ -569,19 +574,27 @@ Public Class ConferenciaAdmin
             If (SQL.temConexao()) Then
 
                 If (conta = "CXMT") Then
-                    query = "delete from TDU_ConferenciaCaixa where CDU_conta = '" & conta & "' and CDU_data_fecho = '" & data & "'"
+                    If (utilizadorCaixa <> Nothing) Then
+                        'query = "delete from TDU_ConferenciaCaixa where CDU_conta = '" & conta & "' and CDU_data_fecho = '" & data & "'  and CDU_rec_num_inicial = '" & rec_inicial & "' and CDU_rec_num_final = '" & rec_final & "'   and CDU_rec_serie = '" & rec_serie & "' and CDU_utilizadorCXMT = '" & utilizadorCaixa & "' "
+
+                        query = "delete from TDU_ConferenciaCaixa where CDU_conta = '" & conta & "' and CDU_data_fecho = '" & data & "'   and CDU_rec_serie = '" & rec_serie & "' and CDU_utilizadorCXMT = '" & utilizadorCaixa & "' "
+                    Else
+                        query = "delete from TDU_ConferenciaCaixa where CDU_conta = '" & conta & "' and CDU_data_fecho = '" & data & "'  and CDU_rec_num_inicial = '" & rec_inicial & "' and CDU_rec_num_final = '" & rec_final & "'   and CDU_rec_serie = '" & rec_serie & "' "
+
+
+                    End If
                 Else
-                    query = "delete from TDU_ConferenciaCaixa where CDU_diarioCaixa = '" & diarioCaixa & "' and CDU_data_fecho = '" & data & "'"
+                        query = "delete from TDU_ConferenciaCaixa where CDU_diarioCaixa = '" & diarioCaixa & "'"
 
+                    End If
+
+                    SQL.abrirCon()
+                    Dim cmd = New SqlCommand(query, SQL.conexao)
+
+                    cmd.ExecuteNonQuery()
+                    SQL.fecharCon()
+                    rv = True
                 End If
-
-                SQL.abrirCon()
-                Dim cmd = New SqlCommand(query, SQL.conexao)
-
-                cmd.ExecuteNonQuery()
-                SQL.fecharCon()
-                rv = True
-            End If
         Catch ex As Exception
             MsgBox("[REMOVE LINHA CAIXA] Erro: " + ex.Message())
             SQL.fecharCon()
@@ -649,7 +662,9 @@ Public Class ConferenciaAdmin
         licenca_decode = Me.Decrypt(licenca)
         If (licenca_decode.Length > 0) Then
 
-            licencaDiaGerado = Date.Parse(licenca_decode.Split("_")(4))
+            Dim data = licenca_decode.Split("_")(4)
+            data = data.Split(" ")(0)
+            licencaDiaGerado = Date.Parse(data)
             licencaDuracaoActivacao = CInt(licenca_decode.Split("_")(5))
 
             dataDuracao = Date.Now().AddDays(licencaDuracaoActivacao)
@@ -1203,6 +1218,25 @@ Public Class ConferenciaAdmin
         End If
 
         Return listaConta
+    End Function
+
+
+    Public Function buscarUtilizador() As List(Of String)
+
+        Dim query As String = "select * from Utilizadores"
+
+        Dim tabela As New DataTable
+        Dim listaSerie As New List(Of String)
+        listaSerie.Insert(0, "Selecionar")
+
+        tabela = new sqlControloPriEmpre().buscarDado(query)
+        If (tabela.Rows.Count <> 0) Then
+            For i As Integer = 0 To tabela.Rows.Count - 1
+                listaSerie.Add(tabela.Rows(i)("Codigo"))
+            Next
+        End If
+
+        Return listaSerie
     End Function
 
 End Class

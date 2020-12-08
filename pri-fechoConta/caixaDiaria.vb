@@ -8,8 +8,9 @@
         If SQL.temConexao() = True Then
             Dim tabela As New DataTable
             Dim contaPos As String = ConferenciaCaixa.cboContaPos.SelectedItem.ToString()
+            Dim serie As String = ConferenciaCaixa.cboFacturaSerie.SelectedItem.ToString()
 
-            tabela = SQL.buscarDado("select  ct.NumDoc, dc.Conta, dc.Diario, dc.DataAbertura, dc.SaldoAbertura, dc.UtilizadorAbertura, dc.DataFecho, dc.SaldoFecho, dc.UtilizadorFecho, dc.Estado from diarioCaixa as dc, cabecTesouraria as ct where Conta = '" + contaPos + " ' and ct.IDDiarioCaixa=dc.Id  AND ct.TipoDoc = 'FCHCX' and ct.ContaOrigem = '" + contaPos + "' order by dc.DataFecho desc")
+            tabela = SQL.buscarDado("select  ct.NumDoc, dc.Conta, dc.Diario, dc.DataAbertura, dc.SaldoAbertura, dc.UtilizadorAbertura, dc.DataFecho, dc.SaldoFecho, dc.UtilizadorFecho, dc.Estado from diarioCaixa as dc, cabecTesouraria as ct where Conta = '" + contaPos + " ' and ct.IDDiarioCaixa=dc.Id  AND ct.TipoDoc = 'FCHCX' and ct.ContaOrigem = '" + contaPos + "'  and ct.Serie = '" + serie + "'   order by dc.DataFecho desc")
 
             If (tabela.Rows.Count <> 0) Then
 
@@ -43,7 +44,5 @@
         Me.Close()
     End Sub
 
-    Private Sub dgvCaixaDiaria_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvCaixaDiaria.CellContentClick
 
-    End Sub
 End Class

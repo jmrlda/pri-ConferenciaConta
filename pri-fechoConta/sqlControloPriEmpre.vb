@@ -66,4 +66,30 @@ Public Class sqlControloPriEmpre
 
         Return sqlCon
     End Function
+
+
+    Public Function buscarUtilizadores()
+
+        Try
+
+            If (temConexao()) Then
+                Dim query = "insert into ComissaoInterveniente(id, vendedor, nome,  classe, especialidade, posto, comissao, data, filial, tipoDoc, serie, numDoc, entidade, nomeEntidade, total, comVenda  )  select cd.id, ld.Vendedor, v.Nome, v.CDU_classe, v.CDU_Especialidade, cd.Posto, c.Comissao, ld.Data, cd.Filial, cd.TipoDoc, cd.Serie, cd.NumDoc, cd.Entidade, cli.Nome, case  when ld.precUnit = 0 then ld.CDU_pliquido else cast(ld.precUnit  as float) end as total, case  when ld.precUnit <= 0 then ld.CDU_pliquido * (c.Comissao/100) else ld.precUnit * (c.Comissao/100) end  as comVenda from CabecDoc cd, LinhasDoc ld, Vendedores v, Comissoes c, Artigo a, ArtigoMoeda am, Clientes cli where cd.id = ld.IdCabecDoc and v.Vendedor = ld.Vendedor and c.Campo1 = ld.Vendedor and c.Campo2 = a.Familia and cd.Entidade = cli.Cliente and a.Artigo = am.Artigo and am.Moeda = 'MT'   and ld.Vendedor is not NULL order by NumDoc asc"
+                abrirCon()
+
+                Dim cmd = New SqlCommand(query, conexao)
+
+                cmd.ExecuteNonQuery()
+                fecharCon()
+            End If
+        Catch ex As Exception
+            MessageBox.Show("[INSERT COMISSAO INTERVENIENTE]: Ocorreu um erro  /> " + ex.Message(), "Atenção - Perigo", MessageBoxButtons.OK)
+            fecharCon()
+
+            Return False
+        End Try
+
+        Return True
+    End Function
+
+
 End Class

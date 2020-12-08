@@ -146,7 +146,6 @@ Public Class Util
 
         For i = 0 To str.Length - 1
             If str(i).ToString() = " " Then
-                MsgBox("ok")
                 str.Remove(i)
 
             End If
@@ -187,6 +186,9 @@ Public Class Util
 
         Return newStr
     End Function
+
+
+
 
 
 End Class
