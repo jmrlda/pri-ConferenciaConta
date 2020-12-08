@@ -24,6 +24,8 @@ Partial Class ConferenciaCaixa
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ConferenciaCaixa))
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.cboFiltroCaixaFactura = New System.Windows.Forms.ComboBox()
+        Me.cboUtilizador = New System.Windows.Forms.ComboBox()
         Me.lblDocFim = New System.Windows.Forms.Label()
         Me.lblDocInicio = New System.Windows.Forms.Label()
         Me.txtDocFim = New System.Windows.Forms.TextBox()
@@ -172,6 +174,8 @@ Partial Class ConferenciaCaixa
         '
         Me.Panel2.AutoSize = True
         Me.Panel2.BackColor = System.Drawing.Color.Transparent
+        Me.Panel2.Controls.Add(Me.cboFiltroCaixaFactura)
+        Me.Panel2.Controls.Add(Me.cboUtilizador)
         Me.Panel2.Controls.Add(Me.lblDocFim)
         Me.Panel2.Controls.Add(Me.lblDocInicio)
         Me.Panel2.Controls.Add(Me.txtDocFim)
@@ -195,6 +199,27 @@ Partial Class ConferenciaCaixa
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(1364, 224)
         Me.Panel2.TabIndex = 0
+        '
+        'cboFiltroCaixaFactura
+        '
+        Me.cboFiltroCaixaFactura.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboFiltroCaixaFactura.FormattingEnabled = True
+        Me.cboFiltroCaixaFactura.Items.AddRange(New Object() {"Utilizador", "Intervalo"})
+        Me.cboFiltroCaixaFactura.Location = New System.Drawing.Point(291, 7)
+        Me.cboFiltroCaixaFactura.Name = "cboFiltroCaixaFactura"
+        Me.cboFiltroCaixaFactura.Size = New System.Drawing.Size(88, 21)
+        Me.cboFiltroCaixaFactura.TabIndex = 57
+        Me.cboFiltroCaixaFactura.Visible = False
+        '
+        'cboUtilizador
+        '
+        Me.cboUtilizador.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboUtilizador.FormattingEnabled = True
+        Me.cboUtilizador.Location = New System.Drawing.Point(238, 32)
+        Me.cboUtilizador.Name = "cboUtilizador"
+        Me.cboUtilizador.Size = New System.Drawing.Size(141, 21)
+        Me.cboUtilizador.TabIndex = 56
+        Me.cboUtilizador.Visible = False
         '
         'lblDocFim
         '
@@ -234,10 +259,11 @@ Partial Class ConferenciaCaixa
         '
         'cboFacturaSerie
         '
+        Me.cboFacturaSerie.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboFacturaSerie.FormattingEnabled = True
-        Me.cboFacturaSerie.Location = New System.Drawing.Point(276, 8)
+        Me.cboFacturaSerie.Location = New System.Drawing.Point(218, 8)
         Me.cboFacturaSerie.Name = "cboFacturaSerie"
-        Me.cboFacturaSerie.Size = New System.Drawing.Size(102, 21)
+        Me.cboFacturaSerie.Size = New System.Drawing.Size(66, 21)
         Me.cboFacturaSerie.TabIndex = 51
         Me.cboFacturaSerie.Visible = False
         '
@@ -738,10 +764,11 @@ Partial Class ConferenciaCaixa
         '
         'cboContaPos
         '
+        Me.cboContaPos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboContaPos.FormattingEnabled = True
         Me.cboContaPos.Location = New System.Drawing.Point(136, 8)
         Me.cboContaPos.Name = "cboContaPos"
-        Me.cboContaPos.Size = New System.Drawing.Size(122, 21)
+        Me.cboContaPos.Size = New System.Drawing.Size(76, 21)
         Me.cboContaPos.TabIndex = 3
         '
         'Label21
@@ -1123,6 +1150,7 @@ Partial Class ConferenciaCaixa
         '
         'cboModoRecebido
         '
+        Me.cboModoRecebido.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboModoRecebido.Enabled = False
         Me.cboModoRecebido.FormattingEnabled = True
         Me.cboModoRecebido.Location = New System.Drawing.Point(3, 30)
@@ -1132,6 +1160,7 @@ Partial Class ConferenciaCaixa
         '
         'cboReferenciaModoReceb
         '
+        Me.cboReferenciaModoReceb.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboReferenciaModoReceb.Enabled = False
         Me.cboReferenciaModoReceb.FormattingEnabled = True
         Me.cboReferenciaModoReceb.Location = New System.Drawing.Point(209, 30)
@@ -1649,4 +1678,6 @@ Partial Class ConferenciaCaixa
     Friend WithEvents DataTransacao As DataGridViewTextBoxColumn
     Friend WithEvents recibo_inicial As DataGridViewTextBoxColumn
     Friend WithEvents recibo_final As DataGridViewTextBoxColumn
+    Friend WithEvents cboUtilizador As ComboBox
+    Friend WithEvents cboFiltroCaixaFactura As ComboBox
 End Class
