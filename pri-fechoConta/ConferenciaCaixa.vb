@@ -3982,6 +3982,7 @@ Public Class ConferenciaCaixa
 
 
         If (e.KeyChar = "." Or e.KeyChar = ",") Then
+            mskvalorRecebidoSetCursorDecimais()
             e.Handled = True
             Return
 
