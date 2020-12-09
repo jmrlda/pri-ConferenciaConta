@@ -1160,7 +1160,6 @@ Partial Class ConferenciaCaixa
         '
         'cboReferenciaModoReceb
         '
-        Me.cboReferenciaModoReceb.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboReferenciaModoReceb.Enabled = False
         Me.cboReferenciaModoReceb.FormattingEnabled = True
         Me.cboReferenciaModoReceb.Location = New System.Drawing.Point(209, 30)
