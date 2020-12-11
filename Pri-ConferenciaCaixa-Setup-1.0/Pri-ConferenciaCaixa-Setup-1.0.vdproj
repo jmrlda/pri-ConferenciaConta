@@ -714,7 +714,7 @@
                 {
                 "Name" = "8:.NET Framework"
                 "Message" = "8:[VSDNETMSG]"
-                "FrameworkVersion" = "8:v4.8  "
+                "FrameworkVersion" = "8:v4.8   "
                 "AllowLaterVersions" = "11:FALSE"
                 "InstallUrl" = "8:http://go.microsoft.com/fwlink/?LinkId=671728"
                 }
@@ -1150,7 +1150,7 @@
             "SharedLegacy" = "11:FALSE"
             "PackageAs" = "3:1"
             "Register" = "3:1"
-            "Exclude" = "11:FALSE"
+            "Exclude" = "11:TRUE"
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
@@ -2086,7 +2086,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_ED6C7B3A759E456B8593EA3274FDE071"
             {
-            "SourcePath" = "8:..\\pri-fechoConta\\obj\\Release\\pri_fechoConta.exe"
+            "SourcePath" = "8:..\\pri-fechoConta\\obj\\x86\\Release\\pri_fechoConta.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_689FCDD11E57438A9617C7B56935485E"
