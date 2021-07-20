@@ -88,6 +88,14 @@ Public Class ConferenciaCaixa
     'controlo  da posicao de cursor para formatacao dos valores
     Public isDecimalPosicao As Boolean = False
 
+    ' formatacao de valores
+    Dim strCurrency As String = ""
+
+    Dim strCurrencyCent As String = "00"
+
+    Dim acceptableKey As Boolean = False
+    Dim Currency As String = ""
+
     ' tipos de movimentos # MODO HARDCODE #'
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -794,6 +802,10 @@ Public Class ConferenciaCaixa
                     If (linha_valor_confirmado) Then
 
                         limpar_campo_fechoconta()
+                        strCurrency = ""
+
+                        strCurrencyCent = "00"
+                        Currency = "0,00"
                         'Me.indiceFechoConta += 1
                     Else
                         MessageBox.Show("Preencher os campos em falta", "Atenção", MessageBoxButtons.OK)
@@ -1116,21 +1128,22 @@ Public Class ConferenciaCaixa
 
             '    End If
             If (cboUtilizador.SelectedIndex > 0 And Me.txtDocInicio.Text.Length <= 0 And Me.txtDocFim.Text.Length <= 0) Then
-                    ' antigo qrLinhaTes = "select *  from Historico where Convert(varchar, DataDoc, 105)   ='" & dtInicio.Value.ToShortDateString() & "' and TipoDoc = 'RE' and TipoEntidade <> 'D'   and Moeda='MT' and serie='" & cboFacturaSerie.Text & "' and utilizador ='" & Me.cboUtilizador.SelectedItem.ToString() & "'"
-                    qrLinhaTes = "select *  from MovimentosBancos where Convert(varchar, DtMov, 105)    ='" & dtInicio.Value.ToShortDateString() & "' and (TipoDocOriginal = 'RE' or TipoDocOriginal = 'MRE' or TipoDocOriginal = 'ARE') and TipoEntidade <> 'D' and SerieOriginal='" & cboFacturaSerie.Text & "'  and Utilizador ='" & Me.cboUtilizador.SelectedItem.ToString() & "'"
+                ' antigo qrLinhaTes = "select *  from Historico where Convert(varchar, DataDoc, 105)   ='" & dtInicio.Value.ToShortDateString() & "' and TipoDoc = 'RE' and TipoEntidade <> 'D'   and Moeda='MT' and serie='" & cboFacturaSerie.Text & "' and utilizador ='" & Me.cboUtilizador.SelectedItem.ToString() & "'"
+                qrLinhaTes = "select *  from MovimentosBancos where Convert(varchar, DataIntroducao, 105)    ='" & dtInicio.Value.ToShortDateString() & "' and (TipoDocOriginal = 'RE' or TipoDocOriginal = 'MRE' or TipoDocOriginal = 'ARE') and TipoEntidade <> 'D' and SerieOriginal='" & cboFacturaSerie.Text & "'  and Utilizador ='" & Me.cboUtilizador.SelectedItem.ToString() & "'"
 
-                    sqlLinhaTesouraria = "select *  from TDU_ConferenciaCaixa where  CDU_rec_serie = '" & Me.cboFacturaSerie.Text & "' and CDU_Conta=  '" + cboContaPos.SelectedItem + "' and CDU_data_fecho = '" + dtInicio.Value.ToShortDateString() + "'  and CDU_utilizadorCXMT = '" + cboUtilizador.Text + "'"
+                sqlLinhaTesouraria = "select *  from TDU_ConferenciaCaixa where  CDU_rec_serie = '" & Me.cboFacturaSerie.Text & "' and CDU_Conta=  '" + cboContaPos.SelectedItem + "' and CDU_data_fecho = '" + dtInicio.Value.ToShortDateString() + "'  and CDU_utilizadorCXMT = '" + cboUtilizador.Text + "'"
 
                 ElseIf (cboUtilizador.SelectedIndex <= 0 And Me.txtDocInicio.Text.Length > 0 And Me.txtDocFim.Text.Length > 0) Then
-                    If (IsNumeric(Me.txtDocInicio.Text) = True And IsNumeric(Me.txtDocFim.Text.Length) = True And CLng(Me.txtDocInicio.Text) And CLng(Me.txtDocFim.Text)) Then
-                        'antigo qrLinhaTes = "select *  from Historico where Convert(varchar, DataDoc, 105)   ='" & dtInicio.Value.ToShortDateString() & "'  and TipoDoc = 'RE' and TipoEntidade <> 'D'   and Moeda='MT' and serie='" & cboFacturaSerie.Text & "' and NumDocint>= '" & CLng(Me.txtDocInicio.Text) & "' and NumDocInt <='" & CLng(Me.txtDocFim.Text) & "'"
-                        qrLinhaTes = "select *  from MovimentosBancos where Convert(varchar, DtMov, 105)    ='" & dtInicio.Value.ToShortDateString() & "' and (TipoDocOriginal = 'RE' or TipoDocOriginal = 'MRE' or TipoDocOriginal = 'ARE') and TipoEntidade <> 'D' and SerieOriginal='" & cboFacturaSerie.Text & "' and NumDocOriginal>= '" & CLng(Me.txtDocInicio.Text) & "' and NumDocOriginal <='" & CLng(Me.txtDocFim.Text) & "'"
+                If (IsNumeric(Me.txtDocInicio.Text) = True And IsNumeric(Me.txtDocFim.Text) = True) Then
+                    'And CLng(Me.txtDocInicio.Text) And CLng(Me.txtDocFim.Text)
+                    'antigo qrLinhaTes = "select *  from Historico where Convert(varchar, DataDoc, 105)   ='" & dtInicio.Value.ToShortDateString() & "'  and TipoDoc = 'RE' and TipoEntidade <> 'D'   and Moeda='MT' and serie='" & cboFacturaSerie.Text & "' and NumDocint>= '" & CLng(Me.txtDocInicio.Text) & "' and NumDocInt <='" & CLng(Me.txtDocFim.Text) & "'"
+                    qrLinhaTes = "select *  from MovimentosBancos where Convert(varchar, DataIntroducao, 105)    ='" & dtInicio.Value.ToShortDateString() & "' and (TipoDocOriginal = 'RE' or TipoDocOriginal = 'MRE' or TipoDocOriginal = 'ARE') and TipoEntidade <> 'D' and SerieOriginal='" & cboFacturaSerie.Text & "' and NumDocOriginal>= '" & CLng(Me.txtDocInicio.Text) & "' and NumDocOriginal <='" & CLng(Me.txtDocFim.Text) & "'"
 
 
                     sqlLinhaTesouraria = "select *  from TDU_ConferenciaCaixa where CDU_rec_num_inicial >= Convert(int, '" & CLng(Me.txtDocInicio.Text) & "')  and  CDU_rec_num_final <= Convert(int, '" & CLng(Me.txtDocFim.Text) & "')   and  CDU_rec_serie = '" & Me.cboFacturaSerie.Text & "' and CDU_Conta=  '" + cboContaPos.SelectedItem + "' and CDU_data_fecho = '" + dtInicio.Value.ToShortDateString() + "' "
                 End If
 
-                Else
+            Else
                     MessageBox.Show("Verifique se o filtro de pesquisa esta correto antes de prosseguir ou Contacte o administrador!", "Atenção ", MessageBoxButtons.OK)
 
             End If
@@ -3956,12 +3969,7 @@ Public Class ConferenciaCaixa
         'linha_valor_confirmado = False
         'MessageBox.Show("Preencher os campos em falta", "Atenção", MessageBoxButtons.OK)
     End Sub
-    Dim strCurrency As String = ""
 
-    Dim strCurrencyCent As String = "00"
-
-    Dim acceptableKey As Boolean = False
-    Dim Currency As String = ""
 
     Private Sub mskValorRecebido_KeyDown(sender As Object, e As KeyEventArgs) Handles mskValorRecebido.KeyDown
 
@@ -3982,6 +3990,7 @@ Public Class ConferenciaCaixa
 
 
         If (e.KeyChar = "." Or e.KeyChar = ",") Then
+            mskvalorRecebidoSetCursorDecimais()
             e.Handled = True
             Return
 
