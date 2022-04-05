@@ -86,8 +86,8 @@ Public Class report
         '        cryRpt.SetParameterValue("Conta", getConta())
         '    End If
 
-        '    CrystalReportViewer1.ReportSource = cryRpt
-        '        CrystalReportViewer1.Refresh()
+        '    CrystalReportViewer5.ReportSource = cryRpt
+        '        CrystalReportViewer5.Refresh()
 
         '    Else
         '        MessageBox.Show("Mapa de Reporter não encontrado", "Atenção", MessageBoxButtons.OK)
@@ -115,7 +115,7 @@ Public Class report
 
     '        cryRpt.SetParameterValue("Diario", getDiario())
     '        cryRpt.SetParameterValue("Conta", getConta())
-    '        CrystalReportViewer1.ReportSource = cryRpt
+    '        CrystalReportViewer5.ReportSource = cryRpt
 
     '        CrDiskFileDestinationOptions.DiskFileName = path.dataPathReport & "/" & Date.Now() & ".pdf"
 
@@ -134,4 +134,7 @@ Public Class report
 
     End Sub
 
+    Private Sub CrystalReportViewer5_Load(sender As Object, e As EventArgs) Handles CrystalReportViewer5.Load
+
+    End Sub
 End Class

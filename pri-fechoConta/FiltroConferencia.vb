@@ -151,7 +151,7 @@ Public Class FiltroConferencia
     End Sub
 
     Private Sub btnPrevisualizar_Click(sender As Object, e As EventArgs) Handles btnPrevisualizar.Click
-        ' report.CrystalReportViewer1.ReportSource = New Object()
+        ' report.CrystalReportViewer5.ReportSource = New Object()
 
         report.Reporte_origem = "FECHO TOTAL"
         'report.cryRpt.ParameterFields.Clear()
@@ -393,11 +393,11 @@ Public Class FiltroConferencia
                 End If
                 '
                 ' Fim Verificar se foi selecionado parametro DATA
-                report.CrystalReportViewer1.ReportSource = Nothing
-                report.CrystalReportViewer1.Refresh()
-                report.CrystalReportViewer1.ReportSource = report.cryRpt
+                report.CrystalReportViewer5.ReportSource = Nothing
+                report.CrystalReportViewer5.Refresh()
+                report.CrystalReportViewer5.ReportSource = report.cryRpt
 
-                'report.CrystalReportViewer1.Refresh()
+                'report.CrystalReportViewer5.Refresh()
                 report.cryRpt.SetDatabaseLogon(utilizador, senha, servidor, basedados)
                 With report.crConnectionInfo
                     .ServerName = servidor

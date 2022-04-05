@@ -2697,12 +2697,12 @@ Public Class ConferenciaCaixa
 
 
         Try
-            report.CrystalReportViewer1.EnableRefresh = True
-            report.CrystalReportViewer1.Update()
+            report.CrystalReportViewer5.EnableRefresh = True
+            report.CrystalReportViewer5.Update()
 
-            report.CrystalReportViewer1.ReportSource = Nothing
+            report.CrystalReportViewer5.ReportSource = Nothing
             report.cryRpt.Refresh()
-            report.CrystalReportViewer1.Refresh()
+            report.CrystalReportViewer5.Refresh()
             report.cryRpt.Load(Nothing)
             report.cryRpt.Load("")
             report.Close()
@@ -2777,29 +2777,29 @@ Public Class ConferenciaCaixa
                     report.cryRpt.SetParameterValue("diario", (Me.txtDocInicio.Text + "0" & Me.txtDocFim.Text))
 
 
-                        If (Me.txtDocInicio.Text = Nothing Or Me.txtDocInicio.Text.Length <= 0) Then
-                            report.cryRpt.SetParameterValue("numDocInicial", "0")
-
-                        Else
-                            report.cryRpt.SetParameterValue("numDocInicial", (Me.txtDocInicio.Text))
-
-                        End If
-
-                        If (Me.txtDocFim.Text = Nothing Or Me.txtDocFim.Text.Length <= 0) Then
-                            report.cryRpt.SetParameterValue("numDocFinal", "0")
-
-                        Else
-                            report.cryRpt.SetParameterValue("numDocFinal", Me.txtDocFim.Text)
-
-                        End If
-
-
-                        report.cryRpt.SetParameterValue("doc_serie", (Me.cboFacturaSerie.Text))
-                        'exportar mapa para pdf
-                        'pdfFilePath = System.IO.Path.Combine(Application.StartupPath, path.dataPathReport + "\" + txtDocInicio.Text + "_" + txtDocFim.Text + ".pdf")
+                    If (Me.txtDocInicio.Text = Nothing Or Me.txtDocInicio.Text.Length <= 0) Then
+                        report.cryRpt.SetParameterValue("numDocInicial", "0")
 
                     Else
-                        report.cryRpt.SetParameterValue("diario", CLng(lblDiarioCaixa.Text))
+                        report.cryRpt.SetParameterValue("numDocInicial", (Me.txtDocInicio.Text))
+
+                    End If
+
+                    If (Me.txtDocFim.Text = Nothing Or Me.txtDocFim.Text.Length <= 0) Then
+                        report.cryRpt.SetParameterValue("numDocFinal", "0")
+
+                    Else
+                        report.cryRpt.SetParameterValue("numDocFinal", Me.txtDocFim.Text)
+
+                    End If
+
+
+                    report.cryRpt.SetParameterValue("doc_serie", (Me.cboFacturaSerie.Text))
+                    'exportar mapa para pdf
+                    'pdfFilePath = System.IO.Path.Combine(Application.StartupPath, path.dataPathReport + "\" + txtDocInicio.Text + "_" + txtDocFim.Text + ".pdf")
+
+                Else
+                    report.cryRpt.SetParameterValue("diario", CLng(lblDiarioCaixa.Text))
                     report.cryRpt.SetParameterValue("conta", Me.cboContaPos.SelectedItem)
                     report.cryRpt.SetParameterValue("abertura_recebido", mskValRecAbertura.Text)
                     report.cryRpt.SetParameterValue("abertura_conferido", mskValConfAbertura.Text)
@@ -2842,11 +2842,11 @@ Public Class ConferenciaCaixa
                 .Password = senha
             End With
             Try
-                report.CrystalReportViewer1.EnableRefresh = True
-                report.CrystalReportViewer1.RefreshReport()
-                report.CrystalReportViewer1.ReportSource = report.cryRpt
+                report.CrystalReportViewer5.EnableRefresh = True
+                report.CrystalReportViewer5.RefreshReport()
+                report.CrystalReportViewer5.ReportSource = report.cryRpt
 
-                report.CrystalReportViewer1.Refresh()
+                report.CrystalReportViewer5.Refresh()
 
                 report.ShowDialog()
 
