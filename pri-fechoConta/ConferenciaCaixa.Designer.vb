@@ -1509,7 +1509,7 @@ Partial Class ConferenciaCaixa
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
+        Me.BackgroundImage = Global.pri_fechoConta.My.Resources.Resources.Erpbg02
         Me.ClientSize = New System.Drawing.Size(1370, 630)
         Me.Controls.Add(Me.pnlMensagemLicenca)
         Me.Controls.Add(Me.StatusStrip1)
