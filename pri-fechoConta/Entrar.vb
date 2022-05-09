@@ -33,8 +33,14 @@ Public Class Entrar
 
 
             If (administracao.isUtilizadorLogadoNoutroComputador(Me.txtUtilizador.Text, Environment.MachineName) = True) Then
-                If MessageBox.Show("Sessão Aberta na maquina " & administracao.buscarMaquinaRemoto(Me.txtUtilizador.Text) & ". Fechar outra sessão para Continuar ?", "Atenção", MessageBoxButtons.YesNo) = DialogResult.Yes Then
-                    user_online = administracao.logar(user, senha)
+                ' Messagebox.YesNo é importante se o programa fechar de forma inesperada sem registrar a saida o utilizador, assim poderá forçar a entrar na
+                ' sessão, mas se ainda estiver um usuario logado em outro dispositivo todo o trabalho será cancelado.
+                If MessageBox.Show("Sessão Aberta na maquina " & administracao.buscarMaquinaRemoto(Me.txtUtilizador.Text) & ". Fechar outra sessão para Continuar?", "ATENÇÃO", MessageBoxButtons.YesNo, MessageBoxIcon.Information) = DialogResult.Yes Then
+                    If MessageBox.Show("Atenção. Têm a certeza que deseja  continuar?\n O trabalho sendo feito na sessão atual será todo perdido", "ATENÇÃO PERIGO  ", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = DialogResult.Yes Then
+                        user_online = administracao.logar(user, senha)
+                    Else
+                        Me.Close()
+                    End If
                 Else
                     Me.Close()
                 End If
