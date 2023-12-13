@@ -1129,7 +1129,7 @@ Public Class ConferenciaCaixa
             '    End If
             If (cboUtilizador.SelectedIndex > 0 And Me.txtDocInicio.Text.Length <= 0 And Me.txtDocFim.Text.Length <= 0) Then
                 ' antigo qrLinhaTes = "select *  from Historico where Convert(varchar, DataDoc, 105)   ='" & dtInicio.Value.ToShortDateString() & "' and TipoDoc = 'RE' and TipoEntidade <> 'D'   and Moeda='MT' and serie='" & cboFacturaSerie.Text & "' and utilizador ='" & Me.cboUtilizador.SelectedItem.ToString() & "'"
-                qrLinhaTes = "select *  from MovimentosBancos where Convert(varchar, DataIntroducao, 105)    ='" & dtInicio.Value.ToShortDateString() & "' and (TipoDocOriginal = 'RE' or TipoDocOriginal = 'MRE' or TipoDocOriginal = 'ARE') and TipoEntidade <> 'D' and SerieOriginal='" & cboFacturaSerie.Text & "'  and Utilizador ='" & Me.cboUtilizador.SelectedItem.ToString() & "'"
+                qrLinhaTes = "select *  from MovimentosBancos where Convert(varchar, DataIntroducao, 105)    ='" & dtInicio.Value.ToShortDateString() & "' and (TipoDocOriginal = 'RE' or  TipoDocOriginal = 'REL' or TipoDocOriginal = 'MRE' or TipoDocOriginal = 'ARE') and TipoEntidade <> 'D' and SerieOriginal='" & cboFacturaSerie.Text & "'  and Utilizador ='" & Me.cboUtilizador.SelectedItem.ToString() & "'"
 
                 sqlLinhaTesouraria = "select *  from TDU_ConferenciaCaixa where  CDU_rec_serie = '" & Me.cboFacturaSerie.Text & "' and CDU_Conta=  '" + cboContaPos.SelectedItem + "' and CDU_data_fecho = '" + dtInicio.Value.ToShortDateString() + "'  and CDU_utilizadorCXMT = '" + cboUtilizador.Text + "'"
 
@@ -1137,7 +1137,7 @@ Public Class ConferenciaCaixa
                 If (IsNumeric(Me.txtDocInicio.Text) = True And IsNumeric(Me.txtDocFim.Text) = True) Then
                     'And CLng(Me.txtDocInicio.Text) And CLng(Me.txtDocFim.Text)
                     'antigo qrLinhaTes = "select *  from Historico where Convert(varchar, DataDoc, 105)   ='" & dtInicio.Value.ToShortDateString() & "'  and TipoDoc = 'RE' and TipoEntidade <> 'D'   and Moeda='MT' and serie='" & cboFacturaSerie.Text & "' and NumDocint>= '" & CLng(Me.txtDocInicio.Text) & "' and NumDocInt <='" & CLng(Me.txtDocFim.Text) & "'"
-                    qrLinhaTes = "select *  from MovimentosBancos where Convert(varchar, DataIntroducao, 105)    ='" & dtInicio.Value.ToShortDateString() & "' and (TipoDocOriginal = 'RE' or TipoDocOriginal = 'MRE' or TipoDocOriginal = 'ARE') and TipoEntidade <> 'D' and SerieOriginal='" & cboFacturaSerie.Text & "' and NumDocOriginal>= '" & CLng(Me.txtDocInicio.Text) & "' and NumDocOriginal <='" & CLng(Me.txtDocFim.Text) & "'"
+                    qrLinhaTes = "select *  from MovimentosBancos where Convert(varchar, DataIntroducao, 105)    ='" & dtInicio.Value.ToShortDateString() & "' and (TipoDocOriginal = 'RE' or  TipoDocOriginal = 'REL' or TipoDocOriginal = 'MRE' or TipoDocOriginal = 'ARE') and TipoEntidade <> 'D' and SerieOriginal='" & cboFacturaSerie.Text & "' and NumDocOriginal>= '" & CLng(Me.txtDocInicio.Text) & "' and NumDocOriginal <='" & CLng(Me.txtDocFim.Text) & "'"
 
 
                     sqlLinhaTesouraria = "select *  from TDU_ConferenciaCaixa where CDU_rec_num_inicial >= Convert(int, '" & CLng(Me.txtDocInicio.Text) & "')  and  CDU_rec_num_final <= Convert(int, '" & CLng(Me.txtDocFim.Text) & "')   and  CDU_rec_serie = '" & Me.cboFacturaSerie.Text & "' and CDU_Conta=  '" + cboContaPos.SelectedItem + "' and CDU_data_fecho = '" + dtInicio.Value.ToShortDateString() + "' "
