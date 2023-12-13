@@ -1418,7 +1418,7 @@ Partial Class ConferenciaCaixa
         'ConferênciaDeCaixaTotaisToolStripMenuItem
         '
         Me.ConferênciaDeCaixaTotaisToolStripMenuItem.Name = "ConferênciaDeCaixaTotaisToolStripMenuItem"
-        Me.ConferênciaDeCaixaTotaisToolStripMenuItem.Size = New System.Drawing.Size(233, 22)
+        Me.ConferênciaDeCaixaTotaisToolStripMenuItem.Size = New System.Drawing.Size(234, 22)
         Me.ConferênciaDeCaixaTotaisToolStripMenuItem.Text = "Conferência de Caixa ( Totais )"
         '
         'AjudaToolStripMenuItem
